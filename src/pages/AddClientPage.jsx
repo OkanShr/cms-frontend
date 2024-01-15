@@ -2,9 +2,9 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import { SidebarItem } from "../components/Sidebar";
 import { LayoutDashboard, UserPlus, Users } from "lucide-react";
-import Dashboard from "../components/Dashboard";
+import ClientForm from "../components/ClientForm";
 
-function HomePage() {
+function AddClientPage() {
   return (
     <div className="bg-white-100 h-screen flex flex-row">
       <Sidebar>
@@ -12,7 +12,6 @@ function HomePage() {
           text="Dashboard"
           icon={<LayoutDashboard size={20} />}
           onclick={"home"}
-          active
         />
         <SidebarItem
           text="Clients"
@@ -23,12 +22,16 @@ function HomePage() {
           text="Add Client"
           icon={<UserPlus size={20} />}
           onclick={"addclient"}
+          active
         />
       </Sidebar>
-
-      <Dashboard />
+      <div className="flex flex-col p-5 w-full">
+        <h2>Add Client</h2>
+      <ClientForm />
+      </div>
+      
     </div>
   );
 }
 
-export default HomePage;
+export default AddClientPage;

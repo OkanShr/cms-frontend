@@ -2,9 +2,9 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import { SidebarItem } from "../components/Sidebar";
 import { LayoutDashboard, UserPlus, Users } from "lucide-react";
-import Dashboard from "../components/Dashboard";
+import Clients from "../components/Clients";
 
-function HomePage() {
+function ClientsPage() {
   return (
     <div className="bg-white-100 h-screen flex flex-row">
       <Sidebar>
@@ -12,12 +12,12 @@ function HomePage() {
           text="Dashboard"
           icon={<LayoutDashboard size={20} />}
           onclick={"home"}
-          active
         />
         <SidebarItem
           text="Clients"
           icon={<Users size={20} />}
           onclick={"clients"}
+          active
         />
         <SidebarItem
           text="Add Client"
@@ -25,10 +25,13 @@ function HomePage() {
           onclick={"addclient"}
         />
       </Sidebar>
-
-      <Dashboard />
+      <div className="flex flex-col p-5 w-full">
+        <h2 >Clients</h2>
+        <Clients/>
+      </div>
+      
     </div>
   );
 }
 
-export default HomePage;
+export default ClientsPage;

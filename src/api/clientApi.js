@@ -1,4 +1,6 @@
-export const getAllUsers = (token) => {
+import { instance as axiosInstance } from "./apiInterceptor";
+
+export const getAllClients = (token) => {
     return axiosInstance.get("/api/client", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -6,7 +8,7 @@ export const getAllUsers = (token) => {
       
     });
   };
-  export const updateUser = (post, token) => {
+  export const updateClient = (post, token) => {
     return axiosInstance.put("/api/client", post, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -14,15 +16,15 @@ export const getAllUsers = (token) => {
       },
     });
   };
-  export const deleteUser = (id, token) => {
+  export const deleteClient = (id, token) => {
     return axiosInstance.delete("/api/client/" + id, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
   };
-  export const createUser = (post, token) => {
-    return axiosInstance.post("/api/client/create-client", post, {
+  export const createClient = (post, token) => {
+    return axiosInstance.post("/api/client", post, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -3,7 +3,7 @@ import { loginUser } from '../api/authApi';
 import { Button, Form, Container } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-
+import { login } from '../store/authentication';
 
 function Login() {
   const dispatch = useDispatch();
@@ -11,25 +11,30 @@ function Login() {
   const [loginDetails, setLoginDetails] = useState({
     email: "",
     username: "",
-
   });
 
   const [error, setError] = useState("");
 
-
   const loginFunction = (e) => {
     e.preventDefault();
+    console.log(loginDetails)
     loginUser(loginDetails)
       .then((x) => {
+        console.log(x)
         setError("");
         const data = x.data;
-        console.log(data);
+        dispatch(
+          login({
+            token: data.token,
+            user: data.doctor,
+          })
+        );
+        navigate("/home");
       })
       .catch((e) => {
         setError(e.response.data.error);
       });
   };
-
 
 
   return (
