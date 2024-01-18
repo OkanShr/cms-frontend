@@ -10,7 +10,7 @@ function Login() {
   const navigate = useNavigate();
   const [loginDetails, setLoginDetails] = useState({
     email: "",
-    username: "",
+    password: "",
   });
 
   const [error, setError] = useState("");

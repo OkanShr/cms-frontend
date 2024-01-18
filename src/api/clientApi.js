@@ -1,6 +1,7 @@
 import { instance as axiosInstance } from "./apiInterceptor";
 
 export const getAllClients = (token) => {
+  
     return axiosInstance.get("/api/client", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -8,6 +9,14 @@ export const getAllClients = (token) => {
       
     });
   };
+  export const getClientById = (id ,token) => {
+      return axiosInstance.get("/api/client/" + id, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+        
+      });
+    };
   export const updateClient = (post, token) => {
     return axiosInstance.put("/api/client", post, {
       headers: {

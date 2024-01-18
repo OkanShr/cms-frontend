@@ -12,6 +12,7 @@ import LoginPage from "./pages/LoginPage";
 import HomePage from "./pages/HomePage"
 import AddClientPage from './pages/AddClientPage';
 import ClientsPage from './pages/ClientsPage';
+import ClientDetailsPage from './pages/ClientDetailsPage';
 
 function App() {
 
@@ -22,7 +23,7 @@ function App() {
           <Route path='/home' element={<HomePage />}/>
           <Route path='/clients' element={<ClientsPage />}/>
           <Route path='/addclient' element={<AddClientPage />}/>
-
+          <Route path="/client/:clientId" element={<ClientDetailsPage/>}/>
           {/* after login */}
         </Route>
         <Route path='/signin' element={<LoginPage />}/>

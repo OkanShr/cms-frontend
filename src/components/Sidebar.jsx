@@ -1,5 +1,5 @@
 import { LogOut, ChevronLast, ChevronFirst } from "lucide-react"
-import { useContext, createContext, useState } from "react"
+import { useContext, createContext, useState,useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { logout } from '../store/authentication'
 import  doctorImg from '../assets/doctor.png'
@@ -20,6 +20,8 @@ export default function Sidebar({ children }) {
       logout()
     )
   };
+
+
 
   return (
     <aside className="h-screen ">

@@ -10,15 +10,18 @@ const loginDetails = useSelector((state) => state.auth.value);
     lastName: '',
     email: '',
     phoneNumber: '',
-    doctor: loginDetails.user.id
+    doctorId: loginDetails.user.userId
   });
 
+  const [message, setMessage] = useState("")
+  const [err, setErr] = useState("")
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      createClient(formData);
+      createClient(formData,loginDetails.token).then((x)=> {setMessage(`Client ${x.data.firstName} created succesfully`)})
     } catch (error) {
       console.log(error);
+      setErr("Failed due to an Error.")
     }
     
     // Perform actions with the form data, for now, let's just log it
@@ -44,7 +47,7 @@ const loginDetails = useSelector((state) => state.auth.value);
   // };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className='w-6/12' onSubmit={handleSubmit}>
       <Row>
         <Form.Group as={Col} controlId="formFirstName">
           <Form.Label>First Name</Form.Label>
@@ -118,8 +121,9 @@ const loginDetails = useSelector((state) => state.auth.value);
           />
         </Form.Group>
       </Row> */}
-
-      <button className='mt-3 rounded-md px-3 py-1.5 ml-6
+      <p className='text-lime-500 mt-2'>{message}</p>
+      <p className='text-red-500 mt-2'>{err}</p>
+      <button className='mt-1 rounded-md px-3 py-1.5 ml-6
            text-indigo-800 transition-all bg-gradient-to-tr from-indigo-200 to-indigo-100' type="submit">
         Submit
       </button>
