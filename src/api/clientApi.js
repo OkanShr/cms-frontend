@@ -17,8 +17,8 @@ export const getAllClients = (token) => {
         
       });
     };
-  export const updateClient = (post, token) => {
-    return axiosInstance.put("/api/client", post, {
+  export const updateClient = (post, token, id) => {
+    return axiosInstance.put("/api/client/"+ id, post, {
       headers: {
         Authorization: `Bearer ${token}`,
         

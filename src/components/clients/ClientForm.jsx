@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Form,Col, Row} from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { createClient } from '../api/clientApi';
-const ClientForm = () => {
+import { createClient } from '../../api/clientApi';
+
+
+export const ClientForm = () => {
 const loginDetails = useSelector((state) => state.auth.value);
 
   const [formData, setFormData] = useState({
@@ -23,8 +25,6 @@ const loginDetails = useSelector((state) => state.auth.value);
       console.log(error);
       setErr("Failed due to an Error.")
     }
-    
-    // Perform actions with the form data, for now, let's just log it
     console.log(formData);
   };
 
@@ -35,16 +35,6 @@ const loginDetails = useSelector((state) => state.auth.value);
       [name]: value,
     });
   };
-
-  // const handleImageChange = (e) => {
-    // const files = e.target.files;
-    // setFormData({
-    //   ...formData,
-    //   imageList: files,
-    // });
-    
-    // TODO: Process and upload files to server
-  // };
 
   return (
     <Form className='w-6/12' onSubmit={handleSubmit}>
@@ -95,40 +85,12 @@ const loginDetails = useSelector((state) => state.auth.value);
           />
         </Form.Group>
       </Row>
-
-      {/* <Row>
-        <Form.Group as={Col} controlId="formAge">
-          <Form.Label>Age</Form.Label>
-          <Form.Control
-            type="number"
-            placeholder="Enter age"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-          />
-        </Form.Group>
-      </Row> */}
-
-      {/* <Row>
-        <Form.Group as={Col} controlId="formImageUpload">
-          <Form.Label>Image List</Form.Label>
-          <Form.Control
-            type="file"
-            placeholder="Enter image URLs separated by commas"
-            name="imageList"
-            value={formData.imageList}
-            onChange={handleImageChange}
-          />
-        </Form.Group>
-      </Row> */}
       <p className='text-lime-500 mt-2'>{message}</p>
       <p className='text-red-500 mt-2'>{err}</p>
       <button className='mt-1 rounded-md px-3 py-1.5 ml-6
-           text-indigo-800 transition-all bg-gradient-to-tr from-indigo-200 to-indigo-100' type="submit">
+           text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100' type="submit">
         Submit
       </button>
     </Form>
   );
 };
-
-export default ClientForm;

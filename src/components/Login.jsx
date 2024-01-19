@@ -38,10 +38,12 @@ function Login() {
 
 
   return (
-    <div className='bg-gray-700 h-screen justify-center flex flex-col'>
-        <h2 className='text-4xl text-white font-bold text-center'>SIGN IN</h2>
-        <div className='flex flex-col text-gray-400 py-2'>
-        <Form className='max-w-[350px] w-full m-auto bg-gray-900 p-8 px-8 rounded-lg justify-center' onSubmit={loginFunction}>
+    <div className='bg-teal-800 h-screen justify-center flex flex-col'>
+        
+        <div className='flex flex-col text-dark font-medium text-white py-2'>
+        
+        <Form className='max-w-[350px] w-full m-auto bg-slate-200 bg-opacity-30 p-8 px-8 rounded-lg justify-center' onSubmit={loginFunction}>
+          <h2 className='text-4xl text-white font-bold text-center mb-2'>SIGN IN</h2>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label id="formlabels">E-Mail</Form.Label>
           <Form.Control
@@ -68,9 +70,7 @@ function Login() {
         </Form.Group>
         <p className="font-weight-light text-danger">{error}</p>
         <div className="d-flex ">
-          <Button required type="submit" className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-md' >
-            Login
-          </Button>
+          <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-md'>Login</button>
         </div>
       </Form>  
     </div>

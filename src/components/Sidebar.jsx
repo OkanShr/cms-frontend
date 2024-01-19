@@ -3,9 +3,8 @@ import { useContext, createContext, useState,useEffect } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import { logout } from '../store/authentication'
 import  doctorImg from '../assets/doctor.png'
-import { Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
-
+import XeramedImg from '../assets/xeramedimg.png'
 
 const SidebarContext = createContext()
 
@@ -29,7 +28,7 @@ export default function Sidebar({ children }) {
         <div className="p-4 pb-2 flex justify-between items-center">
           {console.log(loginDetails)}
           <img
-            src="https://img.logoipsum.com/243.svg"
+            src={XeramedImg}
             className={`overflow-hidden transition-all ${
               expanded ? "w-32" : "w-0"
             }`}
@@ -46,7 +45,7 @@ export default function Sidebar({ children }) {
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
-
+        <LogOut className={`${expanded ? "m-3":"hidden"}`} onClick={logoutFunction} size={25} />
         <div className="border-t flex p-3">
           <img
             src={doctorImg}
@@ -61,9 +60,9 @@ export default function Sidebar({ children }) {
           >
             <div className={`leading-4 ${expanded ? "":"hidden"}`}>
               <h4 className="font-semibold">{loginDetails.user ? loginDetails.user.username : ""}</h4>
-              <span className="text-xs text-gray-600">{loginDetails.user ? loginDetails.user.username : ""}</span>
+              <span className="text-xs text-gray-600">{loginDetails.user ? loginDetails.user.email : ""}</span>
             </div>
-            <LogOut className={`${expanded ? "":"hidden"}`} onClick={logoutFunction} size={20} />
+            
           </div>
         </div>
       </nav>
@@ -83,8 +82,8 @@ export function SidebarItem({ icon, text, active, alert, onclick }) {
         transition-colors group
         ${
           active
-            ? "bg-gradient-to-tr from-indigo-200 to-indigo-100 text-indigo-800"
-            : "hover:bg-indigo-50 text-gray-600"
+            ? "bg-gradient-to-tr from-teal-200 to-teal-100 text-teal-900"
+            : "hover:bg-teal-50 text-teal-600"
         }
     `}
     >
@@ -98,7 +97,7 @@ export function SidebarItem({ icon, text, active, alert, onclick }) {
       </span>
       {alert && (
         <div
-          className={`absolute right-2 w-2 h-2 rounded bg-indigo-400 ${
+          className={`absolute right-2 w-2 h-2 rounded bg-teal-400 ${
             expanded ? "" : "top-2"
           }`}
         />
@@ -108,7 +107,7 @@ export function SidebarItem({ icon, text, active, alert, onclick }) {
         <span 
           className={`
           absolute left-full rounded-md px-2 py-1 ml-6
-          bg-indigo-100 text-indigo-800 text-sm
+          bg-teal-100 text-teal-800 text-sm
           invisible opacity-20 -translate-x-3 transition-all
           group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
       `}
