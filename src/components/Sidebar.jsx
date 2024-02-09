@@ -26,7 +26,6 @@ export default function Sidebar({ children }) {
     <aside className="h-screen ">
       <nav className="h-full flex flex-col bg-white border-r shadow-sm  pt-4">
         <div className="p-4 pb-2 flex justify-between items-center">
-          {console.log(loginDetails)}
           <img
             src={XeramedImg}
             className={`overflow-hidden transition-all ${

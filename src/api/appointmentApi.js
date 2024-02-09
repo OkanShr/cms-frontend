@@ -9,6 +9,15 @@ export const getAllAppointments = (token,id) => {
       
     });
   };
+
+  export const getAllAppointmentsByDoctor = (token) => {
+    return axiosInstance.get("/api/appointment/clients/all",{
+      headers: {
+        Authorization: `Bearer ${token}`,
+      }
+    })
+  }
+
   export const getAppointmentById = (id ,token) => {
       return axiosInstance.get("/api/appointment/" + id, {
         headers: {

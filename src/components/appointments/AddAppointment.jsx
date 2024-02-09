@@ -10,6 +10,7 @@ const AddAppointment=({clientId,loginDetails,showAddModal,handleClose, updateApp
         medication: '',
         complications: '',
         date: '',
+        time: '',
         clientId: clientId
       });
     
@@ -83,6 +84,15 @@ const AddAppointment=({clientId,loginDetails,showAddModal,handleClose, updateApp
           type="date"
           name="date"
           value={formData.date}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="time">
+        <Form.Label>Time</Form.Label>
+        <Form.Control
+          type="time"
+          name="time"
+          value={formData.time}
           onChange={handleChange}
         />
       </Form.Group>

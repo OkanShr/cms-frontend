@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { updateClient, getClientById } from "../api/clientApi";
 import SidebarShort from "../components/SidebarShort";
@@ -51,24 +51,26 @@ const ClientEditPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const updatedFormData = { ...formData }; // Make a copy of the formData
       const response = await updateClient(
-        formData,
+        updatedFormData,
         loginDetails.token,
         clientId
       );
-      setMessage(`Client ${response.data.firstName} updated successfully`);
+      setFormData(updatedFormData); // Update formData after successful submission
+      setMessage(`Client ${updatedFormData.firstName} updated successfully`);
+      navigate(-1); // Navigate after updating
     } catch (error) {
       console.error("Update failed:", error);
       setErr("Failed due to an Error.");
     }
   };
-
   return (
     <div className="bg-white-100 h-screen flex flex-row">
       <SidebarShort dashboard={false} clients={true} addClient={false} />
       <div className="p-5  flex flex-col w-full">
         <div className="flex flex-row">
-          <button onClick={() => navigate("/clients")}>
+          <button onClick={() => navigate(-1)}>
             <ChevronLeft size={35} />
           </button>
           <h1>Edit Client</h1>

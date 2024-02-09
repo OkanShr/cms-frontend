@@ -1,11 +1,6 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 
 import './App.css'
-
 import { PrivateRoute } from "./pages/PrivateRoute";
-import { useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
 
@@ -16,6 +11,7 @@ import  ClientEditPage from './pages/ClientEditPage';
 import AddClientPage from './pages/AddClientPage';
 import ClientsPage from './pages/ClientsPage';
 import ClientDetailsPage from './pages/ClientDetailsPage';
+import CalendarPage from './pages/CalendarPage';
 
 
 function App() {
@@ -24,9 +20,11 @@ function App() {
     <div>
       <Routes>
         <Route path='/' element={<PrivateRoute />}>
-          <Route path='/home' element={<HomePage />}/>
+          <Route path='/' element={<HomePage />}/>
           <Route path='/clients' element={<ClientsPage />}/>
           <Route path='/addclient' element={<AddClientPage />}/>
+          <Route path='/calendar' element={<CalendarPage />}/>
+
           <Route path="/client/:clientId" element={<ClientDetailsPage/>}/>
           <Route path='/client/edit/:clientId' element={<ClientEditPage/>}/>
           {/* after login */}

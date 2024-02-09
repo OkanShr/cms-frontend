@@ -1,7 +1,4 @@
 import React from "react";
-import Sidebar from "../components/Sidebar";
-import { SidebarItem } from "../components/Sidebar";
-import { LayoutDashboard, UserPlus, Users } from "lucide-react";
 import Dashboard from "../components/Dashboard";
 import SidebarShort from "../components/SidebarShort";
 function HomePage() {

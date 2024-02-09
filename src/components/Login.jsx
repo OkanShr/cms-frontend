@@ -29,7 +29,7 @@ function Login() {
             user: data.doctor,
           })
         );
-        navigate("/home");
+        navigate("/");
       })
       .catch((e) => {
         setError(e.response.data.error);

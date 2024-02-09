@@ -29,6 +29,7 @@ const AppointmentDetails = ({updateAppointmentList,loginDetails,appointment,show
         <p>Medications: {appointment.medication}</p>
         <p>Complications: {appointment.complications}</p>
         <p>Date: {appointment.date.split("T")[0]}</p>
+        <p>Time: {appointment.time}</p>
         <h4>Gallery</h4>
         <Slider/>
       </Modal.Body>

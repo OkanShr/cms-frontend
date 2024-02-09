@@ -1,16 +1,16 @@
 import React from 'react'
 import Sidebar from "../components/Sidebar";
 import { SidebarItem } from "../components/Sidebar";
-import { LayoutDashboard, Users, UserPlus, LogOut } from "lucide-react";
+import { LayoutDashboard, Users, UserPlus, CalendarDays } from "lucide-react";
 export const SidebarShort=(props) => {
-    const {dashboard,clients,addClient} = props;
+    const {dashboard,clients,addClient,calendar} = props;
   return (
     <div className="bg-white-100 h-screen flex flex-row">
       <Sidebar>
         <SidebarItem
           text="Dashboard"
           icon={<LayoutDashboard size={20} />}
-          onclick={"home"}
+          onclick={""}
           active={dashboard}
         />
         <SidebarItem
@@ -24,6 +24,12 @@ export const SidebarShort=(props) => {
           icon={<UserPlus size={20} />}
           onclick={"addclient"}
           active={addClient}
+        />
+        <SidebarItem
+          text="Calendar"
+          icon={<CalendarDays size={20}/>}
+          onclick={"calendar"}
+          active={calendar}
         />
       </Sidebar>
 
