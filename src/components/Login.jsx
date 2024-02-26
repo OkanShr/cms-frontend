@@ -32,7 +32,7 @@ function Login() {
         navigate("/");
       })
       .catch((e) => {
-        setError(e.response.data.error);
+        setError("Wrong Username or Password");
       });
   };
 
@@ -68,10 +68,11 @@ function Login() {
             placeholder="password"
           />
         </Form.Group>
-        <p className="font-weight-light text-danger">{error}</p>
+        <p className="font-weight-light text-danger bg-black rounded-xl text-center">{error}</p>
         <div className="d-flex ">
           <button className='w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-md'>Login</button>
         </div>
+        
       </Form>  
     </div>
     </div>
