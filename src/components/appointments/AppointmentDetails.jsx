@@ -41,7 +41,7 @@ const AppointmentDetails = ({
   };
 
   return (
-    <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} size={isFullscreen ? 'xl' : 'lg'}>
+    <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)} size={isFullscreen ? 'xxl' : 'xl'}>
       <Modal.Header closeButton>
         <Modal.Title>Appointment Details</Modal.Title>
       </Modal.Header>
