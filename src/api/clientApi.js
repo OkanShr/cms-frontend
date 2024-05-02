@@ -61,3 +61,25 @@ export const uploadClientImage = (clientId, file, token) => {
     },
   });
 };
+
+// Function to get client PDFs by client ID
+export const getClientPdfs = (clientId, token) => {
+  return axiosInstance.get(`/api/client-pdfs/${clientId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// Function to upload client PDF
+export const uploadClientPdf = (clientId, file, token) => {
+  const formData = new FormData();
+  formData.append("file", file);
+
+  return axiosInstance.post(`/api/client-pdfs/${clientId}/upload`, formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
