@@ -10,6 +10,7 @@ import AddClientPage from "./pages/AddClientPage";
 import ClientsPage from "./pages/ClientsPage";
 import ClientDetailsPage from "./pages/ClientDetailsPage";
 import TestPage from "./pages/TestPage";
+import ClientGalleryPage from "./pages/ClientGalleryPage";
 
 function App() {
   return (
@@ -23,6 +24,10 @@ function App() {
 
           <Route path="/client/:clientId" element={<ClientDetailsPage />} />
           <Route path="/client/edit/:clientId" element={<ClientEditPage />} />
+          <Route
+            path="/client/gallery/:clientId"
+            element={<ClientGalleryPage />}
+          />
           {/* after login */}
         </Route>
         <Route path="/signin" element={<LoginPage />} />

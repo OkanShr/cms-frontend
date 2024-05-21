@@ -71,6 +71,12 @@ function ClientDetailsPage() {
           >
             Delete Client
           </Button>
+          <Button
+            className="w-40 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-2"
+            onClick={() => navigate(`/client/gallery/${client.id}`)}
+          >
+            Gallery
+          </Button>
           <DeleteClientModal
             show={showModal}
             handleClose={handleCloseModal}

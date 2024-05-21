@@ -98,7 +98,7 @@ function TestPage() {
 
           <div>
             {clientImages.map((image) =>
-              image.fileName.endsWith("jpg") ||
+              image.fileName.endsWith(".jpg") ||
               image.fileName.endsWith(".jpeg") ||
               image.fileName.endsWith(".png") ? (
                 <img
