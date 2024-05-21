@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { ListGroup } from "react-bootstrap";
 import { ClientCard } from "./ClientCard";
 
-function Clients({ searchInput }) { // Destructure searchInput from props
+function Clients({ searchInput }) {
+  // Destructure searchInput from props
   const loginDetails = useSelector((state) => state.auth.value);
 
   const [clients, setClients] = useState([]);
@@ -20,12 +21,13 @@ function Clients({ searchInput }) { // Destructure searchInput from props
   }, [loginDetails.token]); // Add loginDetails.token as a dependency
 
   return (
-    <div className="pt-4 shadow-md rounded-sm w-6/12 h-screen">
+    <div className="pt-4 shadow-md rounded-sm h-screen">
       <ListGroup>
         {clients.length > 0 ? (
           clients.map((x) => {
             const fullName = `${x.firstName} ${x.lastName}`;
-            if (fullName.toLowerCase().startsWith(searchInput.toLowerCase())) { // Use toLowerCase for case-insensitive comparison
+            if (fullName.toLowerCase().startsWith(searchInput.toLowerCase())) {
+              // Use toLowerCase for case-insensitive comparison
               return <ClientCard key={x.id} client={x} />;
             }
             return null; // Return null if the condition doesn't match

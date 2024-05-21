@@ -41,13 +41,13 @@ const Appointments = ({ clientId }) => {
   }, []);
 
   const shouldShowAppointment = (appointment) => {
-    return searchInput === '' || appointment.date.startsWith(searchInput);
+    return searchInput === "" || appointment.date.startsWith(searchInput);
   };
 
   return (
     <>
       <div className="flex flex-row">
-        <h2>Appointments</h2>
+        <h2 className="mt-2">Appointments</h2>
         <Button
           onClick={() => setShowAddModal(true)}
           className="m-2 p-2 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
@@ -79,7 +79,9 @@ const Appointments = ({ clientId }) => {
                   key={appointment.id}
                   className="flex flex-row shadow-md p-3 w-2/3 justify-between"
                 >
-                  <span>{`${appointment.date.split("T")[0]} - ${appointment.time} | ${appointment.activity}`}</span>
+                  <span>{`${appointment.date.split("T")[0]} - ${
+                    appointment.time
+                  } | ${appointment.activity}`}</span>
                   <Button
                     className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
                     onClick={() => setShowDetailsModal(true)}

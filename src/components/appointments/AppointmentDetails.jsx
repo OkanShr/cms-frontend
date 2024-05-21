@@ -29,23 +29,8 @@ const AppointmentDetails = ({
     setShowEditModal(true);
   };
 
-  const [isFullscreen, setIsFullscreen] = useState(false);
-  const [activeTab, setActiveTab] = useState("tab1"); // Default tab is 'tab1'
-
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
-  };
-
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
-
   return (
-    <Modal
-      show={showDetailsModal}
-      onHide={() => setShowDetailsModal(false)}
-      size={isFullscreen ? "xxl" : "xl"}
-    >
+    <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
       <Modal.Header closeButton>
         <Modal.Title>Appointment Details</Modal.Title>
       </Modal.Header>

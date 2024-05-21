@@ -50,7 +50,7 @@ function ClientDetailsPage() {
           <button onClick={() => navigate("/clients")}>
             <ChevronLeft size={35} />
           </button>
-          <h2>Client Details</h2>
+          <h2 className="m-0">Client Details</h2>
         </div>
 
         <span>Vorname: {client.firstName}</span>
@@ -65,17 +65,24 @@ function ClientDetailsPage() {
           >
             Edit Client
           </Button>
-          <Button
-            className="w-40 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-2"
-            onClick={handleShowModal}
-          >
-            Delete Client
-          </Button>
+
           <Button
             className="w-40 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-2"
             onClick={() => navigate(`/client/gallery/${client.id}`)}
           >
             Gallery
+          </Button>
+          <Button
+            className="w-40 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-2"
+            onClick={() => navigate(`/client/documents/${client.id}`)}
+          >
+            Documents
+          </Button>
+          <Button
+            className="w-40 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-2"
+            onClick={handleShowModal}
+          >
+            Delete Client
           </Button>
           <DeleteClientModal
             show={showModal}

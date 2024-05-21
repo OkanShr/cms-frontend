@@ -11,6 +11,7 @@ import ClientsPage from "./pages/ClientsPage";
 import ClientDetailsPage from "./pages/ClientDetailsPage";
 import TestPage from "./pages/TestPage";
 import ClientGalleryPage from "./pages/ClientGalleryPage";
+import ClientDocumentsPage from "./pages/ClientDocumentsPage";
 
 function App() {
   return (
@@ -27,6 +28,10 @@ function App() {
           <Route
             path="/client/gallery/:clientId"
             element={<ClientGalleryPage />}
+          />
+          <Route
+            path="/client/documents/:clientId"
+            element={<ClientDocumentsPage />}
           />
           {/* after login */}
         </Route>

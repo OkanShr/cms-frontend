@@ -13,14 +13,7 @@ function ClientGalleryPage() {
   const [currentIndex, setCurrentIndex] = useState(null);
   const [clientImages, setClientImages] = useState([]);
   const [file, setFile] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
   const loginDetails = useSelector((state) => state.auth.value);
-  const [pdfUrl, setPdfUrl] = useState("");
-
-  // Function to handle file change
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
-  };
 
   // Function to fetch client images
   const fetchClientImages = () => {
@@ -31,10 +24,6 @@ function ClientGalleryPage() {
       .catch((error) => {
         console.error("Error fetching client images:", error);
       });
-  };
-
-  const handleClientIdChange = (event) => {
-    setClientId(event.target.value);
   };
 
   // Function to handle image upload
@@ -54,26 +43,6 @@ function ClientGalleryPage() {
       });
   };
 
-  // Function to handle PDF file change
-  const handlePdfFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-
-  // Function to handle PDF file upload
-  const handleFileUpload = () => {
-    if (!selectedFile || !clientId || !loginDetails.token) {
-      console.error("File, client ID, or token missing");
-      return;
-    }
-
-    uploadClientPdf(clientId, selectedFile, loginDetails.token)
-      .then((response) => {
-        console.log("PDF uploaded successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error uploading PDF:", error);
-      });
-  };
   const handleClick = (item, index) => {
     setCurrentIndex(index);
     setClickedImg(item.imageUrl);
@@ -129,7 +98,10 @@ function ClientGalleryPage() {
       />
       <div className="flex flex-col">
         <div className="flex flex-row items-start p-5 w-full">
-          <button onClick={() => navigate("/clients")} className="mr-3">
+          <button
+            onClick={() => navigate(`/client/${clientId}`)}
+            className="mr-3"
+          >
             <ChevronLeft size={35} />
           </button>
           <h2>Client Gallery</h2>
