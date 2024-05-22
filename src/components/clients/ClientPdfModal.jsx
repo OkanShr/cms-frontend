@@ -2,10 +2,18 @@ import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import { deleteClientPdf } from "../../api/clientApi";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-const ClientPdfModal = ({ pdf, showPdfModal, setShowPdfModal }) => {
+const ClientPdfModal = ({
+  pdf,
+  showPdfModal,
+  setShowPdfModal,
+  clientId,
+  loginDetails,
+  fetchClientPdfs,
+}) => {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
@@ -14,10 +22,21 @@ const ClientPdfModal = ({ pdf, showPdfModal, setShowPdfModal }) => {
     setPageNumber(1);
   };
 
-  const onHide = () => setShowPdfModal(false);
+  const Hide = () => setShowPdfModal(false);
+
+  const handleDelete = () => {
+    try {
+      deleteClientPdf(clientId, pdf.id, loginDetails.token).then(() => {
+        Hide();
+        fetchClientPdfs();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <Modal show={showPdfModal} onHide={onHide} size="lg" centered>
+    <Modal show={showPdfModal} onHide={Hide} size="lg" centered>
       <Modal.Body style={{ height: "80vh", overflow: "auto" }}>
         <Document file={pdf.pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
           <Page
@@ -46,7 +65,14 @@ const ClientPdfModal = ({ pdf, showPdfModal, setShowPdfModal }) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
+        <Button
+          onClick={() => {
+            handleDelete();
+          }}
+        >
+          Delete
+        </Button>
+        <Button variant="secondary" onClick={Hide}>
           Close
         </Button>
       </Modal.Footer>

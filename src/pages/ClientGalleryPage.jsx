@@ -5,6 +5,9 @@ import SidebarShort from "../components/SidebarShort";
 import { ChevronLeft, GalleryHorizontal } from "lucide-react";
 import { getClientImages } from "../api/clientApi";
 import Gallery from "../components/misc/Gallery";
+import { Button } from "react-bootstrap";
+import UploadImageModal from "../components/clients/UploadImageModal";
+
 function ClientGalleryPage() {
   const { clientId } = useParams();
   const navigate = useNavigate();
@@ -12,7 +15,7 @@ function ClientGalleryPage() {
   const [clickedImg, setClickedImg] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
   const [clientImages, setClientImages] = useState([]);
-  const [file, setFile] = useState(null);
+  const [showImageUploadModal, setShowImageUploadModal] = useState([]);
   const loginDetails = useSelector((state) => state.auth.value);
 
   // Function to fetch client images
@@ -23,23 +26,6 @@ function ClientGalleryPage() {
       })
       .catch((error) => {
         console.error("Error fetching client images:", error);
-      });
-  };
-
-  // Function to handle image upload
-  const handleImageUpload = () => {
-    if (!file || !clientId || !loginDetails.token) {
-      console.error("File, client ID, or token missing");
-      return;
-    }
-
-    uploadClientImage(clientId, file, loginDetails.token)
-      .then((response) => {
-        console.log("Image uploaded successfully:", response.data);
-        fetchClientImages();
-      })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
       });
   };
 
@@ -106,6 +92,15 @@ function ClientGalleryPage() {
           </button>
           <h2>Client Gallery</h2>
         </div>
+        <Button
+          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+          onClick={() => {
+            setShowImageUploadModal(true);
+            console.log(showImageUploadModal);
+          }}
+        >
+          Upload Image
+        </Button>
         <div className="grid grid-cols-3 gap-4 p-3">
           {clientImages.map((item, index) => (
             <div key={index} className="rounded overflow-hidden shadow-lg">
@@ -129,6 +124,13 @@ function ClientGalleryPage() {
             />
           )}
         </div>
+        <UploadImageModal
+          showImageUploadModal={showImageUploadModal}
+          setShowImageUploadModal={setShowImageUploadModal}
+          clientId={clientId}
+          loginDetails={loginDetails}
+          fetchClientImages={fetchClientImages}
+        />
       </div>
     </div>
   );

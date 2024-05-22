@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import SidebarShort from "../components/SidebarShort";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
-import { getClientPdfs } from "../api/clientApi";
+import { getClientPdfs, uploadClientPdf } from "../api/clientApi";
 import { useSelector } from "react-redux";
 import { ListGroup, Button } from "react-bootstrap";
 import ClientPdfModal from "../components/clients/ClientPdfModal";
-
+import UploadPdfModal from "../components/clients/UploadPdfModal";
 function ClientDocumentsPage() {
   const { clientId } = useParams();
   const navigate = useNavigate();
   const [pdfs, setPdfs] = useState([]);
-  const [showPdfModal, setShowPdfModal] = useState(false);
+  const [showPdfModal, setShowPdfModal] = useState(false); //For viewing pdf
+  const [showPdfUploadModal, setShowPdfUploadModal] = useState(false); //For uploading pdf
   const [currentPdf, setCurrentPdf] = useState(null);
   const loginDetails = useSelector((state) => state.auth.value);
 
@@ -53,6 +54,15 @@ function ClientDocumentsPage() {
           </button>
           <h2>Client Documents</h2>
         </div>
+        <Button
+          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+          onClick={() => {
+            setShowPdfUploadModal(true);
+            console.log(showPdfUploadModal);
+          }}
+        >
+          Upload Document
+        </Button>
         <ListGroup className="m-3 w-6/12">
           {pdfs.length > 0 ? (
             pdfs.map((pdf) => (
@@ -70,7 +80,7 @@ function ClientDocumentsPage() {
               </div>
             ))
           ) : (
-            <h4>There are no PDFs</h4>
+            <h4>No Documents Found</h4>
           )}
         </ListGroup>
         {currentPdf && (
@@ -78,8 +88,18 @@ function ClientDocumentsPage() {
             showPdfModal={showPdfModal}
             setShowPdfModal={setShowPdfModal}
             pdf={currentPdf}
+            clientId={clientId}
+            loginDetails={loginDetails}
+            fetchClientPdfs={fetchClientPdfs}
           />
         )}
+        <UploadPdfModal
+          showPdfUploadModal={showPdfUploadModal}
+          setShowPdfUploadModal={setShowPdfUploadModal}
+          clientId={clientId}
+          loginDetails={loginDetails}
+          fetchClientPdfs={fetchClientPdfs}
+        />
       </div>
     </div>
   );

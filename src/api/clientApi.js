@@ -83,3 +83,12 @@ export const uploadClientPdf = (clientId, file, token) => {
     },
   });
 };
+
+// Function to delete client PDF
+export const deleteClientPdf = (clientId, pdfId, token) => {
+  return axiosInstance.delete(`/api/client-pdfs/${clientId}/delete/${pdfId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
