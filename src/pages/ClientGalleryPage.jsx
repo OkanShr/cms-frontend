@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import SidebarShort from "../components/SidebarShort";
-import { ChevronLeft, GalleryHorizontal } from "lucide-react";
-import { getClientImages } from "../api/clientApi";
+import { ChevronLeft, RotateCcw } from "lucide-react";
+import { deleteClientImage, getClientImages } from "../api/clientApi";
 import Gallery from "../components/misc/Gallery";
 import { Button } from "react-bootstrap";
 import UploadImageModal from "../components/clients/UploadImageModal";
+import ImageComparator from "../components/misc/ImageComparator";
 
 function ClientGalleryPage() {
   const { clientId } = useParams();
@@ -15,8 +16,50 @@ function ClientGalleryPage() {
   const [clickedImg, setClickedImg] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
   const [clientImages, setClientImages] = useState([]);
-  const [showImageUploadModal, setShowImageUploadModal] = useState([]);
+  const [showImageUploadModal, setShowImageUploadModal] = useState(false);
+  const [showComparatorModal, setShowComparatorModal] = useState(false);
   const loginDetails = useSelector((state) => state.auth.value);
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const handleSelectImage = (image) => {
+    setSelectedImages((prevSelected) => {
+      console.log(image);
+      if (prevSelected.includes(image)) {
+        return prevSelected.filter((url) => url !== image);
+      } else if (prevSelected.length < 2) {
+        return [...prevSelected, image];
+      } else {
+        return prevSelected;
+      }
+    });
+  };
+
+  const handleCompare = () => {
+    if (selectedImages.length === 2) {
+      console.log(selectedImages);
+      setShowComparatorModal(true);
+    } else {
+      console.log("Please select exactly two images to compare.");
+    }
+  };
+
+  const handleDelete = () => {
+    if (selectedImages.length === 1) {
+      const imageId = selectedImages[0].id;
+      console.log("Deleting");
+      try {
+        deleteClientImage(clientId, imageId, loginDetails.token).then(() => {
+          fetchClientImages();
+          setSelectedImages([]);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      // Implement delete logic here
+    } else {
+      console.log("Please select exactly one image to delete.");
+    }
+  };
 
   // Function to fetch client images
   const fetchClientImages = () => {
@@ -92,19 +135,49 @@ function ClientGalleryPage() {
           </button>
           <h2>Client Gallery</h2>
         </div>
-        <Button
-          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
-          onClick={() => {
-            setShowImageUploadModal(true);
-            console.log(showImageUploadModal);
-          }}
-        >
-          Upload Image
-        </Button>
+        <div className="flex flex-row">
+          <Button
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+            onClick={() => {
+              setShowImageUploadModal(true);
+              console.log(showImageUploadModal);
+            }}
+          >
+            Upload Image
+          </Button>
+          <Button
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+            onClick={handleCompare}
+          >
+            Compare
+          </Button>
+          <RotateCcw
+            size={38}
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-3 p-1.5 rounded-xl"
+            onClick={() => setSelectedImages([])}
+          />
+          <Button
+            className="text-dark bg-gradient-to-tr from-red-200 to-red-100 border-white w-40 m-3"
+            onClick={handleDelete}
+          >
+            Delete Image
+          </Button>
+        </div>
+
         <div className="grid grid-cols-3 gap-4 p-3">
           {clientImages.map((item, index) => (
-            <div key={index} className="rounded overflow-hidden shadow-lg">
+            <div
+              key={index}
+              className="relative rounded overflow-hidden shadow-lg"
+            >
+              <input
+                type="checkbox"
+                className="absolute top-2 left-2 w-5 h-5"
+                checked={selectedImages.includes(item)}
+                onChange={() => handleSelectImage(item)}
+              />
               <img
+                loading="lazy"
                 src={item.imageUrl}
                 alt={item.fileName.split(".")[0]}
                 className="w-full h-auto cursor-pointer"
@@ -130,6 +203,12 @@ function ClientGalleryPage() {
           clientId={clientId}
           loginDetails={loginDetails}
           fetchClientImages={fetchClientImages}
+        />
+        <ImageComparator
+          showComparatorModal={showComparatorModal}
+          setShowComparatorModal={setShowComparatorModal}
+          firstImage={selectedImages[0] ? selectedImages[0].imageUrl : ""}
+          secondImage={selectedImages[1] ? selectedImages[1].imageUrl : ""}
         />
       </div>
     </div>

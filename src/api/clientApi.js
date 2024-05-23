@@ -92,3 +92,15 @@ export const deleteClientPdf = (clientId, pdfId, token) => {
     },
   });
 };
+
+// Function to delete client Image
+export const deleteClientImage = (clientId, imageId, token) => {
+  return axiosInstance.delete(
+    `/api/client-images/${clientId}/delete/${imageId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};

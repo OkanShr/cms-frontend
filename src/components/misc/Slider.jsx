@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const Slider = () => {
+export const Slider = ({ firstImage, secondImage }) => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -29,19 +29,13 @@ export const Slider = () => {
         onMouseMove={handleMove}
         onMouseDown={handleMouseDown}
       >
-        <img
-          alt=""
-          src="https://images.unsplash.com/photo-1523435324848-a7a613898152?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWgelHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1769&q=80"
-        />
+        <img alt="" src={secondImage} />
 
         <div
           className="absolute top-0 left-0 right-0 w-full max-w-[700px] aspect-[70/45] m-auto overflow-hidden select-none"
           style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
         >
-          <img
-            alt=""
-            src="https://images.unsplash.com/photo-1598875791852-8bb153e713f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWgelHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2010&q=80"
-          />
+          <img alt="" src={firstImage} />
         </div>
         <div
           className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"
