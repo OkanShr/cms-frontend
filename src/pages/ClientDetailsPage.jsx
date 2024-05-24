@@ -11,7 +11,7 @@ import editImage from "../assets/edit.png";
 import deleteImage from "../assets/delete.png";
 import galleryImage from "../assets/gallery.png";
 import docsImage from "../assets/document.png";
-
+import userImg from "../assets/userImg.png";
 function ClientDetailsPage() {
   const { clientId } = useParams();
   const [client, setClient] = useState(null);
@@ -98,28 +98,6 @@ function ClientDetailsPage() {
               />
             </div>
 
-            {/* <button
-              className="px-4 py-2 text-black hover:bg-orange-300 rounded shadow"
-              onClick={() => navigate(`/client/edit/${client.id}`)}
-            >
-              <img src={editImage} alt="" className="w-6 h-6 mr-2" />
-              Edit Client
-            </button> */}
-            {/* <button
-            className="px-4 py-2 text-black  hover:bg-red-600 rounded shadow"
-            onClick={handleShowModal}
-          >
-            <img src={deleteImage} alt=""className="w-6 h-6 mr-2" onClick={handleShowModal} />
-            Delete Client
-          </button> */}
-            {/* <button
-            className="px-4 py-2 text-white hover:bg-sky-600 rounded shadow"
-            onClick={() => navigate(`/client/gallery/${client.id}`)}
-          >
-            <img src={galleryImage} alt="" className="w-6 h-6 mr-2"/>
-            Gallery
-          </button> */}
-
             <DeleteClientModal
               show={showModal}
               handleClose={handleCloseModal}
@@ -127,22 +105,25 @@ function ClientDetailsPage() {
             />
           </div>
         </div>
-
-        <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3 text-lg">
-          <p>
-            <span className="font-medium ">Vorname:</span> {client.firstName}
-          </p>
-          <p>
-            <span className="font-medium">Nachname:</span> {client.lastName}
-          </p>
-          <p>
-            <span className="font-medium">Telefon Nummer:</span>{" "}
-            {client.phoneNumber}
-          </p>
-          <p>
-            <span className="font-medium">Email:</span> {client.email}
-          </p>
+        <div className="flex flex-row">
+          <img src={userImg} width={300}></img>
+          <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3 text-lg">
+            <p>
+              <span className="font-medium ">Vorname:</span> {client.firstName}
+            </p>
+            <p>
+              <span className="font-medium">Nachname:</span> {client.lastName}
+            </p>
+            <p>
+              <span className="font-medium">Telefon Nummer:</span>{" "}
+              {client.phoneNumber}
+            </p>
+            <p>
+              <span className="font-medium">Email:</span> {client.email}
+            </p>
+          </div>
         </div>
+
         <div className="p-4 bg-gray-100 rounded-lg">
           <Appointments clientId={client.id} />
         </div>

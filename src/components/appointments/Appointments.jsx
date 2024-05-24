@@ -56,7 +56,6 @@ const Appointments = ({ clientId }) => {
             <FilePlus />
           </button>
         </div>
-
       </div>
       <AddAppointment
         loginDetails={loginDetails}
@@ -80,7 +79,7 @@ const Appointments = ({ clientId }) => {
               return (
                 <div
                   key={appointment.id}
-                  className="flex flex-row shadow-md p-3 w-2/3 rounded-lg justify-between bg-red-200 mt-3"
+                  className="flex flex-row shadow-md p-3 w-2/3 rounded-lg justify-between bg-white mt-3"
                 >
                   <span>{`${appointment.date.split("T")[0]} - ${
                     appointment.time
