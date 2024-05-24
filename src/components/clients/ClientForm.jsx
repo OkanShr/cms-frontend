@@ -1,29 +1,31 @@
-import React, { useState } from 'react';
-import { Form,Col, Row} from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { createClient } from '../../api/clientApi';
-
+import React, { useState } from "react";
+import { Form, Col, Row } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { createClient } from "../../api/clientApi";
 
 export const ClientForm = () => {
-const loginDetails = useSelector((state) => state.auth.value);
+  const loginDetails = useSelector((state) => state.auth.value);
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phoneNumber: '',
-    doctorId: loginDetails.user.userId
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    gender: "",
+    doctorId: loginDetails.user.userId,
   });
 
-  const [message, setMessage] = useState("")
-  const [err, setErr] = useState("")
+  const [message, setMessage] = useState("");
+  const [err, setErr] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      createClient(formData,loginDetails.token).then((x)=> {setMessage(`Client ${x.data.firstName} created succesfully`)})
+      createClient(formData, loginDetails.token).then((x) => {
+        setMessage(`Client ${x.data.firstName} created succesfully`);
+      });
     } catch (error) {
       console.log(error);
-      setErr("Failed due to an Error.")
+      setErr("Failed due to an Error.");
     }
     console.log(formData);
   };
@@ -37,7 +39,7 @@ const loginDetails = useSelector((state) => state.auth.value);
   };
 
   return (
-    <Form className='w-6/12' onSubmit={handleSubmit}>
+    <Form className="w-6/12" onSubmit={handleSubmit}>
       <Row>
         <Form.Group as={Col} controlId="formFirstName">
           <Form.Label>First Name</Form.Label>
@@ -84,11 +86,29 @@ const loginDetails = useSelector((state) => state.auth.value);
             onChange={handleChange}
           />
         </Form.Group>
+
+        <Form.Group as={Col} controlId="formGender">
+          <Form.Label>Gender</Form.Label>
+          <Form.Control
+            as="select"
+            name="gender"
+            value={formData.gender}
+            onChange={handleChange}
+          >
+            <option value="">Select gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+          </Form.Control>
+        </Form.Group>
       </Row>
-      <p className='text-lime-500 mt-2'>{message}</p>
-      <p className='text-red-500 mt-2'>{err}</p>
-      <button className='mt-1 rounded-md px-3 py-1.5 ml-6
-           text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100' type="submit">
+      <p className="text-lime-500 mt-2">{message}</p>
+      <p className="text-red-500 mt-2">{err}</p>
+      <button
+        className="mt-1 rounded-md px-3 py-1.5 ml-6
+           text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
+        type="submit"
+      >
         Submit
       </button>
     </Form>
