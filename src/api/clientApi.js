@@ -104,3 +104,12 @@ export const deleteClientImage = (clientId, imageId, token) => {
     }
   );
 };
+
+//Function to get last created clients based on months (eg. Last 3 Months)
+export const lastCreatedClientNumber = (months, token) => {
+  return axiosInstance.get(`/api/client/created/last${months}months`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
