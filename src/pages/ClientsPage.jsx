@@ -11,12 +11,14 @@ function ClientsPage() {
   };
 
   return (
-    <div className="bg-white-100 h-screen flex flex-row">
+
+    <div className="flex bg-gray-100 h-screen">
       <SidebarShort dashboard={false} clients={true} addClient={false} />
-      <div className="flex flex-col p-5 w-full">
-        <h2 className="m-0">Clients</h2>
+      <div className="flex flex-col p-5 w-full ">
+        <h1 className=" m-2 text-4xl font-semibold mb-4">Clients</h1>
+
         <input
-          className="w-50 my-2 p-1 border-b-2  border-black"
+          className="m-2 w-60 p-2 mb-4 rounded-lg border border-gray-300 focus:outline-none focus:border-teal-500"
           id="searchtableinput"
           type="text"
           placeholder="Search Client"

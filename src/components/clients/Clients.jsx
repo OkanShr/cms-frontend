@@ -21,23 +21,25 @@ function Clients({ searchInput }) {
   }, [loginDetails.token]); // Add loginDetails.token as a dependency
 
   return (
-    <div className="pt-4 shadow-md rounded-sm h-screen">
-      <ListGroup>
-        {clients.length > 0 ? (
-          clients.map((x) => {
-            const fullName = `${x.firstName} ${x.lastName}`;
-            if (fullName.toLowerCase().startsWith(searchInput.toLowerCase())) {
-              // Use toLowerCase for case-insensitive comparison
-              return <ClientCard key={x.id} client={x} />;
-            }
-            return null; // Return null if the condition doesn't match
-          })
-        ) : (
-          <p>No Clients Found</p>
-        )}
-      </ListGroup>
-    </div>
-  );
+
+    <div>
+    <ListGroup>
+      {clients.length > 0 ? (
+        clients.map((client) => {
+          const fullName = `${client.firstName} ${client.lastName}`;
+          if (fullName.toLowerCase().startsWith(searchInput.toLowerCase())) {
+            return <ClientCard key={client.id} client={client} />;
+          }
+          return null;
+        })
+      ) : (
+        <p className="text-center mt-4">No Clients Found</p>
+      )}
+    </ListGroup>
+  </div>
+);
+
 }
+
 
 export default Clients;
