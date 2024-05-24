@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import SidebarShort from "../components/SidebarShort";
-import { ChevronLeft, GalleryHorizontal } from "lucide-react";
-import { getClientImages } from "../api/clientApi";
+import { ChevronLeft, RotateCcw } from "lucide-react";
+import { deleteClientImage, getClientImages } from "../api/clientApi";
 import Gallery from "../components/misc/Gallery";
+import { Button } from "react-bootstrap";
+import UploadImageModal from "../components/clients/UploadImageModal";
+import ImageComparator from "../components/misc/ImageComparator";
+
 function ClientGalleryPage() {
   const { clientId } = useParams();
   const navigate = useNavigate();
@@ -12,14 +16,49 @@ function ClientGalleryPage() {
   const [clickedImg, setClickedImg] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(null);
   const [clientImages, setClientImages] = useState([]);
-  const [file, setFile] = useState(null);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [showImageUploadModal, setShowImageUploadModal] = useState(false);
+  const [showComparatorModal, setShowComparatorModal] = useState(false);
   const loginDetails = useSelector((state) => state.auth.value);
-  const [pdfUrl, setPdfUrl] = useState("");
+  const [selectedImages, setSelectedImages] = useState([]);
 
-  // Function to handle file change
-  const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+  const handleSelectImage = (image) => {
+    setSelectedImages((prevSelected) => {
+      console.log(image);
+      if (prevSelected.includes(image)) {
+        return prevSelected.filter((url) => url !== image);
+      } else if (prevSelected.length < 2) {
+        return [...prevSelected, image];
+      } else {
+        return prevSelected;
+      }
+    });
+  };
+
+  const handleCompare = () => {
+    if (selectedImages.length === 2) {
+      console.log(selectedImages);
+      setShowComparatorModal(true);
+    } else {
+      console.log("Please select exactly two images to compare.");
+    }
+  };
+
+  const handleDelete = () => {
+    if (selectedImages.length === 1) {
+      const imageId = selectedImages[0].id;
+      console.log("Deleting");
+      try {
+        deleteClientImage(clientId, imageId, loginDetails.token).then(() => {
+          fetchClientImages();
+          setSelectedImages([]);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      // Implement delete logic here
+    } else {
+      console.log("Please select exactly one image to delete.");
+    }
   };
 
   // Function to fetch client images
@@ -33,47 +72,6 @@ function ClientGalleryPage() {
       });
   };
 
-  const handleClientIdChange = (event) => {
-    setClientId(event.target.value);
-  };
-
-  // Function to handle image upload
-  const handleImageUpload = () => {
-    if (!file || !clientId || !loginDetails.token) {
-      console.error("File, client ID, or token missing");
-      return;
-    }
-
-    uploadClientImage(clientId, file, loginDetails.token)
-      .then((response) => {
-        console.log("Image uploaded successfully:", response.data);
-        fetchClientImages();
-      })
-      .catch((error) => {
-        console.error("Error uploading image:", error);
-      });
-  };
-
-  // Function to handle PDF file change
-  const handlePdfFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
-
-  // Function to handle PDF file upload
-  const handleFileUpload = () => {
-    if (!selectedFile || !clientId || !loginDetails.token) {
-      console.error("File, client ID, or token missing");
-      return;
-    }
-
-    uploadClientPdf(clientId, selectedFile, loginDetails.token)
-      .then((response) => {
-        console.log("PDF uploaded successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error uploading PDF:", error);
-      });
-  };
   const handleClick = (item, index) => {
     setCurrentIndex(index);
     setClickedImg(item.imageUrl);
@@ -129,15 +127,57 @@ function ClientGalleryPage() {
       />
       <div className="flex flex-col">
         <div className="flex flex-row items-start p-5 w-full">
-          <button onClick={() => navigate("/clients")} className="mr-3">
+          <button
+            onClick={() => navigate(`/client/${clientId}`)}
+            className="mr-3"
+          >
             <ChevronLeft size={35} />
           </button>
           <h2>Client Gallery</h2>
         </div>
+        <div className="flex flex-row">
+          <Button
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+            onClick={() => {
+              setShowImageUploadModal(true);
+              console.log(showImageUploadModal);
+            }}
+          >
+            Upload Image
+          </Button>
+          <Button
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+            onClick={handleCompare}
+          >
+            Compare
+          </Button>
+          <RotateCcw
+            size={38}
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-3 p-1.5 rounded-xl"
+            onClick={() => setSelectedImages([])}
+          />
+          <Button
+            className="text-dark bg-gradient-to-tr from-red-200 to-red-100 border-white w-40 m-3"
+            onClick={handleDelete}
+          >
+            Delete Image
+          </Button>
+        </div>
+
         <div className="grid grid-cols-3 gap-4 p-3">
           {clientImages.map((item, index) => (
-            <div key={index} className="rounded overflow-hidden shadow-lg">
+            <div
+              key={index}
+              className="relative rounded overflow-hidden shadow-lg"
+            >
+              <input
+                type="checkbox"
+                className="absolute top-2 left-2 w-5 h-5"
+                checked={selectedImages.includes(item)}
+                onChange={() => handleSelectImage(item)}
+              />
               <img
+                loading="lazy"
                 src={item.imageUrl}
                 alt={item.fileName.split(".")[0]}
                 className="w-full h-auto cursor-pointer"
@@ -157,6 +197,19 @@ function ClientGalleryPage() {
             />
           )}
         </div>
+        <UploadImageModal
+          showImageUploadModal={showImageUploadModal}
+          setShowImageUploadModal={setShowImageUploadModal}
+          clientId={clientId}
+          loginDetails={loginDetails}
+          fetchClientImages={fetchClientImages}
+        />
+        <ImageComparator
+          showComparatorModal={showComparatorModal}
+          setShowComparatorModal={setShowComparatorModal}
+          firstImage={selectedImages[0] ? selectedImages[0].imageUrl : ""}
+          secondImage={selectedImages[1] ? selectedImages[1].imageUrl : ""}
+        />
       </div>
     </div>
   );

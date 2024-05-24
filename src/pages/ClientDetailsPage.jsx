@@ -56,6 +56,7 @@ function ClientDetailsPage() {
           >
             <ChevronLeft size={35} />
           </button>
+
           <h2 className="text-3xl font-semibold text-gray-800">
             Client Details
           </h2>
@@ -77,6 +78,7 @@ function ClientDetailsPage() {
               />
             </div>
 
+
             <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
               <img
                 src={galleryImage}
@@ -85,6 +87,7 @@ function ClientDetailsPage() {
                 onClick={() => navigate(`/client/gallery/${client.id}`)}
               />
             </div>
+
 
             {/* <button
               className="px-4 py-2 text-black hover:bg-orange-300 rounded shadow"
@@ -114,6 +117,7 @@ function ClientDetailsPage() {
               handleDelete={handleDelete}
             />
           </div>
+
         </div>
 
         <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3 text-lg">

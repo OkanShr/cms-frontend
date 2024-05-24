@@ -56,6 +56,7 @@ const Appointments = ({ clientId }) => {
             <FilePlus />
           </button>
         </div>
+
       </div>
       <AddAppointment
         loginDetails={loginDetails}

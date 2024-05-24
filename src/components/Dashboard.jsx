@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { Chart, registerables } from "chart.js"; // Chart.js ve gerekli bileşenleri içe aktar
@@ -10,8 +11,12 @@ import rightArrowImage from "../assets/right-arrow.png"
 // Chart.js bileşenlerini kaydet
 Chart.register(...registerables);
 
-function Dashboard() {
-  const Clientnum = 5;
+const Dashboard = ({
+  clientsLast3Months,
+  clientsLast6Months,
+  clientsLast12Months,
+}) => {
+
   const [moreData, setMoreData] = useState(true);
 
   const data = {
@@ -46,7 +51,7 @@ function Dashboard() {
                 </div>
                 <div>
                   <p className="text-center">Total Patients</p>
-                  <h2 className="text-center font-bold text-5xl">{Clientnum}</h2>
+                  <h2 className="text-center font-bold text-5xl">{clientsLast3Months}</h2>
                 </div>
               </div>
               <div className="flex items-center rounded-lg bg-gradient-to-br from-indigo-50 to-indigo-200 p-8 sm:w-60 h-28 gap-4">
@@ -60,7 +65,7 @@ function Dashboard() {
                 </div>
                 <div>
                   <p className="text-center">Consultation</p>
-                  <h2 className="text-center font-bold text-5xl">{Clientnum}</h2>
+                  <h2 className="text-center font-bold text-5xl">{clientsLast3Months}</h2>
                 </div>
               </div>
               <div className="flex items-center rounded-lg bg-gradient-to-br from-fuchsia-50 to-fuchsia-200 p-8 sm:w-60 h-28 gap-4">
@@ -73,7 +78,7 @@ function Dashboard() {
                 </div>
                 <div>
                   <p className="text-center">Bototks</p>
-                  <h2 className="text-center font-bold text-5xl">{Clientnum}</h2>
+                  <h2 className="text-center font-bold text-5xl">{clientsLast3Months}</h2>
                 </div>
               </div>
               <div className="flex items-center rounded-lg bg-gradient-to-br from-amber-50 to-amber-200 p-8 sm:w-60 h-28 gap-4">
@@ -86,7 +91,7 @@ function Dashboard() {
                 </div>
                 <div>
                   <p className="text-center">Surgery</p>
-                  <h2 className="text-center font-bold text-5xl">{Clientnum}</h2>
+                  <h2 className="text-center font-bold text-5xl">{clientsLast3Months}</h2>
                 </div>
               </div>
             </div>
@@ -131,10 +136,11 @@ function Dashboard() {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Dashboard;

@@ -83,3 +83,33 @@ export const uploadClientPdf = (clientId, file, token) => {
     },
   });
 };
+
+// Function to delete client PDF
+export const deleteClientPdf = (clientId, pdfId, token) => {
+  return axiosInstance.delete(`/api/client-pdfs/${clientId}/delete/${pdfId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+// Function to delete client Image
+export const deleteClientImage = (clientId, imageId, token) => {
+  return axiosInstance.delete(
+    `/api/client-images/${clientId}/delete/${imageId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+//Function to get last created clients based on months (eg. Last 3 Months)
+export const lastCreatedClientNumber = (months, token) => {
+  return axiosInstance.get(`/api/client/created/last${months}months`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

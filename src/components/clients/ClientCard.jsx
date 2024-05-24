@@ -17,6 +17,7 @@ export const ClientCard = ({ client }) => {
         >
           Client Details
         </button>
+
       </div>
     </div>
   );

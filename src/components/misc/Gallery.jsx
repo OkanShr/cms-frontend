@@ -1,5 +1,5 @@
 import React from "react";
-import "./lightbox.css";
+import "./lightbox.css"; // This can be removed if no other styles are used
 
 const Gallery = ({
   clickedImg,
@@ -15,12 +15,26 @@ const Gallery = ({
 
   return (
     <>
-      <div className="overlay dismiss" onClick={handleClick}>
-        <img src={clickedImg} alt="bigger pic" />
-        <span className="dismiss" onClick={handleClick}>
+      <div
+        className="fixed top-0 left-0 right-0 w-full h-full bg-[rgba(27,27,27,0.54)] flex items-center dismiss"
+        onClick={handleClick}
+      >
+        <img
+          loading="lazy"
+          src={clickedImg}
+          alt="bigger pic"
+          className="block max-w-[60%] max-h-[80%] m-auto shadow-[3px_5px_7px_rgba(0,0,0,0.5)]"
+        />
+        <span
+          className="absolute top-5 right-5 text-3xl text-white z-[999] cursor-pointer dismiss"
+          onClick={handleClick}
+        >
           X
         </span>
-        <div onClick={handelRotationLeft} className="overlay-arrows_left">
+        <div
+          onClick={handelRotationLeft}
+          className="flex bg-[#6d6d6d] justify-between absolute top-1/2 left-0 w-[50px] h-[50px] z-[999] cursor-pointer"
+        >
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +50,10 @@ const Gallery = ({
             </svg>
           </div>
         </div>
-        <div onClick={handelRotationRight} className="overlay-arrows_right">
+        <div
+          onClick={handelRotationRight}
+          className="flex bg-[#6d6d6d] justify-between absolute right-0 top-1/2 w-[50px] h-[50px] z-[999] cursor-pointer"
+        >
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"

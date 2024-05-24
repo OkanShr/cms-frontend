@@ -4,7 +4,8 @@ import { useSelector } from "react-redux";
 import { ListGroup } from "react-bootstrap";
 import { ClientCard } from "./ClientCard";
 
-function Clients({ searchInput }) { // Destructure searchInput from props
+function Clients({ searchInput }) {
+  // Destructure searchInput from props
   const loginDetails = useSelector((state) => state.auth.value);
 
   const [clients, setClients] = useState([]);
@@ -20,6 +21,7 @@ function Clients({ searchInput }) { // Destructure searchInput from props
   }, [loginDetails.token]); // Add loginDetails.token as a dependency
 
   return (
+
     <div>
     <ListGroup>
       {clients.length > 0 ? (
@@ -36,6 +38,7 @@ function Clients({ searchInput }) { // Destructure searchInput from props
     </ListGroup>
   </div>
 );
+
 }
 
 
