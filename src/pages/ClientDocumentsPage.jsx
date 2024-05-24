@@ -38,12 +38,7 @@ function ClientDocumentsPage() {
 
   return (
     <div className="bg-white-100 h-screen flex flex-row">
-      <SidebarShort
-        dashboard={false}
-        clients={false}
-        addClient={false}
-        calendar={true}
-      />
+      <SidebarShort dashboard={false} clients={true} addClient={false} />
       <div className="flex flex-col w-full">
         <div className="flex flex-row items-start p-5 w-full">
           <button

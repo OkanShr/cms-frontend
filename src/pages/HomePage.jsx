@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Dashboard from "../components/Dashboard";
 import SidebarShort from "../components/SidebarShort";
-import { lastCreatedClientNumber } from "../api/clientApi";
+import {
+  getClientCount,
+  getRegisterGraphData,
+  lastCreatedClientNumber,
+} from "../api/clientApi";
 import { useSelector } from "react-redux";
+import { getAppointmentData } from "../api/appointmentApi";
 
 function HomePage() {
   const loginDetails = useSelector((state) => state.auth.value);
@@ -11,6 +16,23 @@ function HomePage() {
     last6Months: 0,
     last12Months: 0,
   });
+  const [graphData, setGraphData] = useState({});
+  const [clientCount, setClientCount] = useState(0);
+
+  const [appointmentData, setAppointmentData] = useState({
+    Surgery: 0,
+    Botox: 0,
+    Consulting: 0,
+    Example: 0,
+  });
+
+  const getClientGraphData = async () => {
+    getRegisterGraphData(loginDetails.token).then((response) => {
+      setGraphData(response.data).catch((error) => {
+        console.log(error);
+      });
+    });
+  };
 
   const getLastCreatedClientNumber = async (months) => {
     lastCreatedClientNumber(months, loginDetails.token)
@@ -25,10 +47,29 @@ function HomePage() {
       });
   };
 
+  const _getAppointmentData = async () => {
+    getAppointmentData(loginDetails.token).then((response) => {
+      setAppointmentData(response.data).catch((error) => {
+        console.log(error);
+      });
+    });
+  };
+
+  const _getClientCount = async () => {
+    getClientCount(loginDetails.token).then((response) => {
+      setClientCount(response.data).catch((error) => {
+        console.log(error);
+      });
+    });
+  };
+
   useEffect(() => {
     getLastCreatedClientNumber(3);
     getLastCreatedClientNumber(6);
     getLastCreatedClientNumber(12);
+    _getAppointmentData();
+    _getClientCount();
+    getClientGraphData();
   }, [loginDetails.token]);
 
   return (
@@ -38,6 +79,9 @@ function HomePage() {
         clientsLast3Months={clientsData.last3Months}
         clientsLast6Months={clientsData.last6Months}
         clientsLast12Months={clientsData.last12Months}
+        appointmentData={appointmentData}
+        clientCount={clientCount}
+        graphData={graphData}
       />
     </div>
   );

@@ -113,3 +113,21 @@ export const lastCreatedClientNumber = (months, token) => {
     },
   });
 };
+
+//Function to get count of clients
+export const getClientCount = (token) => {
+  return axiosInstance.get(`/api/client/total`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+//Function to get count of clients for each of the last 6 months from now
+export const getRegisterGraphData = (token) => {
+  return axiosInstance.get(`/api/client/created/forEachLast6Months`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};

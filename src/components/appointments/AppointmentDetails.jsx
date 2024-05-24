@@ -36,8 +36,6 @@ const AppointmentDetails = ({
       </Modal.Header>
       <Modal.Body>
         <p>Subject: {appointment.activity}</p>
-        {/* <p>Medications: {appointment.medication}</p> */}
-        {/* <p>Complications: {appointment.complications}</p> */}
         <p>Date: {appointment.date.split("T")[0]}</p>
         <p>Time: {appointment.time}</p>
         {/* PDF will be shown here */}

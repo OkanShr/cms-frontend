@@ -12,8 +12,6 @@ const AddAppointment = ({
 }) => {
   const [formData, setFormData] = useState({
     activity: "",
-    medication: "",
-    complications: "",
     date: "",
     time: "",
     clientId: clientId,
@@ -52,28 +50,6 @@ const AddAppointment = ({
               placeholder="Enter activity"
               name="activity"
               value={formData.activity}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="medications">
-            <Form.Label>Medications</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter medications"
-              name="medications"
-              value={formData.medications}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="complications">
-            <Form.Label>Complications</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter complications"
-              name="complications"
-              value={formData.complications}
               onChange={handleChange}
             />
           </Form.Group>

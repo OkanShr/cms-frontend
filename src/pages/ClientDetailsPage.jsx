@@ -10,6 +10,7 @@ import DeleteClientModal from "../components/clients/DeleteClientModal";
 import editImage from "../assets/edit.png";
 import deleteImage from "../assets/delete.png";
 import galleryImage from "../assets/gallery.png";
+import docsImage from "../assets/document.png";
 
 function ClientDetailsPage() {
   const { clientId } = useParams();
@@ -69,6 +70,7 @@ function ClientDetailsPage() {
                 onClick={() => navigate(`/client/edit/${client.id}`)}
               />
             </div>
+
             <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
               <img
                 src={deleteImage}
@@ -77,7 +79,6 @@ function ClientDetailsPage() {
                 onClick={handleShowModal}
               />
             </div>
-
 
             <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
               <img
@@ -88,6 +89,14 @@ function ClientDetailsPage() {
               />
             </div>
 
+            <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
+              <img
+                src={docsImage}
+                alt=""
+                className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
+                onClick={() => navigate(`/client/documents/${client.id}`)}
+              />
+            </div>
 
             {/* <button
               className="px-4 py-2 text-black hover:bg-orange-300 rounded shadow"
@@ -117,7 +126,6 @@ function ClientDetailsPage() {
               handleDelete={handleDelete}
             />
           </div>
-
         </div>
 
         <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3 text-lg">
