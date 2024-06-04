@@ -152,7 +152,7 @@ function ClientGalleryPage() {
             onClick={() => setSelectedImages([])}
           />
           <Button
-            className="text-dark bg-gradient-to-tr from-red-200 to-red-100 border-white w-40 m-3"
+            className="text-dark bg-gradient-to-tr from-red-500 to-red-400 border-white w-40 m-3"
             onClick={handleDelete}
           >
             Delete Image

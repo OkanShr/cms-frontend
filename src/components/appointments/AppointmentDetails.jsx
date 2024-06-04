@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import { deleteAppointment } from "../../api/appointmentApi";
-import { Slider } from "../misc/Slider";
-import { Maximize2, Minimize2 } from "lucide-react";
+import "../modal.css";
 
 const AppointmentDetails = ({
   updateAppointmentList,
@@ -30,8 +29,12 @@ const AppointmentDetails = ({
   };
 
   return (
-    <Modal show={showDetailsModal} onHide={() => setShowDetailsModal(false)}>
-      <Modal.Header closeButton>
+    <Modal
+      show={showDetailsModal}
+      onHide={() => setShowDetailsModal(false)}
+      dialogClassName="w-9/12"
+    >
+      <Modal.Header>
         <Modal.Title>Appointment Details</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -42,6 +45,12 @@ const AppointmentDetails = ({
       </Modal.Body>
       <Modal.Footer>
         <Button
+          onClick={() => setShowDetailsModal(false)}
+          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
+        >
+          Back
+        </Button>
+        <Button
           onClick={handleOpenEdit}
           className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         >
@@ -49,7 +58,7 @@ const AppointmentDetails = ({
         </Button>
         <Button
           onClick={handleDelete}
-          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
+          className="text-dark bg-gradient-to-tr from-red-500 to-red-400 border-white"
         >
           Delete Appointment
         </Button>

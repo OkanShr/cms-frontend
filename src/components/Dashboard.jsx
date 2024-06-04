@@ -135,32 +135,36 @@ const Dashboard = ({
           <div className="mt-3 flex flex-wrap flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl">
             <div className="m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
               <h4 className="text-center mb-6">Patients</h4>
-              <Line data={data} />
+              <Line data={data} content="" />
             </div>
             <div className="m-5 bg-indigo-100 rounded-2xl p-4 w-full sm:w-1/2 lg:w-5/12 ">
               <h3 className="text-xl font-semibold mb-4">Clients Registered</h3>
               <div>
                 <div className="p-2 flex items-center justify-around bg-sky-950 rounded-lg mb-2 text-white">
-                  <span className="font-medium">Clients</span>
+                  <span className="font-medium">Client Number</span>
                   <span className="font-medium">Time Period</span>
                 </div>
                 <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast3Months} Clients</span>
+                  <span>{clientsLast3Months} New Clients</span>
                   <span>Last 3 Months</span>
                 </div>
                 <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast6Months} Clients</span>
+                  <span>{clientsLast6Months} New Clients</span>
                   <span>Last 6 Months</span>
                 </div>
                 <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast12Months} Clients</span>
+                  <span>{clientsLast12Months} New Clients</span>
                   <span>Last 12 Months</span>
                 </div>
                 {moreData && (
                   <div className="flex justify-end">
                     <button
                       className="text-red-600  hover:text-gray-900 w-4 h-2 "
-                      onClick={() => navigate("/clients")}
+                      onClick={() =>
+                        navigate(
+                          "https://my.shore.com/calendar/week/2024-06-03:2024-06-09"
+                        )
+                      }
                     >
                       <img src={rightArrowImage} alt="" />
                     </button>

@@ -27,11 +27,12 @@ function HomePage() {
   });
 
   const getClientGraphData = async () => {
-    getRegisterGraphData(loginDetails.token).then((response) => {
-      setGraphData(response.data).catch((error) => {
-        console.log(error);
-      });
-    });
+    try {
+      const response = await getRegisterGraphData(loginDetails.token);
+      setGraphData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const getLastCreatedClientNumber = async (months) => {
@@ -48,19 +49,21 @@ function HomePage() {
   };
 
   const _getAppointmentData = async () => {
-    getAppointmentData(loginDetails.token).then((response) => {
-      setAppointmentData(response.data).catch((error) => {
-        console.log(error);
-      });
-    });
+    try {
+      const response = await getAppointmentData(loginDetails.token);
+      setAppointmentData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const _getClientCount = async () => {
-    getClientCount(loginDetails.token).then((response) => {
-      setClientCount(response.data).catch((error) => {
-        console.log(error);
-      });
-    });
+    try {
+      const response = await getClientCount(loginDetails.token);
+      setClientCount(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
