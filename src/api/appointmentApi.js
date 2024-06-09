@@ -52,3 +52,39 @@ export const getAppointmentData = (token) => {
     },
   });
 };
+
+export const getAppointmentPdf = (id, token) => {
+  return (
+    axiosInstance.get("/api/appointment-pdfs/" + id),
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export const createAppointmentPdf = (post, id, token) => {
+  return (
+    axiosInstance.post("/api/appointment-pdfs/" + id + "/upload"),
+    post,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};
+
+export const deleteAppointmentPdf = (AppointmentId, PdfId, token) => {
+  return (
+    axiosInstance.delete(
+      "/api/appointment-pdfs/" + AppointmentId + "/delete/" + PdfId
+    ),
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+};

@@ -15,6 +15,7 @@ const AddAppointment = ({
     date: "",
     time: "",
     clientId: clientId,
+    type: "Consulting",
   });
 
   const handleChange = (e) => {
@@ -29,6 +30,7 @@ const AddAppointment = ({
     e.preventDefault();
     try {
       createAppointment(formData, loginDetails.token).then(() => {
+        console.log(formData);
         handleClose();
         updateAppointmentList();
       });
