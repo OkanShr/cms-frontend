@@ -38,7 +38,7 @@ const ClientPdfModal = ({
   return (
     <Modal show={showPdfModal} onHide={Hide} size="lg" centered>
       <Modal.Body style={{ height: "80vh", overflow: "auto" }}>
-        <Document file={pdf.pdfUrl} onLoadSuccess={onDocumentLoadSuccess}>
+        <Document file={pdf.filePath} onLoadSuccess={onDocumentLoadSuccess}>
           <Page
             size={"A4"}
             pageNumber={pageNumber}

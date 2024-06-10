@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { uploadClientPdf } from "../../api/clientApi";
+
 const UploadPdfModal = ({
   showPdfUploadModal,
   setShowPdfUploadModal,
@@ -37,11 +38,11 @@ const UploadPdfModal = ({
       onHide={() => setShowPdfUploadModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Are you sure you want to delete the client?</Modal.Title>
+        <Modal.Title>Upload Pdf</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <input type="file" onChange={handlePdfFileChange} />
-        <button onClick={handleFileUpload}>Upload</button>
+        <Button onClick={handleFileUpload}>Upload</Button>
       </Modal.Body>
       <Modal.Footer>
         <Button

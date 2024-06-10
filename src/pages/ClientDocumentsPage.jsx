@@ -29,6 +29,7 @@ function ClientDocumentsPage() {
 
   useEffect(() => {
     fetchClientPdfs();
+    console.log(pdfs);
   }, []);
 
   const handlePdfClick = (pdf) => {

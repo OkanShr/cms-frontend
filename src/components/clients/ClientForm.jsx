@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { createClient } from "../../api/clientApi";
 
-export const ClientForm = () => {
+export const ClientForm = ({ onNext }) => {
   const loginDetails = useSelector((state) => state.auth.value);
 
   const [formData, setFormData] = useState({
@@ -15,19 +14,9 @@ export const ClientForm = () => {
     doctorId: loginDetails.user.userId,
   });
 
-  const [message, setMessage] = useState("");
-  const [err, setErr] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    try {
-      createClient(formData, loginDetails.token).then((x) => {
-        setMessage(`Client ${x.data.firstName} created succesfully`);
-      });
-    } catch (error) {
-      console.log(error);
-      setErr("Failed due to an Error.");
-    }
-    console.log(formData);
+    onNext(formData); // Pass the form data to the parent
   };
 
   const handleChange = (e) => {
@@ -39,7 +28,7 @@ export const ClientForm = () => {
   };
 
   return (
-    <Form className="w-6/12" onSubmit={handleSubmit}>
+    <Form className="w-full" onSubmit={handleSubmit}>
       <Row>
         <Form.Group as={Col} controlId="formFirstName">
           <Form.Label>First Name</Form.Label>
@@ -102,14 +91,12 @@ export const ClientForm = () => {
           </Form.Control>
         </Form.Group>
       </Row>
-      <p className="text-lime-500 mt-2">{message}</p>
-      <p className="text-red-500 mt-2">{err}</p>
       <button
         className="mt-1 rounded-md px-3 py-1.5 ml-6
            text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
         type="submit"
       >
-        Submit
+        Next
       </button>
     </Form>
   );

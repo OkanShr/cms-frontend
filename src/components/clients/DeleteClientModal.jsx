@@ -4,7 +4,7 @@ import { Modal, Button } from "react-bootstrap";
 const DeleteClientModal = ({ show, handleClose, handleDelete }) => {
   return (
     <Modal show={show} onHide={handleClose}>
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title>Are you sure you want to delete the client?</Modal.Title>
       </Modal.Header>
       <Modal.Footer>
