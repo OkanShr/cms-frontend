@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Button } from "react-bootstrap";
+
+import { Form } from "react-bootstrap";
 
 export const DocumentForm = ({
   onDSEFileChange,
@@ -27,19 +28,26 @@ export const DocumentForm = ({
   };
 
   return (
-    <form className="flex flex-col" onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       {/* Datenschutz Einwilligung */}
-      <input type="file" onChange={handleDSEFileChange} />
+      <Form.Group controlId="formDSEFile">
+        <Form.Label>Datenschutz Einwilligung</Form.Label>
+        <Form.Control type="file" onChange={handleDSEFileChange} />
+      </Form.Group>
+
       {/* Aufnahmeformular Neukunen */}
-      <input type="file" onChange={handleAFNFileChange} />
+      <Form.Group controlId="formAFNFile">
+        <Form.Label>Aufnahmeformular Neukunen</Form.Label>
+        <Form.Control type="file" onChange={handleAFNFileChange} />
+      </Form.Group>
 
       <button
-        className="mt-1 rounded-md px-3 py-1.5 ml-6
+        className="mt-3 rounded-md px-3 py-1.5 ml-6
            text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
         type="submit"
       >
         Create Client
       </button>
-    </form>
+    </Form>
   );
 };

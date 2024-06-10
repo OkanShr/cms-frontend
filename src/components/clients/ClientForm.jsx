@@ -92,7 +92,7 @@ export const ClientForm = ({ onNext }) => {
         </Form.Group>
       </Row>
       <button
-        className="mt-1 rounded-md px-3 py-1.5 ml-6
+        className="mt-3 rounded-md px-3 py-1.5 ml-6
            text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
         type="submit"
       >

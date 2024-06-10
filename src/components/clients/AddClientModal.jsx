@@ -56,10 +56,10 @@ const AddClientModal = ({
       </Modal.Header>
       <Modal.Body>
         <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
-          <Tab className="m-3" title="Client Info" eventKey="clientInfo">
+          <Tab className="mx-3 mt-3" title="Client Info" eventKey="clientInfo">
             <ClientForm onNext={handleNext} />
           </Tab>
-          <Tab className="m-3" title="Documents" eventKey="documents">
+          <Tab className="mx-3 mt-3" title="Documents" eventKey="documents">
             <DocumentForm
               onDSEFileChange={handleDSEFileChange}
               onAFNFileChange={handleAFNFileChange}
