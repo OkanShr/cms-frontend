@@ -35,9 +35,9 @@ export const DocumentForm = ({
         <Form.Control type="file" onChange={handleDSEFileChange} />
       </Form.Group>
 
-      {/* Aufnahmeformular Neukunen */}
+      {/* Aufnahmeformular Neukunden */}
       <Form.Group controlId="formAFNFile">
-        <Form.Label>Aufnahmeformular Neukunen</Form.Label>
+        <Form.Label>Aufnahmeformular Neukunden</Form.Label>
         <Form.Control type="file" onChange={handleAFNFileChange} />
       </Form.Group>
 

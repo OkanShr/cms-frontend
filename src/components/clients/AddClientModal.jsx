@@ -32,10 +32,22 @@ const AddClientModal = ({
       const clientResponse = await createClient(clientData, loginDetails.token);
       const clientId = clientResponse.data.clientId;
       if (selectedDSEFile) {
-        await uploadClientPdf(clientId, selectedDSEFile, loginDetails.token);
+        await uploadClientPdf(
+          clientId,
+
+          selectedDSEFile,
+          "datenschutz",
+          loginDetails.token
+        );
       }
       if (selectedAFNFile) {
-        await uploadClientPdf(clientId, selectedAFNFile, loginDetails.token);
+        await uploadClientPdf(
+          clientId,
+
+          selectedAFNFile,
+          "aufnahmeformular",
+          loginDetails.token
+        );
       }
 
       console.log("Client and PDF uploaded successfully");

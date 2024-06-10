@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import SidebarShort from "../components/SidebarShort";
 import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
-import { getClientPdfs, uploadClientPdf } from "../api/clientApi";
+import { getClientPdfs } from "../api/clientApi";
 import { useSelector } from "react-redux";
 import { ListGroup, Button } from "react-bootstrap";
 import ClientPdfModal from "../components/clients/ClientPdfModal";
 import UploadPdfModal from "../components/clients/UploadPdfModal";
+import { RotateCcw } from "lucide-react";
+
 function ClientDocumentsPage() {
   const { clientId } = useParams();
   const navigate = useNavigate();
@@ -15,6 +17,7 @@ function ClientDocumentsPage() {
   const [showPdfUploadModal, setShowPdfUploadModal] = useState(false); //For uploading pdf
   const [currentPdf, setCurrentPdf] = useState(null);
   const loginDetails = useSelector((state) => state.auth.value);
+  const [documentFilter, setDocumentFilter] = useState("");
 
   const fetchClientPdfs = () => {
     getClientPdfs(clientId, loginDetails.token)
@@ -26,6 +29,10 @@ function ClientDocumentsPage() {
         console.error("Error fetching client PDFs:", error);
       });
   };
+
+  const filteredPdfs = pdfs.filter((pdf) =>
+    pdf.type.toLowerCase().includes(documentFilter.toLowerCase())
+  );
 
   useEffect(() => {
     fetchClientPdfs();
@@ -50,6 +57,31 @@ function ClientDocumentsPage() {
           </button>
           <h2>Client Documents</h2>
         </div>
+        <div className="flex flex-row">
+          <RotateCcw
+            size={38}
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-3 p-1.5 rounded-xl"
+            onClick={() => setDocumentFilter("")}
+          />
+          <Button
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-45 m-3"
+            onClick={() => setDocumentFilter("datenschutz")}
+          >
+            Datenschutz
+          </Button>
+          <Button
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-45 m-3"
+            onClick={() => setDocumentFilter("aufnahmeformular")}
+          >
+            Aufnahmeformular
+          </Button>
+          <Button
+            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-45 m-3"
+            onClick={() => setDocumentFilter("behandlungsformular")}
+          >
+            Behandlungsformular
+          </Button>
+        </div>
         <Button
           className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
           onClick={() => {
@@ -60,8 +92,8 @@ function ClientDocumentsPage() {
           Upload Document
         </Button>
         <ListGroup className="m-3 w-6/12">
-          {pdfs.length > 0 ? (
-            pdfs.map((pdf) => (
+          {filteredPdfs.length > 0 ? (
+            filteredPdfs.map((pdf) => (
               <div
                 key={pdf.id}
                 className="flex flex-row shadow-md p-3 justify-between items-center"

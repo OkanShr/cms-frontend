@@ -72,10 +72,11 @@ export const getClientPdfs = (clientId, token) => {
 };
 
 // Function to upload client PDF
-export const uploadClientPdf = (clientId, file, token) => {
+export const uploadClientPdf = (clientId, file, type, token) => {
   const formData = new FormData();
   formData.append("file", file);
-
+  formData.append("type", type);
+  console.log(formData);
   return axiosInstance.post(`/api/client-pdfs/${clientId}/upload`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",
