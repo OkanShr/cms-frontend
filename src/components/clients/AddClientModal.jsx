@@ -8,6 +8,7 @@ const AddClientModal = ({
   showAddClientModal,
   setShowAddClientModal,
   loginDetails,
+  updateClientList,
 }) => {
   const [activeTab, setActiveTab] = useState("clientInfo");
   const [clientData, setClientData] = useState({});
@@ -30,17 +31,16 @@ const AddClientModal = ({
     try {
       const clientResponse = await createClient(clientData, loginDetails.token);
       const clientId = clientResponse.data.clientId;
-      console.log(clientId);
-      console.log(clientResponse.data);
-      // if (selectedDSEFile) {
-      //   await uploadClientPdf(clientId, selectedDSEFile, loginDetails.token);
-      // }
-      // if (selectedAFNFile) {
-      //   await uploadClientPdf(clientId, selectedAFNFile, loginDetails.token);
-      // }
+      if (selectedDSEFile) {
+        await uploadClientPdf(clientId, selectedDSEFile, loginDetails.token);
+      }
+      if (selectedAFNFile) {
+        await uploadClientPdf(clientId, selectedAFNFile, loginDetails.token);
+      }
 
       console.log("Client and PDF uploaded successfully");
       setShowAddClientModal(false);
+      updateClientList();
     } catch (error) {
       console.error("Error in final submission:", error);
     }

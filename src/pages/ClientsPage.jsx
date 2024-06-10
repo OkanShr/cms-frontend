@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Clients from "../components/clients/Clients";
 import SidebarShort from "../components/SidebarShort";
-import { useState } from "react";
+import { getAllClients } from "../api/clientApi";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import AddClientModal from "../components/clients/AddClientModal";
 
 function ClientsPage() {
   const loginDetails = useSelector((state) => state.auth.value);
+  const [clients, setClients] = useState([]);
 
   const [searchInput, setSearchInput] = useState("");
   const [showAddClientModal, setShowAddClientModal] = useState(false);
@@ -16,6 +17,16 @@ function ClientsPage() {
     e.preventDefault();
     setSearchInput(e.target.value);
   };
+
+  const updateClientList = () => {
+    getAllClients(loginDetails.token).then((response) => {
+      setClients(response.data);
+    });
+  };
+
+  useEffect(() => {
+    updateClientList();
+  }, [loginDetails.token]); // Add loginDetails.token as a dependency
 
   return (
     <div className="flex bg-gray-100 h-screen">
@@ -36,11 +47,12 @@ function ClientsPage() {
           </Button>
         </div>
         <AddClientModal
+          updateClientList={updateClientList}
           loginDetails={loginDetails}
           showAddClientModal={showAddClientModal}
           setShowAddClientModal={setShowAddClientModal}
         />
-        <Clients searchInput={searchInput} />
+        <Clients clients={clients} searchInput={searchInput} />
       </div>
     </div>
   );
