@@ -7,7 +7,7 @@ import { FilePlus } from "lucide-react";
 import AddAppointment from "./AddAppointment";
 import EditAppointment from "./EditAppointment";
 
-const Appointments = ({ clientId }) => {
+const Appointments = ({ clientId, clientName, clientLastName }) => {
   const loginDetails = useSelector((state) => state.auth.value);
 
   const [appointments, setAppointments] = useState([]);
@@ -63,6 +63,8 @@ const Appointments = ({ clientId }) => {
         handleClose={handleCloseModals}
         clientId={clientId}
         updateAppointmentList={updateAppointmentList}
+        clientName={clientName}
+        clientLastName={clientLastName}
       />
       <input
         className="w-50 mb-2 p-1 border-b-2 bg-transparent border-black"

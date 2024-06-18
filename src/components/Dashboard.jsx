@@ -160,11 +160,7 @@ const Dashboard = ({
                   <div className="flex justify-end">
                     <button
                       className="text-red-600  hover:text-gray-900 w-4 h-2 "
-                      onClick={() =>
-                        navigate(
-                          "https://my.shore.com/calendar/week/2024-06-03:2024-06-09"
-                        )
-                      }
+                      onClick={() => navigate("/clients")}
                     >
                       <img src={rightArrowImage} alt="" />
                     </button>

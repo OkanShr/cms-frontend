@@ -19,12 +19,12 @@ export const SidebarShort = (props) => {
           onclick={"clients"}
           active={clients}
         />
-        <SidebarItem
+        {/* <SidebarItem
           text="Add Client"
           icon={<UserPlus size={20} />}
           onclick={"addclient"}
           active={addClient}
-        />
+        /> */}
         {/* <SidebarItem
           text="Testpage"
           icon={<CalendarDays size={20} />}

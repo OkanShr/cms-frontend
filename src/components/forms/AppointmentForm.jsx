@@ -45,6 +45,7 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Form.Group className="mb-3" controlId="time">
         <Form.Label>Time</Form.Label>
         <Form.Control
@@ -54,6 +55,7 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
           onChange={handleChange}
         />
       </Form.Group>
+
       <Form.Group className="mb-3" controlId="type">
         <Form.Label>Type</Form.Label>
         <Form.Control
@@ -71,12 +73,13 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
 
       <Button
         onClick={handleClose}
-        className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
+        className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
       >
         Cancel
       </Button>
+
       <Button
-        className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
+        className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         type="submit"
       >
         Next

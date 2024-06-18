@@ -9,10 +9,10 @@ export const BehandlungsForm = ({
   appointmentData,
 }) => {
   const [docuFormData, setDocuFormData] = useState({
-    datum: appointmentData.date ? appointmentData.date : "",
+    datum: appointmentData.date || "",
+    name: clientLastName || "",
+    vorname: clientName || "",
     geburtsdatum: "",
-    name: clientLastName ? clientLastName : "",
-    vorname: clientName ? clientName : "",
     vorerkrankungen: "",
     vormedikation: "",
     allergie: "",
@@ -25,23 +25,28 @@ export const BehandlungsForm = ({
     gpfolgetherapie: "",
   });
 
+  useEffect(() => {
+    // Update docuFormData whenever appointmentData, clientName or clientLastName changes
+    setDocuFormData({
+      ...docuFormData,
+      datum: appointmentData.date || "",
+      name: clientLastName || "",
+      vorname: clientName || "",
+    });
+  }, [appointmentData, clientName, clientLastName]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDocuFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onDocuDataChange(docuFormData);
     onFinalSubmit();
-  };
-  console.log(appointmentData);
-
-  useEffect(() => {
-    onDocuDataChange(docuFormData);
-  }, [docuFormData]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setDocuFormData({
-      ...docuFormData,
-      [name]: value,
-    });
   };
 
   return (
