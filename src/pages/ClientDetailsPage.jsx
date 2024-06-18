@@ -12,6 +12,7 @@ import deleteImage from "../assets/delete.png";
 import galleryImage from "../assets/gallery.png";
 import docsImage from "../assets/document.png";
 import userImg from "../assets/userImg.png";
+
 function ClientDetailsPage() {
   const { clientId } = useParams();
   const [client, setClient] = useState(null);

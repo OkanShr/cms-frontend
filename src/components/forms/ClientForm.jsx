@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { Form, Col, Row } from "react-bootstrap";
-import { useSelector } from "react-redux";
 
-export const ClientForm = ({ onNext }) => {
-  const loginDetails = useSelector((state) => state.auth.value);
-
+export const ClientForm = ({ onNext, loginDetails }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",

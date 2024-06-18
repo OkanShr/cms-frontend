@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Modal, Tab, Tabs } from "react-bootstrap";
-import { ClientForm } from "./ClientForm";
+import { ClientForm } from "../forms/ClientForm";
 import { DocumentForm } from "../forms/DocumentForm";
 import { createClient, uploadClientPdf } from "../../api/clientApi";
 
@@ -69,7 +69,7 @@ const AddClientModal = ({
       <Modal.Body>
         <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
           <Tab className="mx-3 mt-3" title="Client Info" eventKey="clientInfo">
-            <ClientForm onNext={handleNext} />
+            <ClientForm onNext={handleNext} loginDetails={loginDetails} />
           </Tab>
           <Tab className="mx-3 mt-3" title="Documents" eventKey="documents">
             <DocumentForm

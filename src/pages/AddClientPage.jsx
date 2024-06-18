@@ -1,5 +1,5 @@
 import React from "react";
-import { ClientForm } from "../components/clients/ClientForm";
+import { ClientForm } from "../components/forms/ClientForm";
 import SidebarShort from "../components/SidebarShort";
 function AddClientPage() {
   return (

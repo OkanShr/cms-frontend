@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Modal, Form, Button } from "react-bootstrap";
+import { Modal, Tab, Tabs } from "react-bootstrap";
 import { createAppointment } from "../../api/appointmentApi";
-
+import { AppointmentForm } from "../forms/AppointmentForm";
+import { BehandlungsForm } from "../forms/BehandlungsForm";
 const AddAppointment = ({
   clientId,
   loginDetails,
@@ -10,84 +10,64 @@ const AddAppointment = ({
   handleClose,
   updateAppointmentList,
 }) => {
-  const [formData, setFormData] = useState({
-    activity: "",
-    date: "",
-    time: "",
-    clientId: clientId,
-    type: "Consulting",
-  });
+  const [activeTab, setActiveTab] = useState("appointmentInfo");
+  const [appointmentData, setAppointmentData] = useState({});
+  const [docuFormData, setDocuFormData] = useState({});
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+  const handleNext = (data) => {
+    setAppointmentData(data);
+    setActiveTab("behandlungsForm");
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleDocuDataChange = (data) => {
+    setDocuFormData(data);
+  };
+
+  const handleFinalSubmit = async () => {
     try {
-      createAppointment(formData, loginDetails.token).then(() => {
-        console.log(formData);
-        handleClose();
-        updateAppointmentList();
-      });
+      const appointmentResponse = await createAppointment(
+        appointmentData,
+        loginDetails.token
+      );
+      const appointmentId = appointmentResponse.data.appointmentId;
+      if (docuFormData) {
+        // create docx file and upload to appointment
+        console.log(docuFormData);
+      }
+      console.log(appointmentResponse.data);
+      updateAppointmentList();
     } catch (error) {
-      console.log(error);
+      console.error("Error in final submission:", error);
     }
-    console.log(formData);
   };
-
   return (
     <Modal show={showAddModal} onHide={handleClose}>
       <Modal.Header>Add Appointment</Modal.Header>
       <Modal.Body>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group className="mb-3" controlId="activity">
-            <Form.Label>Activity</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter activity"
-              name="activity"
-              value={formData.activity}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="date">
-            <Form.Label>Date</Form.Label>
-            <Form.Control
-              type="date"
-              name="date"
-              value={formData.date}
-              onChange={handleChange}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="time">
-            <Form.Label>Time</Form.Label>
-            <Form.Control
-              type="time"
-              name="time"
-              value={formData.time}
-              onChange={handleChange}
-            />
-          </Form.Group>
-
-          <Button
-            onClick={handleClose}
-            className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
+        <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
+          <Tab
+            className="mx-3 mt-3"
+            title="Appointment Info"
+            eventKey="appointmentInfo"
           >
-            Cancel
-          </Button>
-          <Button
-            className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
-            type="submit"
+            <AppointmentForm
+              onNext={handleNext}
+              clientId={clientId}
+              handleClose={handleClose}
+            />
+          </Tab>
+          <Tab
+            className="mx-3 mt-3"
+            title="Behandlungsformular"
+            eventKey="behandlungsForm"
           >
-            Submit
-          </Button>
-        </Form>
+            <h1>Hello</h1>
+            <BehandlungsForm
+              onDocuDataChange={handleDocuDataChange}
+              onFinalSubmit={handleFinalSubmit}
+            />
+          </Tab>
+        </Tabs>
       </Modal.Body>
     </Modal>
   );
