@@ -126,7 +126,11 @@ function ClientDetailsPage() {
         </div>
 
         <div className="p-4 bg-gray-100 rounded-lg">
-          <Appointments clientId={client.id} />
+          <Appointments
+            clientId={client.id}
+            clientName={client.firstName}
+            clientLastName={client.lastName}
+          />
         </div>
       </div>
     );

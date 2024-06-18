@@ -64,16 +64,17 @@ export const getAppointmentPdf = (id, token) => {
   );
 };
 
-export const createAppointmentPdf = (post, id, token) => {
-  return (
-    axiosInstance.post("/api/appointment-pdfs/" + id + "/upload"),
-    post,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export const createAppointmentPdf = (file, type, id, token) => {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("type", type);
+
+  return axiosInstance.post(`/api/appointment-pdfs/${id}/upload`, formData, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
 };
 
 export const deleteAppointmentPdf = (AppointmentId, PdfId, token) => {

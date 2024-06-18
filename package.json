@@ -28,7 +28,10 @@
     "react-router-dom": "6.21.1",
     "redux": "5.0.1",
     "redux-persist": "6.0.0",
-    "rsuite": "^5.53.2"
+    "rsuite": "^5.53.2",
+    "docxtemplater": "^3.47.4",
+    "file-saver": "^2.0.5",
+    "pizzip": "^3.1.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

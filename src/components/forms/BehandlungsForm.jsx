@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "react-bootstrap";
 
-export const BehandlungsForm = ({ onDocuDataChange, onFinalSubmit }) => {
+export const BehandlungsForm = ({
+  clientName,
+  clientLastName,
+  onDocuDataChange,
+  onFinalSubmit,
+  appointmentData,
+}) => {
   const [docuFormData, setDocuFormData] = useState({
-    datum: "",
+    datum: appointmentData.date ? appointmentData.date : "",
     geburtsdatum: "",
-    name: "",
-    vorname: "",
+    name: clientLastName ? clientLastName : "",
+    vorname: clientName ? clientName : "",
     vorerkrankungen: "",
     vormedikation: "",
     allergie: "",
@@ -21,8 +27,14 @@ export const BehandlungsForm = ({ onDocuDataChange, onFinalSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onDocuDataChange(docuFormData).then(() => onFinalSubmit());
+    onDocuDataChange(docuFormData);
+    onFinalSubmit();
   };
+  console.log(appointmentData);
+
+  useEffect(() => {
+    onDocuDataChange(docuFormData);
+  }, [docuFormData]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
