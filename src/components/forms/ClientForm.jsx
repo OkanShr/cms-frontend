@@ -8,6 +8,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
     email: "",
     phoneNumber: "",
     gender: "",
+    birthDate: "",
     doctorId: loginDetails.user.userId,
   });
 
@@ -26,7 +27,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
 
   return (
     <Form className="w-full" onSubmit={handleSubmit}>
-      <Row>
+      <Row className="mb-3">
         <Form.Group as={Col} controlId="formFirstName">
           <Form.Label>First Name</Form.Label>
           <Form.Control
@@ -48,20 +49,20 @@ export const ClientForm = ({ onNext, loginDetails }) => {
             onChange={handleChange}
           />
         </Form.Group>
-      </Row>
 
-      <Row>
-        <Form.Group as={Col} controlId="formPhoneNumber">
-          <Form.Label>Phone Number</Form.Label>
+        <Form.Group as={Col} controlId="formBirthDate">
+          <Form.Label>Birth Date</Form.Label>
           <Form.Control
-            type="text"
-            placeholder="Enter phone number"
-            name="phoneNumber"
-            value={formData.phoneNumber}
+            type="date"
+            placeholder="Enter Birth Date"
+            name="birthDate"
+            value={formData.birthDate}
             onChange={handleChange}
           />
         </Form.Group>
+      </Row>
 
+      <Row>
         <Form.Group as={Col} controlId="formEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -69,6 +70,17 @@ export const ClientForm = ({ onNext, loginDetails }) => {
             placeholder="Enter email"
             name="email"
             value={formData.email}
+            onChange={handleChange}
+          />
+        </Form.Group>
+
+        <Form.Group as={Col} controlId="formPhoneNumber">
+          <Form.Label>Phone Number</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter phone number"
+            name="phoneNumber"
+            value={formData.phoneNumber}
             onChange={handleChange}
           />
         </Form.Group>

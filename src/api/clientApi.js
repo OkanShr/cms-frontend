@@ -33,11 +33,18 @@ export const deleteClient = (id, token) => {
 };
 
 export const createClient = (post, token) => {
-  return axiosInstance.post("/api/client", post, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  return axiosInstance
+    .post("/api/client", post, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    .catch((error) => {
+      if (error.response && error.response.status === 409) {
+        throw new Error("Email already taken");
+      }
+      throw error;
+    });
 };
 
 // Function to get client images by client ID

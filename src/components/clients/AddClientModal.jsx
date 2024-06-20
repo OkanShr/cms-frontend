@@ -14,7 +14,7 @@ const AddClientModal = ({
   const [clientData, setClientData] = useState({});
   const [selectedDSEFile, setSelectedDSEFile] = useState(null);
   const [selectedAFNFile, setSelectedAFNFile] = useState(null);
-
+  const [error, setError] = useState("");
   const handleNext = (data) => {
     setClientData(data);
     setActiveTab("documents");
@@ -54,14 +54,18 @@ const AddClientModal = ({
       setShowAddClientModal(false);
       updateClientList();
     } catch (error) {
-      console.error("Error in final submission:", error);
+      setError(error.message);
     }
   };
 
   return (
     <Modal
       show={showAddClientModal}
-      onHide={() => setShowAddClientModal(false)}
+      onHide={() => {
+        setShowAddClientModal(false);
+        setError("");
+        setActiveTab("clientInfo");
+      }}
     >
       <Modal.Header closeButton>
         <Modal.Title>Add Client</Modal.Title>
@@ -72,6 +76,8 @@ const AddClientModal = ({
             <ClientForm onNext={handleNext} loginDetails={loginDetails} />
           </Tab>
           <Tab className="mx-3 mt-3" title="Documents" eventKey="documents">
+            {error && <div className="alert alert-danger">{error}</div>}
+
             <DocumentForm
               onDSEFileChange={handleDSEFileChange}
               onAFNFileChange={handleAFNFileChange}

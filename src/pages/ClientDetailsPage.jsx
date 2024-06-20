@@ -107,7 +107,10 @@ function ClientDetailsPage() {
           </div>
         </div>
         <div className="flex flex-row">
-          <img src={userImg} width={300}></img>
+          <img
+            src={userImg}
+            className=" rounded-xl object-cover h-50 w-50 max-w-[340px]"
+          ></img>
           <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3 text-lg">
             <p>
               <span className="font-medium ">Vorname:</span> {client.firstName}
@@ -121,6 +124,10 @@ function ClientDetailsPage() {
             </p>
             <p>
               <span className="font-medium">Email:</span> {client.email}
+            </p>
+            <p>
+              <span className="font-medium">Birth Date:</span>{" "}
+              {client.Birthdate ? client.Birthdate : "**/**/****"}
             </p>
           </div>
         </div>
