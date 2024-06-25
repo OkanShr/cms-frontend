@@ -1,77 +1,64 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { Document, Page, pdfjs } from "react-pdf";
-import "react-pdf/dist/esm/Page/TextLayer.css";
+import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import { deleteClientPdf } from "../../api/clientApi";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+import { deleteAppointmentPdf } from "../../api/appointmentApi";
 
 const ClientPdfModal = ({
-  pdf,
+  pdf: file,
   showPdfModal,
   setShowPdfModal,
   clientId,
   loginDetails,
   fetchClientPdfs,
 }) => {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-    setPageNumber(1);
-  };
-
   const Hide = () => setShowPdfModal(false);
 
   const handleDelete = () => {
-    try {
-      deleteClientPdf(clientId, pdf.id, loginDetails.token).then(() => {
-        Hide();
-        fetchClientPdfs();
-      });
-    } catch (error) {
-      console.log(error);
+    if (file.fileName.endsWith(".pdf")) {
+      try {
+        deleteClientPdf(clientId, file.pdfId, loginDetails.token).then(() => {
+          Hide();
+          fetchClientPdfs();
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else if (file.fileName.endsWith(".docx")) {
+      try {
+        deleteAppointmentPdf(
+          file.appointmentId,
+          file.pdfId,
+          loginDetails.token
+        ).then(() => {
+          Hide();
+          fetchClientPdfs();
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
+
+  function formatPdf(pdf) {
+    const formattedDoc = {
+      uri: pdf.filePath,
+      fileType: pdf.fileName.split(".")[1],
+      fileName: pdf.fileName,
+    };
+    return [formattedDoc]; // Return as an array
+  }
 
   return (
     <Modal show={showPdfModal} onHide={Hide} size="lg" centered>
       <Modal.Body style={{ height: "80vh", overflow: "auto" }}>
-        <Document file={pdf.filePath} onLoadSuccess={onDocumentLoadSuccess}>
-          <Page
-            size={"A4"}
-            pageNumber={pageNumber}
-            renderTextLayer={false}
-            renderAnnotationLayer={false}
-          />
-        </Document>
-        <div className="text-center">
-          <p>
-            Page {pageNumber} of {numPages}
-          </p>
-          <Button
-            disabled={pageNumber <= 1}
-            onClick={() => setPageNumber(pageNumber - 1)}
-          >
-            Previous
-          </Button>
-          <Button
-            disabled={pageNumber >= numPages}
-            onClick={() => setPageNumber(pageNumber + 1)}
-          >
-            Next
-          </Button>
-        </div>
+        <DocViewer
+          documents={formatPdf(file)}
+          pluginRenderers={DocViewerRenderers}
+        />
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          onClick={() => {
-            handleDelete();
-          }}
-        >
-          Delete
-        </Button>
+        <Button onClick={handleDelete}>Delete</Button>
         <Button variant="secondary" onClick={Hide}>
           Close
         </Button>

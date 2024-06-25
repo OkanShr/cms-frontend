@@ -75,7 +75,7 @@ const AddAppointment = ({
       // Create a File object from the Blob
       const docxFile = new File(
         [out],
-        `Behandlung-${formData.vorname}${formData.name}${formData.datum}.docx`,
+        `Behandlung-${clientName} ${clientLastName}.docx`,
         {
           type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         }

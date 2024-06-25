@@ -51,6 +51,7 @@ function ClientDocumentsPage() {
 
   const handlePdfClick = (pdf) => {
     setCurrentPdf(pdf);
+    console.log(pdf);
     setShowPdfModal(true);
   };
 
@@ -108,7 +109,9 @@ function ClientDocumentsPage() {
                 key={pdf.id}
                 className="flex flex-row shadow-md p-3 justify-between items-center"
               >
-                <span>{`${pdf.fileName} | Upload Date`}</span>
+                <span>{`${pdf.fileName} | ${
+                  pdf.uploadDate.split("T")[0]
+                }`}</span>
                 <Button
                   className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
                   onClick={() => handlePdfClick(pdf)}
