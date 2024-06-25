@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { deleteAppointment } from "../../api/appointmentApi";
+import { deleteAppointment, getAppointmentPdf } from "../../api/appointmentApi";
+import { Document, Page, pdfjs } from "react-pdf";
 import "../modal.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const AppointmentDetails = ({
   updateAppointmentList,
@@ -11,13 +14,32 @@ const AppointmentDetails = ({
   handleClose,
   setShowDetailsModal,
   setShowEditModal,
+  clientName,
+  clientLastName,
 }) => {
-  const handleDelete = () => {
+  const [appointmentPdf, setAppointmentPdf] = useState(null);
+
+  useEffect(() => {
+    if (appointment.id && showDetailsModal) {
+      fetchAppointmentPdf(appointment.id);
+    }
+  }, [appointment.id, showDetailsModal]);
+
+  const fetchAppointmentPdf = async (id) => {
     try {
-      deleteAppointment(appointment.id, loginDetails.token).then(() => {
-        handleClose();
-        updateAppointmentList();
-      });
+      const response = await getAppointmentPdf(id, loginDetails.token);
+      setAppointmentPdf(response.data[0]);
+      console.log(response.data[0]);
+    } catch (error) {
+      console.error("Error fetching pdf:", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await deleteAppointment(appointment.id, loginDetails.token);
+      handleClose();
+      updateAppointmentList();
     } catch (error) {
       console.log(error);
     }
@@ -35,13 +57,24 @@ const AppointmentDetails = ({
       dialogClassName="w-9/12"
     >
       <Modal.Header>
-        <Modal.Title>Appointment Details</Modal.Title>
+        <Modal.Title>
+          Appointment Details - {clientName} {clientLastName}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <p>Subject: {appointment.activity}</p>
         <p>Date: {appointment.date.split("T")[0]}</p>
         <p>Time: {appointment.time}</p>
-        {/* PDF will be shown here */}
+        {appointmentPdf && (
+          <Document file={appointmentPdf.filePath}>
+            <Page
+              size={"A4"}
+              pageNumber={1}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+            />
+          </Document>
+        )}
       </Modal.Body>
       <Modal.Footer>
         <Button

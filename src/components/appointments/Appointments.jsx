@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { getAllAppointments } from "../../api/appointmentApi";
+import {
+  getAllAppointments,
+  getAppointmentPdf,
+} from "../../api/appointmentApi";
 import { ListGroup, Button } from "react-bootstrap";
 import AppointmentDetails from "./AppointmentDetails";
 import { FilePlus } from "lucide-react";
@@ -15,7 +18,7 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-
+  const [appointmentPdf, setAppointmentPdf] = useState({});
   const handleChangeSearch = (e) => {
     setSearchInput(e.target.value);
   };
@@ -42,6 +45,16 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
 
   const shouldShowAppointment = (appointment) => {
     return searchInput === "" || appointment.date.startsWith(searchInput);
+  };
+
+  const handleFetchAppointmentPdf = async (id) => {
+    try {
+      const response = await getAppointmentPdf(id, loginDetails.token);
+      setAppointmentPdf(response.data);
+      console.log(response.data);
+    } catch {
+      console.error("Error fetching pdf:", error);
+    }
   };
 
   return (
@@ -88,11 +101,15 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
                   } | ${appointment.activity}`}</span>
                   <Button
                     className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white  "
-                    onClick={() => setShowDetailsModal(true)}
+                    onClick={() => {
+                      handleFetchAppointmentPdf(appointment.id);
+                      setShowDetailsModal(true);
+                    }}
                   >
                     Show Details
                   </Button>
                   <AppointmentDetails
+                    appointmentPdf={appointmentPdf}
                     updateAppointmentList={updateAppointmentList}
                     loginDetails={loginDetails}
                     appointment={appointment}
@@ -100,6 +117,8 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
                     handleClose={handleCloseModals}
                     setShowDetailsModal={setShowDetailsModal}
                     setShowEditModal={setShowEditModal}
+                    clientLastName={clientLastName}
+                    clientName={clientName}
                   />
                   <EditAppointment
                     updateAppointmentList={updateAppointmentList}

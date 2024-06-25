@@ -17,8 +17,12 @@
     "axios": "1.6.5",
     "bootstrap": "^5.3.2",
     "chart.js": "^4.4.3",
+    "docxtemplater": "^3.47.4",
+    "file-saver": "^2.0.5",
     "lucide-react": "0.309.0",
+    "mammoth": "^1.8.0",
     "pdfjs-dist": "^3.0.279",
+    "pizzip": "^3.1.7",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.2",
     "react-chartjs-2": "^5.2.0",
@@ -28,10 +32,7 @@
     "react-router-dom": "6.21.1",
     "redux": "5.0.1",
     "redux-persist": "6.0.0",
-    "rsuite": "^5.53.2",
-    "docxtemplater": "^3.47.4",
-    "file-saver": "^2.0.5",
-    "pizzip": "^3.1.7"
+    "rsuite": "^5.53.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",

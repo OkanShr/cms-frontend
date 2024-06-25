@@ -53,15 +53,20 @@ export const getAppointmentData = (token) => {
   });
 };
 
-export const getAppointmentPdf = (id, token) => {
-  return (
-    axiosInstance.get("/api/appointment-pdfs/" + id),
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+export const getAppointmentPdf = async (id, token) => {
+  return axiosInstance.get(`/api/appointment-pdfs/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export const getAllAppointmentPdfsByClient = async (id, token) => {
+  return axiosInstance.get(`/api/appointment-pdfs/by-client/${id}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const createAppointmentPdf = (file, type, id, token) => {

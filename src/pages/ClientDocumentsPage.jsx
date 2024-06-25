@@ -8,6 +8,7 @@ import { ListGroup, Button } from "react-bootstrap";
 import ClientPdfModal from "../components/clients/ClientPdfModal";
 import UploadPdfModal from "../components/clients/UploadPdfModal";
 import { RotateCcw } from "lucide-react";
+import { getAllAppointmentPdfsByClient } from "../api/appointmentApi";
 
 function ClientDocumentsPage() {
   const { clientId } = useParams();
@@ -19,15 +20,24 @@ function ClientDocumentsPage() {
   const loginDetails = useSelector((state) => state.auth.value);
   const [documentFilter, setDocumentFilter] = useState("");
 
-  const fetchClientPdfs = () => {
-    getClientPdfs(clientId, loginDetails.token)
-      .then((response) => {
-        setPdfs(response.data);
-        console.log(pdfs);
-      })
-      .catch((error) => {
-        console.error("Error fetching client PDFs:", error);
-      });
+  const fetchClientPdfs = async () => {
+    try {
+      const [clientPdfsResponse, appointmentPdfsResponse] = await Promise.all([
+        getClientPdfs(clientId, loginDetails.token),
+        getAllAppointmentPdfsByClient(clientId, loginDetails.token),
+      ]);
+
+      const allPdfs = [
+        ...clientPdfsResponse.data,
+        ...appointmentPdfsResponse.data,
+      ];
+
+      setPdfs(allPdfs);
+      console.log(clientPdfsResponse.data);
+      console.log(allPdfs);
+    } catch (error) {
+      console.error("Error fetching PDFs:", error);
+    }
   };
 
   const filteredPdfs = pdfs.filter((pdf) =>

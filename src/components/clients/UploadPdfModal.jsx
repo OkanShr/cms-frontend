@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import { uploadClientPdf } from "../../api/clientApi";
 
 const UploadPdfModal = ({
@@ -10,19 +10,23 @@ const UploadPdfModal = ({
   fetchClientPdfs,
 }) => {
   const [selectedFile, setSelectedFile] = useState(null);
-  // Function to handle PDF file change
+  const [type, setType] = useState("");
+
   const handlePdfFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
   };
 
-  // Function to handle PDF file upload
+  const handleTypeChange = (event) => {
+    setType(event.target.value);
+  };
+
   const handleFileUpload = () => {
-    if (!selectedFile || !clientId || !loginDetails.token) {
-      console.error("File, client ID, or token missing");
+    if (!selectedFile || !type || !clientId || !loginDetails.token) {
+      console.error("File, file type, client ID, or token missing");
       return;
     }
 
-    uploadClientPdf(clientId, selectedFile, loginDetails.token)
+    uploadClientPdf(clientId, selectedFile, type, loginDetails.token)
       .then((response) => {
         console.log("PDF uploaded successfully:", response.data);
         setShowPdfUploadModal(false);
@@ -32,17 +36,31 @@ const UploadPdfModal = ({
         console.error("Error uploading PDF:", error);
       });
   };
+
   return (
     <Modal
       show={showPdfUploadModal}
       onHide={() => setShowPdfUploadModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Upload Pdf</Modal.Title>
+        <Modal.Title>Upload PDF</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <input type="file" onChange={handlePdfFileChange} />
-        <Button onClick={handleFileUpload}>Upload</Button>
+        <Form>
+          <Form.Group>
+            <Form.Label>Upload PDF</Form.Label>
+            <Form.Control type="file" onChange={handlePdfFileChange} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Select Type</Form.Label>
+            <Form.Control as="select" value={type} onChange={handleTypeChange}>
+              <option value="">Select type</option>
+              <option value="behandlungsformular">Behandlungsformular</option>
+              <option value="aufnahmeformular">Aufnahmeformular</option>
+              <option value="datenschutz">Datenschutz</option>
+            </Form.Control>
+          </Form.Group>
+        </Form>
       </Modal.Body>
       <Modal.Footer>
         <Button
@@ -51,6 +69,7 @@ const UploadPdfModal = ({
         >
           Cancel
         </Button>
+        <Button onClick={handleFileUpload}>Upload</Button>
       </Modal.Footer>
     </Modal>
   );
