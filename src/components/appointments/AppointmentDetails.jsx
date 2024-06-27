@@ -12,6 +12,7 @@ const AppointmentDetails = ({
   handleClose,
   setShowDetailsModal,
   setShowEditModal,
+  clientId,
   clientName,
   clientLastName,
 }) => {
@@ -23,9 +24,13 @@ const AppointmentDetails = ({
     }
   }, [appointment.id, showDetailsModal]);
 
-  const fetchAppointmentPdf = async (id) => {
+  const fetchAppointmentPdf = async (appointmentId) => {
     try {
-      const response = await getAppointmentPdf(id, loginDetails.token);
+      const response = await getAppointmentPdf(
+        appointmentId,
+        clientId,
+        loginDetails.token
+      );
       setAppointmentPdf(response.data[0]);
       console.log(response.data[0]);
     } catch (error) {

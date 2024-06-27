@@ -53,7 +53,7 @@ export const getAppointmentData = (token) => {
   });
 };
 
-export const getAppointmentPdf = async (appointmentId, clientId, token) => {
+export const getAppointmentPdf = (appointmentId, clientId, token) => {
   return axiosInstance.get(
     `/api/appointment-pdfs/${clientId}/${appointmentId}`,
     {

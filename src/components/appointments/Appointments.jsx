@@ -50,9 +50,13 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
     return searchInput === "" || appointment.date.startsWith(searchInput);
   };
 
-  const handleFetchAppointmentPdf = async (id) => {
+  const handleFetchAppointmentPdf = async (appointmentId) => {
     try {
-      const response = await getAppointmentPdf(id, loginDetails.token);
+      const response = await getAppointmentPdf(
+        appointmentId,
+        clientId,
+        loginDetails.token
+      );
       setAppointmentPdf(response.data);
       console.log(response.data);
     } catch (error) {
@@ -126,6 +130,7 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
                       handleClose={handleCloseModals}
                       setShowDetailsModal={setShowDetailsModal}
                       setShowEditModal={setShowEditModal}
+                      clientId={clientId}
                       clientLastName={clientLastName}
                       clientName={clientName}
                     />

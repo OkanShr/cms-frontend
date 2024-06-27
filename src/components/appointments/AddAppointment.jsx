@@ -51,6 +51,7 @@ const AddAppointment = ({
   const generateDocument = async (formData, appointmentId) => {
     try {
       // Fetch the template file
+      console.log(formData);
       const response = await fetch(templateFile);
       const arrayBuffer = await response.arrayBuffer();
       const zip = new PizZip(arrayBuffer);
@@ -75,7 +76,7 @@ const AddAppointment = ({
       // Create a File object from the Blob
       const docxFile = new File(
         [out],
-        `Behandlung-${clientName} ${clientLastName}.docx`,
+        `Behandlung-${clientName} ${clientLastName} ${appointmentId}.docx`,
         {
           type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         }
