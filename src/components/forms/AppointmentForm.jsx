@@ -7,7 +7,7 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
     date: "",
     time: "",
     clientId: clientId,
-    type: "behandlungsformular",
+    type: "",
   });
 
   const handleSubmit = (e) => {

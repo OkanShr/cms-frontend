@@ -34,7 +34,6 @@ const AddClientModal = ({
       if (selectedDSEFile) {
         await uploadClientPdf(
           clientId,
-
           selectedDSEFile,
           "datenschutz",
           loginDetails.token
@@ -43,7 +42,6 @@ const AddClientModal = ({
       if (selectedAFNFile) {
         await uploadClientPdf(
           clientId,
-
           selectedAFNFile,
           "aufnahmeformular",
           loginDetails.token

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { deleteAppointment, getAppointmentPdf } from "../../api/appointmentApi";
-import { Document, Page, pdfjs } from "react-pdf";
+import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import "../modal.css";
-
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 const AppointmentDetails = ({
   updateAppointmentList,
@@ -50,6 +48,15 @@ const AppointmentDetails = ({
     setShowEditModal(true);
   };
 
+  function formatPdf(pdf) {
+    const formattedDoc = {
+      uri: pdf.filePath,
+      fileType: pdf.fileName.split(".")[1],
+      fileName: pdf.fileName,
+    };
+    return [formattedDoc]; // Return as an array
+  }
+
   return (
     <Modal
       show={showDetailsModal}
@@ -66,14 +73,13 @@ const AppointmentDetails = ({
         <p>Date: {appointment.date.split("T")[0]}</p>
         <p>Time: {appointment.time}</p>
         {appointmentPdf && (
-          <Document file={appointmentPdf.filePath}>
-            <Page
-              size={"A4"}
-              pageNumber={1}
-              renderTextLayer={false}
-              renderAnnotationLayer={false}
+          <div className="doc-viewer-container">
+            {console.log(appointment.id)}
+            <DocViewer
+              documents={formatPdf(appointmentPdf)}
+              pluginRenderers={DocViewerRenderers}
             />
-          </Document>
+          </div>
         )}
       </Modal.Body>
       <Modal.Footer>

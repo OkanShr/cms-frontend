@@ -84,10 +84,12 @@ const AddAppointment = ({
       // Upload the document
       await createAppointmentPdf(
         docxFile,
-        "Docx",
+        "behandlungsformular",
+        clientId,
         appointmentId,
         loginDetails.token
       );
+      handleClose();
     } catch (error) {
       console.error("Error generating document:", error);
       throw error;

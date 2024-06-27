@@ -1,3 +1,7 @@
 .modal-dialog{
     max-width: 60% !important;
 }
+.doc-viewer-container {
+    height: 70vh; /* Adjust according to your preference */
+    width: 100%; /* Ensure full width */
+  }

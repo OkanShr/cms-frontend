@@ -32,19 +32,19 @@ export const deleteClient = (id, token) => {
   });
 };
 
-export const createClient = (post, token) => {
-  return axiosInstance
-    .post("/api/client", post, {
+export const createClient = async (post, token) => {
+  try {
+    return await axiosInstance.post("/api/client", post, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-    .catch((error) => {
-      if (error.response && error.response.status === 409) {
-        throw new Error("Email already taken");
-      }
-      throw error;
     });
+  } catch (error) {
+    if (error.response && error.response.status === 409) {
+      throw new Error("Email already taken");
+    }
+    throw error;
+  }
 };
 
 // Function to get client images by client ID
@@ -83,7 +83,7 @@ export const uploadClientPdf = (clientId, file, type, token) => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("type", type);
-  console.log(formData);
+
   return axiosInstance.post(`/api/client-pdfs/${clientId}/upload`, formData, {
     headers: {
       "Content-Type": "multipart/form-data",

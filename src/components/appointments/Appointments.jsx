@@ -19,6 +19,8 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [appointmentPdf, setAppointmentPdf] = useState({});
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); // New state for selected appointment ID
+
   const handleChangeSearch = (e) => {
     setSearchInput(e.target.value);
   };
@@ -27,6 +29,7 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
     setShowDetailsModal(false);
     setShowAddModal(false);
     setShowEditModal(false);
+    setSelectedAppointmentId(null); // Reset selected appointment ID
   };
 
   const updateAppointmentList = () => {
@@ -52,9 +55,14 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
       const response = await getAppointmentPdf(id, loginDetails.token);
       setAppointmentPdf(response.data);
       console.log(response.data);
-    } catch {
+    } catch (error) {
       console.error("Error fetching pdf:", error);
     }
+  };
+
+  const handleShowDetails = (appointmentId) => {
+    setSelectedAppointmentId(appointmentId);
+    setShowDetailsModal(true);
   };
 
   return (
@@ -103,23 +111,25 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
                     className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white  "
                     onClick={() => {
                       handleFetchAppointmentPdf(appointment.id);
-                      setShowDetailsModal(true);
+                      handleShowDetails(appointment.id);
                     }}
                   >
                     Show Details
                   </Button>
-                  <AppointmentDetails
-                    appointmentPdf={appointmentPdf}
-                    updateAppointmentList={updateAppointmentList}
-                    loginDetails={loginDetails}
-                    appointment={appointment}
-                    showDetailsModal={showDetailsModal}
-                    handleClose={handleCloseModals}
-                    setShowDetailsModal={setShowDetailsModal}
-                    setShowEditModal={setShowEditModal}
-                    clientLastName={clientLastName}
-                    clientName={clientName}
-                  />
+                  {selectedAppointmentId === appointment.id && (
+                    <AppointmentDetails
+                      appointmentPdf={appointmentPdf}
+                      updateAppointmentList={updateAppointmentList}
+                      loginDetails={loginDetails}
+                      appointment={appointment}
+                      showDetailsModal={showDetailsModal}
+                      handleClose={handleCloseModals}
+                      setShowDetailsModal={setShowDetailsModal}
+                      setShowEditModal={setShowEditModal}
+                      clientLastName={clientLastName}
+                      clientName={clientName}
+                    />
+                  )}
                   <EditAppointment
                     updateAppointmentList={updateAppointmentList}
                     loginDetails={loginDetails}

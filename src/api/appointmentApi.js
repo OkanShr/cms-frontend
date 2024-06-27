@@ -53,12 +53,15 @@ export const getAppointmentData = (token) => {
   });
 };
 
-export const getAppointmentPdf = async (id, token) => {
-  return axiosInstance.get(`/api/appointment-pdfs/${id}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+export const getAppointmentPdf = async (appointmentId, clientId, token) => {
+  return axiosInstance.get(
+    `/api/appointment-pdfs/${clientId}/${appointmentId}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 
 export const getAllAppointmentPdfsByClient = async (id, token) => {
@@ -69,23 +72,33 @@ export const getAllAppointmentPdfsByClient = async (id, token) => {
   });
 };
 
-export const createAppointmentPdf = (file, type, id, token) => {
+export const createAppointmentPdf = (
+  file,
+  type,
+  clientId,
+  appointmentId,
+  token
+) => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("type", type);
 
-  return axiosInstance.post(`/api/appointment-pdfs/${id}/upload`, formData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    },
-  });
+  return axiosInstance.post(
+    `/api/appointment-pdfs/${clientId}/${appointmentId}/upload`,
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 };
 
-export const deleteAppointmentPdf = (AppointmentId, PdfId, token) => {
+export const deleteAppointmentPdf = (appointmentId, clientId, PdfId, token) => {
   return (
     axiosInstance.delete(
-      "/api/appointment-pdfs/" + AppointmentId + "/delete/" + PdfId
+      `/api/appointment-pdfs/${clientId}/${appointmentId}/delete/${PdfId}`
     ),
     {
       headers: {

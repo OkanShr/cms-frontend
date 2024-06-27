@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, Button } from "react-bootstrap";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import { deleteClientPdf } from "../../api/clientApi";
