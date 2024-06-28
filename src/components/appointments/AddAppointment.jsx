@@ -39,19 +39,32 @@ const AddAppointment = ({
         loginDetails.token
       );
       const appointmentId = appointmentResponse.data.appointmentId;
-      if (docuFormData) {
-        await generateDocument(docuFormData, appointmentId);
+
+      if (docuFormData && Object.keys(docuFormData).length > 0) {
+        await generateAndUploadDocument(docuFormData, appointmentId);
       }
+
+      handleClose();
+      setDocuFormData({});
+      setActiveTab("appointmentInfo");
       updateAppointmentList();
     } catch (error) {
       console.error("Error in final submission:", error);
     }
   };
 
+  const generateAndUploadDocument = async (formData, appointmentId) => {
+    try {
+      const docxFile = await generateDocument(formData, appointmentId);
+      await uploadDocument(docxFile, appointmentId);
+    } catch (error) {
+      console.error("Error in document processing:", error);
+      throw error;
+    }
+  };
+
   const generateDocument = async (formData, appointmentId) => {
     try {
-      // Fetch the template file
-      console.log(formData);
       const response = await fetch(templateFile);
       const arrayBuffer = await response.arrayBuffer();
       const zip = new PizZip(arrayBuffer);
@@ -60,29 +73,30 @@ const AddAppointment = ({
         linebreaks: true,
       });
 
-      // Replace placeholders with form data
       doc.setData(formData);
-
-      // Render the document
       doc.render();
 
-      // Generate the document blob
       const out = doc.getZip().generate({
         type: "blob",
         mimeType:
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       });
 
-      // Create a File object from the Blob
-      const docxFile = new File(
+      return new File(
         [out],
         `Behandlung-${clientName} ${clientLastName} ${appointmentId}.docx`,
         {
           type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         }
       );
+    } catch (error) {
+      console.error("Error generating document:", error);
+      throw error;
+    }
+  };
 
-      // Upload the document
+  const uploadDocument = async (docxFile, appointmentId) => {
+    try {
       await createAppointmentPdf(
         docxFile,
         "behandlungsformular",
@@ -90,9 +104,8 @@ const AddAppointment = ({
         appointmentId,
         loginDetails.token
       );
-      handleClose();
     } catch (error) {
-      console.error("Error generating document:", error);
+      console.error("Error uploading document:", error);
       throw error;
     }
   };

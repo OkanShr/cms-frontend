@@ -30,8 +30,8 @@ export const updateAppointment = (post, id, token) => {
     },
   });
 };
-export const deleteAppointment = (id, token) => {
-  return axiosInstance.delete("/api/appointment/" + id, {
+export const deleteAppointment = (appointmentId, clientId, token) => {
+  return axiosInstance.delete(`/api/appointment/${clientId}/${appointmentId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

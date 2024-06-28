@@ -27,13 +27,18 @@ export const BehandlungsForm = ({
 
   useEffect(() => {
     // Update docuFormData whenever appointmentData, clientName or clientLastName changes
-    setDocuFormData({
-      ...docuFormData,
+    setDocuFormData((prevData) => ({
+      ...prevData,
       datum: appointmentData.date || "",
       name: clientLastName || "",
       vorname: clientName || "",
-    });
+    }));
   }, [appointmentData, clientName, clientLastName]);
+
+  useEffect(() => {
+    // Call onDocuDataChange whenever docuFormData changes
+    onDocuDataChange(docuFormData);
+  }, [docuFormData, onDocuDataChange]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,7 +50,6 @@ export const BehandlungsForm = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onDocuDataChange(docuFormData);
     onFinalSubmit();
   };
 
@@ -65,7 +69,7 @@ export const BehandlungsForm = ({
       ))}
       <Button
         className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-        onClick={() => onFinalSubmit()}
+        onClick={handleSubmit}
       >
         Cancel
       </Button>

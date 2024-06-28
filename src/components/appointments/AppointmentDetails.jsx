@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { deleteAppointment, getAppointmentPdf } from "../../api/appointmentApi";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
+import { Document, Page } from "react-pdf";
 import "../modal.css";
 
 const AppointmentDetails = ({
@@ -17,6 +18,7 @@ const AppointmentDetails = ({
   clientLastName,
 }) => {
   const [appointmentPdf, setAppointmentPdf] = useState(null);
+  const [fileType, setFileType] = useState(null);
 
   useEffect(() => {
     if (appointment.id && showDetailsModal) {
@@ -32,7 +34,7 @@ const AppointmentDetails = ({
         loginDetails.token
       );
       setAppointmentPdf(response.data[0]);
-      console.log(response.data[0]);
+      setFileType(response.data[0].fileName.split(".")[1]);
     } catch (error) {
       console.error("Error fetching pdf:", error);
     }
@@ -40,7 +42,7 @@ const AppointmentDetails = ({
 
   const handleDelete = async () => {
     try {
-      await deleteAppointment(appointment.id, loginDetails.token);
+      await deleteAppointment(appointment.id, clientId, loginDetails.token);
       handleClose();
       updateAppointmentList();
     } catch (error) {
@@ -79,11 +81,19 @@ const AppointmentDetails = ({
         <p>Time: {appointment.time}</p>
         {appointmentPdf && (
           <div className="doc-viewer-container">
-            {console.log(appointment.id)}
-            <DocViewer
-              documents={formatPdf(appointmentPdf)}
-              pluginRenderers={DocViewerRenderers}
-            />
+            {fileType === "pdf" ? (
+              <Document
+                file={appointmentPdf.filePath}
+                options={{ disableTextLayer: true, disableAnnotations: true }}
+              >
+                <Page pageNumber={1} />
+              </Document>
+            ) : (
+              <DocViewer
+                documents={formatPdf(appointmentPdf)}
+                pluginRenderers={DocViewerRenderers}
+              />
+            )}
           </div>
         )}
       </Modal.Body>

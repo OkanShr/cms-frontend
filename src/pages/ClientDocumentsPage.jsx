@@ -33,8 +33,6 @@ function ClientDocumentsPage() {
       ];
 
       setPdfs(allPdfs);
-      console.log(clientPdfsResponse.data);
-      console.log(allPdfs);
     } catch (error) {
       console.error("Error fetching PDFs:", error);
     }
@@ -46,12 +44,10 @@ function ClientDocumentsPage() {
 
   useEffect(() => {
     fetchClientPdfs();
-    console.log(pdfs);
   }, []);
 
   const handlePdfClick = (pdf) => {
     setCurrentPdf(pdf);
-    console.log(pdf);
     setShowPdfModal(true);
   };
 
@@ -106,7 +102,7 @@ function ClientDocumentsPage() {
           {filteredPdfs.length > 0 ? (
             filteredPdfs.map((pdf) => (
               <div
-                key={pdf.id}
+                key={pdf.pdfId}
                 className="flex flex-row shadow-md p-3 justify-between items-center"
               >
                 <span>{`${pdf.fileName} | ${

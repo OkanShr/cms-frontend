@@ -29,13 +29,13 @@ export const Slider = ({ firstImage, secondImage }) => {
         onMouseMove={handleMove}
         onMouseDown={handleMouseDown}
       >
-        <img alt="" src={secondImage} />
+        <img alt="" src={secondImage} className="w-full h-full object-cover" />
 
         <div
           className="absolute top-0 left-0 right-0 w-full max-w-[700px] aspect-[70/45] m-auto overflow-hidden select-none"
           style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
         >
-          <img alt="" src={firstImage} />
+          <img alt="" src={firstImage} className="w-full h-full object-cover" />
         </div>
         <div
           className="absolute top-0 bottom-0 w-1 bg-white cursor-ew-resize"

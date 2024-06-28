@@ -164,6 +164,7 @@ function ClientGalleryPage() {
             <div
               key={index}
               className="relative rounded overflow-hidden shadow-lg"
+              style={{ width: "200px", height: "200px" }}
             >
               <input
                 type="checkbox"
@@ -172,10 +173,12 @@ function ClientGalleryPage() {
                 onChange={() => handleSelectImage(item)}
               />
               <img
+                width={200}
+                height={200}
                 loading="lazy"
                 src={item.imageUrl}
                 alt={item.fileName.split(".")[0]}
-                className="w-full h-auto cursor-pointer"
+                className="h-full w-full object-cover cursor-pointer"
                 onClick={() => handleClick(item, index)}
               />
             </div>
