@@ -23,7 +23,6 @@ function ClientGalleryPage() {
 
   const handleSelectImage = (image) => {
     setSelectedImages((prevSelected) => {
-      console.log(image);
       if (prevSelected.includes(image)) {
         return prevSelected.filter((url) => url !== image);
       } else if (prevSelected.length < 2) {
@@ -36,7 +35,6 @@ function ClientGalleryPage() {
 
   const handleCompare = () => {
     if (selectedImages.length === 2) {
-      console.log(selectedImages);
       setShowComparatorModal(true);
     } else {
       console.log("Please select exactly two images to compare.");
@@ -46,7 +44,6 @@ function ClientGalleryPage() {
   const handleDelete = () => {
     if (selectedImages.length === 1) {
       const imageId = selectedImages[0].id;
-      console.log("Deleting");
       try {
         deleteClientImage(clientId, imageId, loginDetails.token).then(() => {
           fetchClientImages();
@@ -65,57 +62,49 @@ function ClientGalleryPage() {
   const fetchClientImages = () => {
     getClientImages(clientId, loginDetails.token)
       .then((response) => {
-        setClientImages(response.data);
+        setClientImages(response.data); // Update clientImages state with fetched data
+        setCurrentIndex(null); // Reset currentIndex when fetching new images
+        setClickedImg(null); // Clear clickedImg when fetching new images
       })
       .catch((error) => {
         console.error("Error fetching client images:", error);
       });
   };
 
+  useEffect(() => {
+    fetchClientImages(); // Initial fetch when component mounts
+  }, [clientId]); // Trigger fetch when clientId changes
+
   const handleClick = (item, index) => {
     setCurrentIndex(index);
     setClickedImg(item.imageUrl);
-    console.log(clickedImg);
   };
 
   const handelRotationRight = () => {
-    const totalLength = clientImages.length;
-    if (currentIndex + 1 >= totalLength) {
-      setCurrentIndex(0);
-      const newUrl = clientImages[0].link;
-      setClickedImg(newUrl);
-      return;
+    if (clientImages.length === 0) return;
+
+    let newIndex = currentIndex === null ? 0 : currentIndex + 1;
+    if (newIndex >= clientImages.length) {
+      newIndex = 0;
     }
-    const newIndex = currentIndex + 1;
-    const newUrl = clientImages.filter((item) => {
-      return clientImages.indexOf(item) === newIndex;
-    });
-    const newItem = newUrl[0].link;
-    setClickedImg(newItem);
+
+    const newUrl = clientImages[newIndex].imageUrl;
+    setClickedImg(newUrl);
     setCurrentIndex(newIndex);
   };
 
   const handelRotationLeft = () => {
-    const totalLength = clientImages.length;
-    if (currentIndex === 0) {
-      setCurrentIndex(totalLength - 1);
-      const newUrl = clientImages[totalLength - 1].link;
-      setClickedImg(newUrl);
-      return;
+    if (clientImages.length === 0) return;
+
+    let newIndex = currentIndex === null ? 0 : currentIndex - 1;
+    if (newIndex < 0) {
+      newIndex = clientImages.length - 1;
     }
-    const newIndex = currentIndex - 1;
-    const newUrl = clientImages.filter((item) => {
-      return clientImages.indexOf(item) === newIndex;
-    });
-    const newItem = newUrl[0].link;
-    setClickedImg(newItem);
+
+    const newUrl = clientImages[newIndex].imageUrl;
+    setClickedImg(newUrl);
     setCurrentIndex(newIndex);
   };
-
-  useEffect(() => {
-    fetchClientImages();
-    console.log(clientImages);
-  }, []);
 
   return (
     <div className="bg-white-100 h-screen flex flex-row">
@@ -135,7 +124,6 @@ function ClientGalleryPage() {
             className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
             onClick={() => {
               setShowImageUploadModal(true);
-              console.log(showImageUploadModal);
             }}
           >
             Upload Image

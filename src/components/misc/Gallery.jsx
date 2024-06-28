@@ -26,19 +26,19 @@ const Gallery = ({
           className="block max-w-[60%] max-h-[80%] m-auto shadow-[3px_5px_7px_rgba(0,0,0,0.5)]"
         />
         <span
-          className="absolute top-5 right-5 text-3xl text-white z-[999] cursor-pointer dismiss"
+          className="absolute top-5 right-5 text-3xl text-black z-[999] cursor-pointer dismiss"
           onClick={handleClick}
         >
           X
         </span>
         <div
           onClick={handelRotationLeft}
-          className="flex bg-[#6d6d6d] justify-between absolute top-1/2 left-0 w-[50px] h-[50px] z-[999] cursor-pointer"
+          className="flex justify-between absolute top-1/2 left-0 w-[50px] h-[50px] z-[999] cursor-pointer"
         >
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-10 w-10"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
@@ -52,12 +52,12 @@ const Gallery = ({
         </div>
         <div
           onClick={handelRotationRight}
-          className="flex bg-[#6d6d6d] justify-between absolute right-0 top-1/2 w-[50px] h-[50px] z-[999] cursor-pointer"
+          className="flex justify-between absolute right-0 top-1/2 w-[50px] h-[50px] z-[999] cursor-pointer"
         >
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-10 w-10"
               viewBox="0 0 20 20"
               fill="currentColor"
             >
