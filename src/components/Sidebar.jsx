@@ -72,11 +72,7 @@ export default function Sidebar({ children }) {
         <SidebarContext.Provider value={{ expanded }}>
           <ul className="flex-1 px-3">{children}</ul>
         </SidebarContext.Provider>
-        <LogOut
-          className={`${expanded ? "m-3" : "hidden"}`}
-          onClick={logoutFunction}
-          size={25}
-        />
+        <LogOut className={"m-3"} onClick={logoutFunction} size={25} />
         <div className="border-t flex p-3">
           <img src={doctorImg} alt="" className="w-10 h-10 rounded-md" />
           <div
