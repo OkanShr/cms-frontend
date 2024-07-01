@@ -21,7 +21,7 @@ function HomePage() {
 
   const [appointmentData, setAppointmentData] = useState({
     Surgery: 0,
-    Botox: 0,
+    Injection: 0,
     Consulting: 0,
     Example: 0,
   });

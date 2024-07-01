@@ -109,9 +109,9 @@ const Dashboard = ({
                   />
                 </div>
                 <div>
-                  <p className="text-center m-0">Botox</p>
+                  <p className="text-center m-0">Injection</p>
                   <h2 className="text-center font-bold text-5xl">
-                    {appointmentData.Botox}
+                    {appointmentData.Injection}
                   </h2>
                 </div>
               </div>
@@ -156,16 +156,15 @@ const Dashboard = ({
                   <span>{clientsLast12Months} New Clients</span>
                   <span>Last 12 Months</span>
                 </div>
-                {moreData && (
-                  <div className="flex justify-end">
-                    <button
-                      className="text-red-600  hover:text-gray-900 w-4 h-2 "
-                      onClick={() => navigate("/clients")}
-                    >
-                      <img src={rightArrowImage} alt="" />
-                    </button>
-                  </div>
-                )}
+
+                <div className="flex justify-end">
+                  <button
+                    className="text-red-600  hover:text-gray-900 w-4 h-2 "
+                    onClick={() => navigate("/clients")}
+                  >
+                    <img src={rightArrowImage} alt="" />
+                  </button>
+                </div>
               </div>
             </div>
           </div>

@@ -127,7 +127,7 @@ function ClientDetailsPage() {
             </p>
             <p>
               <span className="font-medium">Birth Date:</span>{" "}
-              {client.Birthdate ? client.Birthdate : "**/**/****"}
+              {client.birthDate}
             </p>
           </div>
         </div>

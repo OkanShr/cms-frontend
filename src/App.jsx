@@ -18,8 +18,6 @@ function App() {
         <Route path="/" element={<PrivateRoute />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/clients" element={<ClientsPage />} />
-          {/* <Route path="/addclient" element={<AddClientPage />} /> */}
-          {/* <Route path="/testpage" element={<TestPage />} /> */}
 
           <Route path="/client/:clientId" element={<ClientDetailsPage />} />
           <Route path="/client/edit/:clientId" element={<ClientEditPage />} />
@@ -31,7 +29,6 @@ function App() {
             path="/client/documents/:clientId"
             element={<ClientDocumentsPage />}
           />
-          {/* after login */}
         </Route>
         <Route path="/signin" element={<LoginPage />} />
       </Routes>
