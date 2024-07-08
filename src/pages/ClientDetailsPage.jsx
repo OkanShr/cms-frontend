@@ -106,14 +106,14 @@ function ClientDetailsPage() {
             />
           </div>
         </div>
-        <div className="flex flex-row">
+        <div className="flex flex-col md:flex-row">
           <img
             src={userImg}
-            className=" rounded-xl object-cover h-50 w-50 max-w-[340px]"
+            className="rounded-xl object-cover h-50 w-50 max-w-[340px]"
           ></img>
           <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3 text-lg">
             <p>
-              <span className="font-medium ">Vorname:</span> {client.firstName}
+              <span className="font-medium">Vorname:</span> {client.firstName}
             </p>
             <p>
               <span className="font-medium">Nachname:</span> {client.lastName}
@@ -144,7 +144,7 @@ function ClientDetailsPage() {
   };
 
   return (
-    <div className="bg-gray-100  min-h-screen flex">
+    <div className="bg-gray-100 min-h-screen flex md:flex-row">
       <SidebarShort dashboard={false} clients={true} addClient={false} />
       <div className="flex-1 p-6 bg-white shadow-lg rounded-lg m-6">
         {renderClientDetails()}

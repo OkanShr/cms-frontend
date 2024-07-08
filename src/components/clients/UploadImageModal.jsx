@@ -36,22 +36,43 @@ const UploadImageModal = ({
     <Modal
       show={showImageUploadModal}
       onHide={() => setShowImageUploadModal(false)}
+      className="fixed inset-0 flex items-center justify-center z-50"
     >
-      <Modal.Header closeButton>
-        <Modal.Title>Are you sure you want to delete the client?</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={handleImageUpload}>Upload Image</button>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={() => setShowImageUploadModal(false)}
-        >
-          Cancel
-        </Button>
-      </Modal.Footer>
+      <div className="bg-white rounded-lg shadow-lg w-full mx-auto">
+        <Modal.Header className="flex justify-between items-center border-b p-4">
+          <Modal.Title className="text-lg font-semibold">
+            Upload Client Image
+          </Modal.Title>
+          <button
+            className="text-gray-400 hover:text-gray-600"
+            onClick={() => setShowImageUploadModal(false)}
+          >
+            &times;
+          </button>
+        </Modal.Header>
+        <Modal.Body className="p-4">
+          <input
+            type="file"
+            onChange={handleFileChange}
+            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          />
+          <button
+            onClick={handleImageUpload}
+            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Upload Image
+          </button>
+        </Modal.Body>
+        <Modal.Footer className="flex justify-end border-t p-4">
+          <Button
+            variant="secondary"
+            onClick={() => setShowImageUploadModal(false)}
+            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+          >
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </div>
     </Modal>
   );
 };

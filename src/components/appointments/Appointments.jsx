@@ -19,7 +19,7 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [appointmentPdf, setAppointmentPdf] = useState({});
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null); // New state for selected appointment ID
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState(null);
 
   const handleChangeSearch = (e) => {
     setSearchInput(e.target.value);
@@ -29,7 +29,7 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
     setShowDetailsModal(false);
     setShowAddModal(false);
     setShowEditModal(false);
-    setSelectedAppointmentId(null); // Reset selected appointment ID
+    setSelectedAppointmentId(null);
   };
 
   const updateAppointmentList = () => {
@@ -70,12 +70,12 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
 
   return (
     <>
-      <div className="flex flex-row items-center ">
+      <div className="flex flex-row items-center">
         <h4>Appointments</h4>
         <div className="flex justify-end items-start ml-auto">
           <button
             onClick={() => setShowAddModal(true)}
-            className=" w-11 h-11 border-3 bg-gradient-to-tr from-teal-200 to-teal-100 border-teal-700 rounded-full flex items-center justify-center"
+            className="w-11 h-11 border-3 bg-gradient-to-tr from-teal-200 to-teal-100 border-teal-700 rounded-full flex items-center justify-center"
           >
             <FilePlus />
           </button>
@@ -91,27 +91,27 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
         clientLastName={clientLastName}
       />
       <input
-        className="w-50 mb-2 p-1 border-b-2 bg-transparent border-black"
+        className="w-full mb-2 p-1 border-b-2 bg-transparent border-black"
         id="searchtableinput"
         type="text"
         placeholder="Search Appointment By Date"
         onChange={handleChangeSearch}
         value={searchInput}
       />
-      <ListGroup className="gap-3 ">
+      <ListGroup className="gap-3">
         {appointments.length > 0 ? (
           appointments.map((appointment) => {
             if (shouldShowAppointment(appointment)) {
               return (
                 <div
                   key={appointment.id}
-                  className="flex flex-row shadow-md p-3 w-2/3 rounded-lg justify-between bg-white mt-3"
+                  className="flex flex-col md:flex-row shadow-md p-3 w-full md:w-2/3 rounded-lg justify-between bg-white mt-3"
                 >
                   <span>{`${appointment.date.split("T")[0]} - ${
                     appointment.time
                   } | ${appointment.activity}`}</span>
                   <Button
-                    className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white  "
+                    className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
                     onClick={() => {
                       handleFetchAppointmentPdf(appointment.id);
                       handleShowDetails(appointment.id);

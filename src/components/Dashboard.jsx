@@ -69,9 +69,10 @@ const Dashboard = ({
         </div>
         <div className="flex flex-col justify-between">
           <div className="rounded-lg border-inherit p-4 w-full mb-6 lg:mb-0">
-            <div className="m-3 flex flex-wrap justify-between">
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-green-50 to-green-200 p-4 sm:w-60 h-28 gap-4">
-                <div className=" w-16 h-16 border-4 border-green-700 rounded-full flex items-center justify-center">
+            <div className="m-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Total Patients */}
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-green-50 to-green-200 p-4 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+                <div className="w-16 h-16 border-4 border-green-700 rounded-full flex items-center justify-center">
                   <img
                     src={clientsImage}
                     alt="Clients"
@@ -85,8 +86,10 @@ const Dashboard = ({
                   </h2>
                 </div>
               </div>
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-indigo-50 to-indigo-200 p-8 sm:w-60 h-28 gap-4">
-                <div className=" w-16 h-16 border-4 border-indigo-700 rounded-full flex items-center justify-center">
+
+              {/* Consultation */}
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-indigo-50 to-indigo-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+                <div className="w-16 h-16 border-4 border-indigo-700 rounded-full flex items-center justify-center">
                   <img
                     src={consultationImage}
                     alt="Consultation"
@@ -100,8 +103,10 @@ const Dashboard = ({
                   </h2>
                 </div>
               </div>
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-fuchsia-50 to-fuchsia-200 p-8 sm:w-60 h-28 gap-4">
-                <div className=" w-16 h-16 border-4 border-fuchsia-700 rounded-full flex items-center justify-center">
+
+              {/* Injection */}
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-fuchsia-50 to-fuchsia-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+                <div className="w-16 h-16 border-4 border-fuchsia-700 rounded-full flex items-center justify-center">
                   <img
                     src={botoksImage}
                     alt="Bototks"
@@ -115,8 +120,10 @@ const Dashboard = ({
                   </h2>
                 </div>
               </div>
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-amber-50 to-amber-200 p-8 sm:w-60 h-28 gap-4">
-                <div className=" w-16 h-16 border-4 border-amber-700 rounded-full flex items-center justify-center">
+
+              {/* Surgery */}
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-amber-50 to-amber-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+                <div className="w-16 h-16 border-4 border-amber-700 rounded-full flex items-center justify-center">
                   <img
                     src={surgeryImage}
                     alt="Surgery"
@@ -124,7 +131,7 @@ const Dashboard = ({
                   />
                 </div>
                 <div>
-                  <p className="text-center m-0 ">Surgery</p>
+                  <p className="text-center m-0">Surgery</p>
                   <h2 className="text-center font-bold text-5xl">
                     {appointmentData.Surgery}
                   </h2>
@@ -132,12 +139,13 @@ const Dashboard = ({
               </div>
             </div>
           </div>
-          <div className="mt-3 flex flex-wrap flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl">
-            <div className="m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
+
+          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl">
+            <div className="lg:m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
               <h4 className="text-center mb-6">Patients</h4>
               <Line data={data} content="" />
             </div>
-            <div className="m-5 bg-indigo-100 rounded-2xl p-4 w-full sm:w-1/2 lg:w-5/12 ">
+            <div className="lg:m-5 bg-indigo-100 rounded-2xl p-4 w-full sm:w-1/2 lg:w-5/12 ">
               <h3 className="text-xl font-semibold mb-4">Clients Registered</h3>
               <div>
                 <div className="p-2 flex items-center justify-around bg-sky-950 rounded-lg mb-2 text-white">
