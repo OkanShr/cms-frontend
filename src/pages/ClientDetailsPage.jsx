@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
 import { ChevronLeft } from "lucide-react";
 import SidebarShort from "../components/SidebarShort";
 import Appointments from "../components/appointments/Appointments";

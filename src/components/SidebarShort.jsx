@@ -1,9 +1,9 @@
 import React from "react";
 import Sidebar from "../components/Sidebar";
 import { SidebarItem } from "../components/Sidebar";
-import { LayoutDashboard, Users, UserPlus, CalendarDays } from "lucide-react";
+import { LayoutDashboard, Users } from "lucide-react";
 export const SidebarShort = (props) => {
-  const { dashboard, clients, addClient, testpage } = props;
+  const { dashboard, clients } = props;
   return (
     <div className="bg-white-100 h-screen flex flex-row">
       <Sidebar>
@@ -24,18 +24,6 @@ export const SidebarShort = (props) => {
           icon={<Users size={20} />}
           onclick={"external"}
         />
-        {/* <SidebarItem
-          text="Add Client"
-          icon={<UserPlus size={20} />}
-          onclick={"addclient"}
-          active={addClient}
-        /> */}
-        {/* <SidebarItem
-          text="Testpage"
-          icon={<CalendarDays size={20} />}
-          onclick={"testpage"}
-          active={testpage}
-        /> */}
       </Sidebar>
     </div>
   );

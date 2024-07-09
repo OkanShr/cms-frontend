@@ -5,7 +5,6 @@ import { getAllClients } from "../api/clientApi";
 import { Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import AddClientModal from "../components/clients/AddClientModal";
-import { classNames } from "@react-pdf-viewer/core";
 
 function ClientsPage() {
   const loginDetails = useSelector((state) => state.auth.value);
