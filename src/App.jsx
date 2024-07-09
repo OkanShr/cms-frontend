@@ -10,7 +10,7 @@ import ClientsPage from "./pages/ClientsPage";
 import ClientDetailsPage from "./pages/ClientDetailsPage";
 import ClientGalleryPage from "./pages/ClientGalleryPage";
 import ClientDocumentsPage from "./pages/ClientDocumentsPage";
-import ExternalRedirect from "./pages/ExternalRedirect";
+
 function App() {
   return (
     <div>
@@ -29,7 +29,6 @@ function App() {
             path="/client/documents/:clientId"
             element={<ClientDocumentsPage />}
           />
-          <Route path="/external" element={<ExternalRedirect />} />
         </Route>
         <Route path="/signin" element={<LoginPage />} />
       </Routes>

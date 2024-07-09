@@ -96,13 +96,28 @@ export default function Sidebar({ children }) {
   );
 }
 
-export function SidebarItem({ icon, text, active, alert, onclick }) {
+export function SidebarItem({
+  icon,
+  text,
+  active,
+  alert,
+  onclick,
+  isExternal,
+}) {
   const { expanded } = useContext(SidebarContext);
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    if (isExternal) {
+      window.location.href = `https://${onclick}.com`;
+    } else {
+      navigate(`/${onclick}`);
+    }
+  };
+
   return (
     <li
-      onClick={() => navigate(`/${onclick}`)}
+      onClick={handleClick}
       className={`
         relative flex items-center py-2 px-3 my-1
         font-medium rounded-md cursor-pointer
@@ -112,11 +127,10 @@ export function SidebarItem({ icon, text, active, alert, onclick }) {
             ? "bg-gradient-to-tr from-teal-200 to-teal-100 text-teal-900"
             : "hover:bg-teal-50 text-teal-600"
         }
-    `}
+      `}
     >
       {icon}
       <span
-        onClick={() => navigate(`/${onclick}`)}
         className={`overflow-hidden transition-all ${
           expanded ? "w-52 ml-3" : "w-0"
         }`}
@@ -134,11 +148,11 @@ export function SidebarItem({ icon, text, active, alert, onclick }) {
       {!expanded && (
         <span
           className={`
-          absolute left-full rounded-md px-2 py-1 ml-6
-          bg-teal-100 text-teal-800 text-sm
-          invisible opacity-20 -translate-x-3 transition-all
-          group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
-      `}
+            absolute left-full rounded-md px-2 py-1 ml-6
+            bg-teal-100 text-teal-800 text-sm
+            invisible opacity-20 -translate-x-3 transition-all
+            group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
+          `}
         >
           {text}
         </span>
