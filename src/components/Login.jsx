@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { login } from "../store/authentication";
-
+import "./login.css";
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -41,47 +41,56 @@ function Login() {
   };
 
   return (
-    <div className="bg-teal-800 h-screen justify-center flex flex-col">
-      <div className="flex flex-col text-dark font-medium text-white py-2">
-        <Form
-          className="max-w-[350px] w-full m-auto bg-slate-200 bg-opacity-30 p-8 px-8 rounded-lg justify-center"
-          onSubmit={loginFunction}
-        >
-          <h2 className="text-4xl text-white font-bold text-center mb-2">
-            SIGN IN
-          </h2>
-          <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label id="formlabels">E-Mail</Form.Label>
-            <Form.Control
-              onChange={(e) =>
-                setLoginDetails({ ...loginDetails, email: e.target.value })
-              }
-              type="text"
-              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-              placeholder="email"
-            />
-          </Form.Group>
+    <div className="bg-teal-100 h-screen flex items-center justify-center">
+      <div className="rounded-lg overflow-hidden shadow-lg bg-white max-w-md w-full">
+        <div className="relative h-44 bg-cover bg-center bg-image">
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
+            <h1 className="text-4xl font-bold text-white">Sign In</h1>
+          </div>
+        </div>
+        <div className="p-8">
+          <Form className="flex flex-col" onSubmit={loginFunction}>
+            <Form.Group className="mb-4" controlId="formBasicEmail">
+              <Form.Label className="font-medium text-gray-700">
+                E-Mail
+              </Form.Label>
+              <Form.Control
+                onChange={(e) =>
+                  setLoginDetails({ ...loginDetails, email: e.target.value })
+                }
+                type="text"
+                className="rounded-lg bg-gray-200 mt-1 p-2 focus:border-blue-500 focus:bg-white focus:outline-none"
+                placeholder="email"
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-2" controlId="formBasicPassword">
+              <Form.Label className="font-medium text-gray-700">
+                Password
+              </Form.Label>
+              <Form.Control
+                onChange={(e) =>
+                  setLoginDetails({ ...loginDetails, password: e.target.value })
+                }
+                type="password"
+                className="rounded-lg bg-gray-200 mt-1 p-2 focus:border-blue-500 focus:bg-white focus:outline-none"
+                placeholder="password"
+                required
+              />
+            </Form.Group>
+            {error ? (
+              <p className="text-center text-red-500 rounded-xl mb-1 p-2">
+                {error}
+              </p>
+            ) : (
+              ""
+            )}
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              onChange={(e) =>
-                setLoginDetails({ ...loginDetails, password: e.target.value })
-              }
-              type="password"
-              className="rounded-lg bg-gray-700 mt-2 p-2 focus:border-blue-500 focus:bg-gray-800 focus:outline-none"
-              placeholder="password"
-            />
-          </Form.Group>
-          <p className="font-weight-light text-danger bg-black rounded-xl text-center">
-            {error}
-          </p>
-          <div className="d-flex ">
-            <button className="w-full my-5 py-2 bg-teal-500 shadow-lg shadow-teal-500/50 hover:shadow-teal-500/40 text-white font-semibold rounded-md">
+            <button className="w-full mt-4 py-2 bg-teal-700 shadow-lg text-white font-semibold rounded-lg hover:bg-teal-600">
               Login
             </button>
-          </div>
-        </Form>
+          </Form>
+        </div>
       </div>
     </div>
   );
