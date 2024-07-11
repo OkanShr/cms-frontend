@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   assetsInclude: ["**/*.docx"],
   server: {
-    host: true,
     port: 3000,
+    strictPort: true,
+    host: true,
   },
 });
