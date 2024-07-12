@@ -15,14 +15,21 @@ function Login() {
 
   const [error, setError] = useState("");
 
-  const loginFunction = (e) => {
+  const loginFunction = async (e) => {
     e.preventDefault();
     console.log(loginDetails);
-    loginUser(loginDetails)
-      .then((response) => {
+
+    try {
+      const response = await loginUser(loginDetails);
+
+      if (typeof response === "string") {
+        // If response is a string, it means there was an error returned from loginUser
+        setError(response);
+      } else {
+        // Successful login
         console.log(response);
         setError("");
-        const { token, doctor } = response.data;
+        const { token, doctor } = response;
         dispatch(
           login({
             token,
@@ -33,11 +40,11 @@ function Login() {
           })
         );
         navigate("/");
-      })
-      .catch((error) => {
-        console.error(error);
-        setError("Wrong Username or Password");
-      });
+      }
+    } catch (error) {
+      console.error(error);
+      setError("An unexpected error occurred");
+    }
   };
 
   return (
