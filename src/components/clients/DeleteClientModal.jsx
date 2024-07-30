@@ -5,14 +5,14 @@ const DeleteClientModal = ({ show, handleClose, handleDelete }) => {
   return (
     <Modal show={show} onHide={handleClose}>
       <Modal.Header>
-        <Modal.Title>Are you sure you want to delete the client?</Modal.Title>
+        <Modal.Title>Möchten Sie den Client wirklich löschen?</Modal.Title>
       </Modal.Header>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
-          Cancel
+          Abbrechen
         </Button>
         <Button variant="danger" onClick={handleDelete}>
-          Delete
+          Löschen
         </Button>
       </Modal.Footer>
     </Modal>

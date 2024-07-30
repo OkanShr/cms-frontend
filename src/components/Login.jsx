@@ -94,7 +94,7 @@ function Login() {
             )}
 
             <button className="w-full mt-4 py-2 bg-teal-700 shadow-lg text-white font-semibold rounded-lg hover:bg-teal-600">
-              Login
+              Einloggen
             </button>
           </Form>
         </div>

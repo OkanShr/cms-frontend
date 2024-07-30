@@ -73,16 +73,16 @@ const ClientEditPage = () => {
           <button onClick={() => navigate(-1)}>
             <ChevronLeft size={35} />
           </button>
-          <h1>Edit Client</h1>
+          <h1>Kunde Bearbeiten</h1>
         </div>
 
         <Form className="w-6/12 m-3" onSubmit={handleSubmit}>
           <Row>
             <Form.Group as={Col} controlId="formFirstName">
-              <Form.Label>First Name</Form.Label>
+              <Form.Label>Vorname</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter first name"
+                placeholder="Vorname eingeben"
                 name="firstName"
                 value={formData.firstName}
                 onChange={handleChange}
@@ -90,10 +90,10 @@ const ClientEditPage = () => {
             </Form.Group>
 
             <Form.Group as={Col} controlId="formLastName">
-              <Form.Label>Last Name</Form.Label>
+              <Form.Label>Nachname</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter last name"
+                placeholder="Nachnamen eingeben"
                 name="lastName"
                 value={formData.lastName}
                 onChange={handleChange}
@@ -103,10 +103,10 @@ const ClientEditPage = () => {
 
           <Row>
             <Form.Group as={Col} controlId="formPhoneNumber">
-              <Form.Label>Phone Number</Form.Label>
+              <Form.Label>Telefonnummer</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter phone number"
+                placeholder="Telefonnummer eingeben"
                 name="phoneNumber"
                 value={formData.phoneNumber}
                 onChange={handleChange}
@@ -117,7 +117,7 @@ const ClientEditPage = () => {
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
-                placeholder="Enter email"
+                placeholder="Email eingeben"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -131,7 +131,7 @@ const ClientEditPage = () => {
             className="mt-1 rounded-md px-3 py-1.5 ml-6 text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
             type="submit"
           >
-            Submit
+            Einreichen
           </button>
         </Form>
       </div>

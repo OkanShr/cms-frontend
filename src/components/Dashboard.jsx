@@ -24,18 +24,18 @@ const Dashboard = ({
 
   function getLastSixMonths() {
     const months = [
-      "January",
-      "February",
-      "March",
+      "Januar",
+      "Februar",
+      "März",
       "April",
-      "May",
-      "June",
-      "July",
+      "Mai",
+      "Juni",
+      "Juli",
       "August",
       "September",
-      "October",
+      "Oktober",
       "November",
-      "December",
+      "Dezember",
     ];
     const result = [];
     const today = new Date();
@@ -80,7 +80,7 @@ const Dashboard = ({
                   />
                 </div>
                 <div>
-                  <p className="text-center m-0">Total Patients</p>
+                  <p className="text-center m-0">Patienten</p>
                   <h2 className="text-center font-bold text-5xl">
                     {clientCount}
                   </h2>
@@ -97,7 +97,7 @@ const Dashboard = ({
                   />
                 </div>
                 <div>
-                  <p className="text-center m-0">Consultation</p>
+                  <p className="text-center m-0">Beratung</p>
                   <h2 className="text-center font-bold text-5xl">
                     {appointmentData.Consulting}
                   </h2>
@@ -114,7 +114,7 @@ const Dashboard = ({
                   />
                 </div>
                 <div>
-                  <p className="text-center m-0">Injection</p>
+                  <p className="text-center m-0">Injektion</p>
                   <h2 className="text-center font-bold text-5xl">
                     {appointmentData.Injection}
                   </h2>
@@ -131,7 +131,7 @@ const Dashboard = ({
                   />
                 </div>
                 <div>
-                  <p className="text-center m-0">Surgery</p>
+                  <p className="text-center m-0">Operation</p>
                   <h2 className="text-center font-bold text-5xl">
                     {appointmentData.Surgery}
                   </h2>
@@ -142,27 +142,29 @@ const Dashboard = ({
 
           <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl">
             <div className="lg:m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
-              <h4 className="text-center mb-6">Patients</h4>
+              <h4 className="text-center mb-6">Patienten</h4>
               <Line data={data} content="" />
             </div>
             <div className="lg:m-5 bg-indigo-100 rounded-2xl p-4 w-full sm:w-1/2 lg:w-5/12 ">
-              <h3 className="text-xl font-semibold mb-4">Clients Registered</h3>
+              <h3 className="text-xl font-semibold mb-4">
+                Patienten Eingetragen
+              </h3>
               <div>
                 <div className="p-2 flex items-center justify-around bg-sky-950 rounded-lg mb-2 text-white">
-                  <span className="font-medium">Client Number</span>
-                  <span className="font-medium">Time Period</span>
+                  <span className="font-medium">Anzahl der Kunden</span>
+                  <span className="font-medium">Zeitraum</span>
                 </div>
                 <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast3Months} New Clients</span>
-                  <span>Last 3 Months</span>
+                  <span>{clientsLast3Months} Neue Kunden</span>
+                  <span>Letzte 3 Monate</span>
                 </div>
                 <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast6Months} New Clients</span>
-                  <span>Last 6 Months</span>
+                  <span>{clientsLast6Months} Neue Kunden</span>
+                  <span>Letzte 6 Monate</span>
                 </div>
                 <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast12Months} New Clients</span>
-                  <span>Last 12 Months</span>
+                  <span>{clientsLast12Months} Neue Kunden</span>
+                  <span>Letzte 12 Monate</span>
                 </div>
 
                 <div className="flex justify-end">

@@ -96,7 +96,7 @@ function ClientDocumentsPage() {
             console.log(showPdfUploadModal);
           }}
         >
-          Upload Document
+          Dokument hochladen
         </Button>
         <ListGroup className="m-3 w-6/12">
           {filteredPdfs.length > 0 ? (
@@ -112,12 +112,12 @@ function ClientDocumentsPage() {
                   className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
                   onClick={() => handlePdfClick(pdf)}
                 >
-                  Read
+                  Öffnen
                 </Button>
               </div>
             ))
           ) : (
-            <h4>No Documents Found</h4>
+            <h4>Keine Dokumente gefunden</h4>
           )}
         </ListGroup>
         {currentPdf && (

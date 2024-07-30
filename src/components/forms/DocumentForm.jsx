@@ -45,7 +45,7 @@ export const DocumentForm = ({
            text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
         type="submit"
       >
-        Create Client
+        Kunde Erstellen
       </button>
     </Form>
   );

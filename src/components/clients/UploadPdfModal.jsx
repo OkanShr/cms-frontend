@@ -43,18 +43,18 @@ const UploadPdfModal = ({
       onHide={() => setShowPdfUploadModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Upload PDF</Modal.Title>
+        <Modal.Title>PDF hochladen</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <Form.Group>
-            <Form.Label>Upload PDF</Form.Label>
+            <Form.Label>PDF hochladen</Form.Label>
             <Form.Control type="file" onChange={handlePdfFileChange} />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Select Type</Form.Label>
+            <Form.Label>Behandlungsart auswählen</Form.Label>
             <Form.Control as="select" value={type} onChange={handleTypeChange}>
-              <option value="">Select type</option>
+              <option value="">Art auswählen</option>
               <option value="behandlungsformular">Behandlungsformular</option>
               <option value="aufnahmeformular">Aufnahmeformular</option>
               <option value="datenschutz">Datenschutz</option>
@@ -67,9 +67,9 @@ const UploadPdfModal = ({
           variant="secondary"
           onClick={() => setShowPdfUploadModal(false)}
         >
-          Cancel
+          Abbrechen
         </Button>
-        <Button onClick={handleFileUpload}>Upload</Button>
+        <Button onClick={handleFileUpload}>Hochladen</Button>
       </Modal.Footer>
     </Modal>
   );

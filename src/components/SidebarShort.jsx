@@ -14,7 +14,7 @@ export const SidebarShort = (props) => {
           active={dashboard}
         />
         <SidebarItem
-          text="Clients"
+          text="Kunden"
           icon={<Users size={20} />}
           onclick={"clients"}
           active={clients}

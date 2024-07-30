@@ -117,7 +117,7 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
                       handleShowDetails(appointment.id);
                     }}
                   >
-                    Show Details
+                    Details Anzeigen
                   </Button>
                   {selectedAppointmentId === appointment.id && (
                     <AppointmentDetails

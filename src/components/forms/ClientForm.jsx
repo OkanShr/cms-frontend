@@ -29,7 +29,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
     <Form className="w-full" onSubmit={handleSubmit}>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formFirstName">
-          <Form.Label>First Name</Form.Label>
+          <Form.Label>Vorname</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter first name"
@@ -40,7 +40,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formLastName">
-          <Form.Label>Last Name</Form.Label>
+          <Form.Label>Nachname</Form.Label>
           <Form.Control
             type="text"
             placeholder="Enter last name"
@@ -51,10 +51,10 @@ export const ClientForm = ({ onNext, loginDetails }) => {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formBirthDate">
-          <Form.Label>Birth Date</Form.Label>
+          <Form.Label>Geburtsdatum</Form.Label>
           <Form.Control
             type="date"
-            placeholder="Enter Birth Date"
+            placeholder="Geburtsdatum Eingeben"
             name="birthDate"
             value={formData.birthDate}
             onChange={handleChange}
@@ -67,7 +67,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
           <Form.Label>Email</Form.Label>
           <Form.Control
             type="email"
-            placeholder="Enter email"
+            placeholder="Email eingeben"
             name="email"
             value={formData.email}
             onChange={handleChange}
@@ -78,7 +78,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
           <Form.Label>Phone Number</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter phone number"
+            placeholder="Telefonnummer eingeben"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
@@ -86,7 +86,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formGender">
-          <Form.Label>Gender</Form.Label>
+          <Form.Label>Geschlecht</Form.Label>
           <Form.Control
             as="select"
             name="gender"
@@ -94,9 +94,9 @@ export const ClientForm = ({ onNext, loginDetails }) => {
             onChange={handleChange}
           >
             <option value="">Select gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="other">Other</option>
+            <option value="male">Männlich</option>
+            <option value="female">Weiblich</option>
+            <option value="other">Diverse</option>
           </Form.Control>
         </Form.Group>
       </Row>
@@ -105,7 +105,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
            text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
         type="submit"
       >
-        Next
+        Nächste
       </button>
     </Form>
   );

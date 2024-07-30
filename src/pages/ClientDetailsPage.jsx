@@ -125,7 +125,7 @@ function ClientDetailsPage() {
               <span className="font-medium">Email:</span> {client.email}
             </p>
             <p>
-              <span className="font-medium">Birth Date:</span>{" "}
+              <span className="font-medium">Geburtsdatum:</span>{" "}
               {client.birthDate}
             </p>
           </div>

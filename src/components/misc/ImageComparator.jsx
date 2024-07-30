@@ -20,7 +20,7 @@ const ImageComparator = ({
           alignItems: "center",
         }}
       >
-        <Modal.Title className="text-center">Before - After</Modal.Title>
+        <Modal.Title className="text-center">Vorher - Nachher</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Slider firstImage={firstImage} secondImage={secondImage} />
@@ -30,7 +30,7 @@ const ImageComparator = ({
           variant="secondary"
           onClick={() => setShowComparatorModal(false)}
         >
-          Cancel
+          Zurück
         </Button>
       </Modal.Footer>
     </Modal>

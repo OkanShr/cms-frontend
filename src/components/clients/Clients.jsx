@@ -15,7 +15,7 @@ function Clients({ searchInput, clients }) {
             return null;
           })
         ) : (
-          <p className="text-center mt-4">No Clients Found</p>
+          <p className="text-center mt-4">Keine Kunden Gefunden</p>
         )}
       </ListGroup>
     </div>

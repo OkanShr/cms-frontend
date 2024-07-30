@@ -72,13 +72,13 @@ const AppointmentDetails = ({
     >
       <Modal.Header>
         <Modal.Title>
-          Appointment Details - {clientName} {clientLastName}
+          Termin Details - {clientName} {clientLastName}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p>Subject: {appointment.activity}</p>
-        <p>Date: {appointment.date.split("T")[0]}</p>
-        <p>Time: {appointment.time}</p>
+        <p>Thema: {appointment.activity}</p>
+        <p>Datum: {appointment.date.split("T")[0]}</p>
+        <p>Zeitpunkt: {appointment.time}</p>
         {appointmentPdf && (
           <div className="doc-viewer-container">
             {fileType === "pdf" ? (
@@ -102,19 +102,19 @@ const AppointmentDetails = ({
           onClick={() => setShowDetailsModal(false)}
           className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         >
-          Back
+          Zurück
         </Button>
         <Button
           onClick={handleOpenEdit}
           className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         >
-          Edit Appointment
+          Termin bearbeiten
         </Button>
         <Button
           onClick={handleDelete}
           className="text-dark bg-gradient-to-tr from-red-500 to-red-400 border-white"
         >
-          Delete Appointment
+          Termin löschen
         </Button>
       </Modal.Footer>
     </Modal>

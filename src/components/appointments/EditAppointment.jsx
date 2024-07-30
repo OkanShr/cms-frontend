@@ -48,14 +48,9 @@ const EditAppointment = ({
     setShowDetailsModal(true);
   };
 
-  const formatDate = (dateString) => {
-    const [year, month, day] = dateString.split("-");
-    return `${day}/${month}/${year}`;
-  };
-
   return (
     <Modal show={showEditModal} onHide={handleClose}>
-      <Modal.Header>Add Appointment</Modal.Header>
+      <Modal.Header>Termin hinzufügen</Modal.Header>
       <Modal.Body>
         <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="activity">
@@ -70,7 +65,7 @@ const EditAppointment = ({
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="date">
-            <Form.Label>Date</Form.Label>
+            <Form.Label>Datum</Form.Label>
             <Form.Control
               type="date"
               name="date"
@@ -83,13 +78,13 @@ const EditAppointment = ({
             onClick={handleCancel}
             className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
           >
-            Cancel
+            Abbrechen
           </Button>
           <Button
             className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
             type="submit"
           >
-            Submit
+            Einreichen
           </Button>
         </Form>
       </Modal.Body>

@@ -117,7 +117,7 @@ function ClientGalleryPage() {
           >
             <ChevronLeft size={35} />
           </button>
-          <h2>Client Gallery</h2>
+          <h2>Kundengalerie</h2>
         </div>
         <div className="flex flex-row">
           <Button
@@ -126,13 +126,13 @@ function ClientGalleryPage() {
               setShowImageUploadModal(true);
             }}
           >
-            Upload Image
+            Bild hochladen
           </Button>
           <Button
             className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
             onClick={handleCompare}
           >
-            Compare
+            Vergleichen
           </Button>
           <RotateCcw
             size={38}
@@ -143,7 +143,7 @@ function ClientGalleryPage() {
             className="text-dark bg-gradient-to-tr from-red-500 to-red-400 border-white w-40 m-3"
             onClick={handleDelete}
           >
-            Delete Image
+            Bild Löschen
           </Button>
         </div>
 

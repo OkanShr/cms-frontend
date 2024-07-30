@@ -41,7 +41,7 @@ const UploadImageModal = ({
       <div className="bg-white rounded-lg shadow-lg w-full mx-auto">
         <Modal.Header className="flex justify-between items-center border-b p-4">
           <Modal.Title className="text-lg font-semibold">
-            Upload Client Image
+            Bild hochladen
           </Modal.Title>
           <button
             className="text-gray-400 hover:text-gray-600"
@@ -60,7 +60,7 @@ const UploadImageModal = ({
             onClick={handleImageUpload}
             className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           >
-            Upload Image
+            Bild hochladen
           </button>
         </Modal.Body>
         <Modal.Footer className="flex justify-end border-t p-4">
@@ -69,7 +69,7 @@ const UploadImageModal = ({
             onClick={() => setShowImageUploadModal(false)}
             className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
           >
-            Cancel
+            Abbrechen
           </Button>
         </Modal.Footer>
       </div>

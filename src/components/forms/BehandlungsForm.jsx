@@ -71,13 +71,13 @@ export const BehandlungsForm = ({
         className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         onClick={handleSubmit}
       >
-        Cancel
+        Abbrechen
       </Button>
       <Button
         className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         type="submit"
       >
-        Next
+        Nächste
       </Button>
     </Form>
   );

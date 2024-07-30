@@ -113,13 +113,13 @@ const AddAppointment = ({
   return (
     <Modal show={showAddModal} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Add Appointment</Modal.Title>
+        <Modal.Title>Termin hinzufügen</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
           <Tab
             className="mx-3 mt-3"
-            title="Appointment Info"
+            title="Termin Info"
             eventKey="appointmentInfo"
           >
             <AppointmentForm

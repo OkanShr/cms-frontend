@@ -15,7 +15,7 @@ export const ClientCard = ({ client }) => {
           className="mt-2 md:mt-0 ml-2 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border border-teal-500 shadow-md shadow-teal-700 px-4 py-2 rounded-lg  whitespace-nowrap"
           onClick={() => navigate(`/client/${client.id}`)}
         >
-          Client Details
+          Kundendetails
         </Button>
       </div>
     </div>

@@ -66,14 +66,18 @@ const AddClientModal = ({
       }}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Add Client</Modal.Title>
+        <Modal.Title>Kunde Hinzufügen</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
-          <Tab className="mx-3 mt-3" title="Client Info" eventKey="clientInfo">
+          <Tab
+            className="mx-3 mt-3"
+            title="Kundendetails"
+            eventKey="clientInfo"
+          >
             <ClientForm onNext={handleNext} loginDetails={loginDetails} />
           </Tab>
-          <Tab className="mx-3 mt-3" title="Documents" eventKey="documents">
+          <Tab className="mx-3 mt-3" title="Dokumente" eventKey="documents">
             {error && <div className="alert alert-danger">{error}</div>}
 
             <DocumentForm

@@ -26,10 +26,10 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="activity">
-        <Form.Label>Activity</Form.Label>
+        <Form.Label>Aktivität</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Enter activity"
+          placeholder="Aktivität eingeben"
           name="activity"
           value={formData.activity}
           onChange={handleChange}
@@ -37,7 +37,7 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="date">
-        <Form.Label>Date</Form.Label>
+        <Form.Label>Datum</Form.Label>
         <Form.Control
           type="date"
           name="date"
@@ -47,7 +47,7 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="time">
-        <Form.Label>Time</Form.Label>
+        <Form.Label>Zeitpunkt</Form.Label>
         <Form.Control
           type="time"
           name="time"
@@ -57,17 +57,17 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="type">
-        <Form.Label>Type</Form.Label>
+        <Form.Label>Art</Form.Label>
         <Form.Control
           as="select"
           name="type"
           value={formData.type}
           onChange={handleChange}
         >
-          <option value="">Select type</option>
-          <option value="Consulting">Consulting</option>
-          <option value="Surgery">Surgery</option>
-          <option value="Injection">Injection</option>
+          <option value="">Art auswählen</option>
+          <option value="Consulting">Beratung</option>
+          <option value="Surgery">Operation</option>
+          <option value="Injection">Injektion</option>
         </Form.Control>
       </Form.Group>
 
@@ -75,14 +75,14 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
         onClick={handleClose}
         className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
       >
-        Cancel
+        Abbrechen
       </Button>
 
       <Button
         className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         type="submit"
       >
-        Next
+        Nächste
       </Button>
     </Form>
   );

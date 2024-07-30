@@ -77,7 +77,7 @@ const ClientPdfModal = ({
       <Modal.Footer>
         <Button onClick={handleDelete}>Delete</Button>
         <Button variant="secondary" onClick={Hide}>
-          Close
+          Schließen
         </Button>
       </Modal.Footer>
     </Modal>
