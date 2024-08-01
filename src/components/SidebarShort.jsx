@@ -20,9 +20,10 @@ export const SidebarShort = (props) => {
           active={clients}
         />
         <SidebarItem
-          text="Google"
+          text="Shore"
           icon={<Users size={20} />}
-          onclick={"google"}
+          onclick={"my.shore"}
+          // https://my.shore.com/calendar/week/2024-06-03:2024-06-09
           isExternal={true}
         />
       </Sidebar>
