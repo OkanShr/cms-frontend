@@ -66,7 +66,7 @@ const AddClientModal = ({
       }}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Kunde Hinzufügen</Modal.Title>
+        <Modal.Title>Patient Hinzufügen</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>

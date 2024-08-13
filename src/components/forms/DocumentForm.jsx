@@ -29,13 +29,13 @@ export const DocumentForm = ({
   return (
     <Form onSubmit={handleSubmit}>
       {/* Datenschutz Einwilligung */}
-      <Form.Group controlId="formDSEFile">
+      <Form.Group controlId="formDSEFile" className="mt-10">
         <Form.Label>Datenschutz Einwilligung</Form.Label>
         <Form.Control type="file" onChange={handleDSEFileChange} />
       </Form.Group>
 
       {/* Aufnahmeformular Neukunden */}
-      <Form.Group controlId="formAFNFile">
+      <Form.Group controlId="formAFNFile" className="my-10">
         <Form.Label>Aufnahmeformular Neukunden</Form.Label>
         <Form.Control type="file" onChange={handleAFNFileChange} />
       </Form.Group>
@@ -47,6 +47,7 @@ export const DocumentForm = ({
       >
         Kunde Erstellen
       </button>
+      {/* right corner */}
     </Form>
   );
 };

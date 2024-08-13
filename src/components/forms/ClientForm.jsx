@@ -29,10 +29,10 @@ export const ClientForm = ({ onNext, loginDetails }) => {
     <Form className="w-full" onSubmit={handleSubmit}>
       <Row className="mb-3">
         <Form.Group as={Col} controlId="formFirstName">
-          <Form.Label>Vorname</Form.Label>
+          <Form.Label className="font-bold">Vorname</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter first name"
+            placeholder="Vorname eingeben"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
@@ -43,7 +43,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
           <Form.Label>Nachname</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter last name"
+            placeholder="Nachname eingeben"
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
@@ -75,10 +75,10 @@ export const ClientForm = ({ onNext, loginDetails }) => {
         </Form.Group>
 
         <Form.Group as={Col} controlId="formPhoneNumber">
-          <Form.Label>Phone Number</Form.Label>
+          <Form.Label>Telefonnummer</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Telefonnummer eingeben"
+            placeholder="+49"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}

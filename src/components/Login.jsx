@@ -48,7 +48,7 @@ function Login() {
   };
 
   return (
-    <div className="bg-teal-100 h-screen flex items-center justify-center">
+    <div className="bg-customColor1 h-screen flex items-center justify-center">
       <div className="rounded-lg overflow-hidden shadow-lg bg-white max-w-md w-full">
         <div className="relative h-44 bg-cover bg-center bg-image">
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">

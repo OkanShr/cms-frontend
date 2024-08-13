@@ -68,6 +68,44 @@ const Dashboard = ({
           <h2 className="text-dark text-left">Dashboard</h2>
         </div>
         <div className="flex flex-col justify-between">
+          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl">
+            <div className="lg:m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
+              <h4 className="text-center mb-6">Patienten</h4>
+              <Line data={data} content="" />
+            </div>
+            <div className="lg:m-5 bg-indigo-100 rounded-2xl p-4 w-full sm:w-1/2 lg:w-5/12 ">
+              <h3 className="text-xl font-semibold mb-4">
+                Patienten Eingetragen
+              </h3>
+              <div>
+                <div className="p-2 flex items-center justify-around bg-sky-950 rounded-lg mb-2 text-white">
+                  <span className="font-medium">Anzahl der Kunden</span>
+                  <span className="font-medium">Zeitraum</span>
+                </div>
+                <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
+                  <span>{clientsLast3Months} Neue Kunden</span>
+                  <span>Letzte 3 Monate</span>
+                </div>
+                <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
+                  <span>{clientsLast6Months} Neue Kunden</span>
+                  <span>Letzte 6 Monate</span>
+                </div>
+                <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
+                  <span>{clientsLast12Months} Neue Kunden</span>
+                  <span>Letzte 12 Monate</span>
+                </div>
+
+                <div className="flex justify-end">
+                  <button
+                    className="text-red-600  hover:text-gray-900 w-4 h-2 "
+                    onClick={() => navigate("/clients")}
+                  >
+                    <img src={rightArrowImage} alt="" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="rounded-lg border-inherit p-4 w-full mb-6 lg:mb-0">
             <div className="m-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Total Patients */}
@@ -135,45 +173,6 @@ const Dashboard = ({
                   <h2 className="text-center font-bold text-5xl">
                     {appointmentData.Surgery}
                   </h2>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl">
-            <div className="lg:m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
-              <h4 className="text-center mb-6">Patienten</h4>
-              <Line data={data} content="" />
-            </div>
-            <div className="lg:m-5 bg-indigo-100 rounded-2xl p-4 w-full sm:w-1/2 lg:w-5/12 ">
-              <h3 className="text-xl font-semibold mb-4">
-                Patienten Eingetragen
-              </h3>
-              <div>
-                <div className="p-2 flex items-center justify-around bg-sky-950 rounded-lg mb-2 text-white">
-                  <span className="font-medium">Anzahl der Kunden</span>
-                  <span className="font-medium">Zeitraum</span>
-                </div>
-                <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast3Months} Neue Kunden</span>
-                  <span>Letzte 3 Monate</span>
-                </div>
-                <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast6Months} Neue Kunden</span>
-                  <span>Letzte 6 Monate</span>
-                </div>
-                <div className="p-2 flex items-center justify-around bg-white rounded-lg mb-2">
-                  <span>{clientsLast12Months} Neue Kunden</span>
-                  <span>Letzte 12 Monate</span>
-                </div>
-
-                <div className="flex justify-end">
-                  <button
-                    className="text-red-600  hover:text-gray-900 w-4 h-2 "
-                    onClick={() => navigate("/clients")}
-                  >
-                    <img src={rightArrowImage} alt="" />
-                  </button>
                 </div>
               </div>
             </div>
