@@ -40,11 +40,7 @@ export const DocumentForm = ({
         <Form.Control type="file" onChange={handleAFNFileChange} />
       </Form.Group>
 
-      <button
-        className="mt-3 rounded-md px-3 py-1.5 ml-6
-           text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
-        type="submit"
-      >
+      <button className="custom-button" type="submit">
         Kunde Erstellen
       </button>
       {/* right corner */}

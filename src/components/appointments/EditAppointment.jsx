@@ -74,18 +74,12 @@ const EditAppointment = ({
             />
           </Form.Group>
 
-          <Button
-            onClick={handleCancel}
-            className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
-          >
+          <button className="custom-button" onClick={handleCancel}>
             Abbrechen
-          </Button>
-          <Button
-            className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white "
-            type="submit"
-          >
+          </button>
+          <button className="custom-button" type="submit">
             Einreichen
-          </Button>
+          </button>
         </Form>
       </Modal.Body>
     </Modal>

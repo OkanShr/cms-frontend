@@ -10,7 +10,9 @@ import editImage from "../assets/edit.png";
 import deleteImage from "../assets/delete.png";
 import galleryImage from "../assets/gallery.png";
 import docsImage from "../assets/document.png";
-import userImg from "../assets/userImg.png";
+import manImg from "../assets/man.png";
+import womanImg from "../assets/woman.png";
+import divImg from "../assets/userImg.png";
 
 function ClientDetailsPage() {
   const { clientId } = useParams();
@@ -45,77 +47,77 @@ function ClientDetailsPage() {
 
   const renderClientDetails = () => {
     if (!client) {
-      return <div>Client Not Found</div>;
+      return <div>Keine Patienten Gefunden</div>;
     }
 
     return (
       <div className="flex flex-col p-2 w-full space-y-8">
-        <div className="flex justify-between items-center">
+        <div className="flex">
           <button
             onClick={() => navigate("/clients")}
-            className="text-teal-500 hover:text-teal-700"
+            className="mt-2 flex items-start text-pink-500 hover:text-pink-700"
           >
             <ChevronLeft size={35} />
           </button>
+          {/* Title and client menu buttons */}
+          <div className="flex justify-between flex-col lg:flex-row  w-full">
+            <h1 className="ml-2 font-semibold text-gray-800 whitespace-nowrap">
+              Patientendetails
+            </h1>
+            <div className="flex justify-end items-start space-x-4 ml-auto">
+              <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
+                <img
+                  src={editImage}
+                  alt=""
+                  className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
+                  onClick={() => navigate(`/client/edit/${client.id}`)}
+                />
+              </div>
 
-          <h2 className="text-3xl font-semibold text-gray-800">
-            Client Details
-          </h2>
-          <div className="flex justify-end items-start space-x-4 ml-auto">
-            <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
-              <img
-                src={editImage}
-                alt=""
-                className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
-                onClick={() => navigate(`/client/edit/${client.id}`)}
+              <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
+                <img
+                  src={deleteImage}
+                  alt=""
+                  className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
+                  onClick={handleShowModal}
+                />
+              </div>
+
+              <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
+                <img
+                  src={galleryImage}
+                  alt=""
+                  className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
+                  onClick={() => navigate(`/client/gallery/${client.id}`)}
+                />
+              </div>
+
+              <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
+                <img
+                  src={docsImage}
+                  alt=""
+                  className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
+                  onClick={() => navigate(`/client/documents/${client.id}`)}
+                />
+              </div>
+
+              <DeleteClientModal
+                show={showModal}
+                handleClose={handleCloseModal}
+                handleDelete={handleDelete}
               />
             </div>
-
-            <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
-              <img
-                src={deleteImage}
-                alt=""
-                className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
-                onClick={handleShowModal}
-              />
-            </div>
-
-            <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
-              <img
-                src={galleryImage}
-                alt=""
-                className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
-                onClick={() => navigate(`/client/gallery/${client.id}`)}
-              />
-            </div>
-
-            <div className="relative inline-block px-4 py-2 text-black cursor-pointer group">
-              <img
-                src={docsImage}
-                alt=""
-                className="w-6 h-6 transition-transform duration-300 transform hover:scale-110"
-                onClick={() => navigate(`/client/documents/${client.id}`)}
-              />
-            </div>
-
-            <DeleteClientModal
-              show={showModal}
-              handleClose={handleCloseModal}
-              handleDelete={handleDelete}
-            />
           </div>
         </div>
         <div className="flex flex-col md:flex-row">
           <img
-            src={userImg}
+            src={client.gender === "male" ? `${manImg}` : `${womanImg}`}
             className="rounded-xl object-cover h-50 w-50 max-w-[340px]"
           ></img>
-          <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3 text-lg">
+          <div className="m-6 pt-6 text-gray-700 flex flex-col gap-3">
             <p>
-              <span className="font-medium">Vorname:</span> {client.firstName}
-            </p>
-            <p>
-              <span className="font-medium">Nachname:</span> {client.lastName}
+              <span className="font-medium">Vor-Nachname:</span>{" "}
+              {client.firstName} {client.lastName}
             </p>
             <p>
               <span className="font-medium">Telefon Nummer:</span>{" "}
@@ -131,7 +133,7 @@ function ClientDetailsPage() {
           </div>
         </div>
 
-        <div className="p-4 bg-gray-100 rounded-lg">
+        <div className="p-4 bg-pink-50 rounded-lg">
           <Appointments
             clientId={client.id}
             clientName={client.firstName}
@@ -143,7 +145,7 @@ function ClientDetailsPage() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex md:flex-row">
+    <div className="bg-pink-50 min-h-screen flex md:flex-row">
       <SidebarShort dashboard={false} clients={true} addClient={false} />
       <div className="flex-1 p-6 bg-white shadow-lg rounded-lg m-6">
         {renderClientDetails()}

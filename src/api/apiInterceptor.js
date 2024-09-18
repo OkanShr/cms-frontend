@@ -66,11 +66,9 @@ instance.interceptors.response.use(
       return retryOriginalRequest;
     } else if (response && response.status === 403) {
       // Handle 403 Forbidden response
-      console.log("Request failed with status code 403");
+      console.log("Request failed with status code 403", response);
       // Redirect to the root directory or show an appropriate message
-      window.location.href = "/signin";
     }
-
     return Promise.reject(error);
   }
 );

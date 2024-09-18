@@ -5,7 +5,7 @@ import { LayoutDashboard, Users } from "lucide-react";
 export const SidebarShort = (props) => {
   const { dashboard, clients } = props;
   return (
-    <div className="bg-white-100 h-screen flex flex-row">
+    <div className="bg-white-100 h-screen flex flex-row sticky top-0">
       <Sidebar>
         <SidebarItem
           text="Dashboard"

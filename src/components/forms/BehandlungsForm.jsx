@@ -67,18 +67,12 @@ export const BehandlungsForm = ({
           />
         </Form.Group>
       ))}
-      <Button
-        className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-        onClick={handleSubmit}
-      >
+      <button className="custom-button-negative" onClick={handleSubmit}>
         Abbrechen
-      </Button>
-      <Button
-        className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-        type="submit"
-      >
-        Nächste
-      </Button>
+      </button>
+      <button className="custom-button float-right" type="submit">
+        Termin Speichern
+      </button>
     </Form>
   );
 };

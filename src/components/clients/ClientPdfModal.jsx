@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 import DocViewer, { DocViewerRenderers } from "@cyntler/react-doc-viewer";
 import { deleteClientPdf } from "../../api/clientApi";
 import { deleteAppointmentPdf } from "../../api/appointmentApi";
@@ -75,10 +75,12 @@ const ClientPdfModal = ({
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleDelete}>Delete</Button>
-        <Button variant="secondary" onClick={Hide}>
+        <button onClick={handleDelete} className="custom-button-negative">
+          Delete
+        </button>
+        <button className="custom-button" onClick={Hide}>
           Schließen
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );

@@ -98,24 +98,18 @@ const AppointmentDetails = ({
         )}
       </Modal.Body>
       <Modal.Footer>
-        <Button
+        <button
+          className="custom-button"
           onClick={() => setShowDetailsModal(false)}
-          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
         >
           Zurück
-        </Button>
-        <Button
-          onClick={handleOpenEdit}
-          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-        >
+        </button>
+        <button className="custom-button" onClick={handleOpenEdit}>
           Termin bearbeiten
-        </Button>
-        <Button
-          onClick={handleDelete}
-          className="text-dark bg-gradient-to-tr from-red-500 to-red-400 border-white"
-        >
+        </button>
+        <button className="custom-button" onClick={handleDelete}>
           Termin löschen
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );

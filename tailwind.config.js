@@ -1,12 +1,16 @@
 /** @type {import('tailwindcss').Config} */
+// Some colors and styles are overwritten in App.css
 export default {
   content: ["./src/**/*.{js,jsx}"],
-  extend: {
-    colors: {
-      customColor1: "#f2eaf4", // Example hex code for a custom color
-      customColor2: "#1e90ff",
-      customColor3: "#32cd32",
+  theme: {
+    extend: {
+      colors: {
+        pink_light: "#f2eaf4",
+        pink_medium: "#fa89cc",
+        pink_dark: "#db5ea7",
+      },
     },
   },
+
   plugins: [],
 };

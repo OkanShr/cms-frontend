@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Col, Row } from "react-bootstrap";
+import { Form, Col, Row, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { updateClient, getClientById } from "../api/clientApi";
 import SidebarShort from "../components/SidebarShort";
@@ -71,7 +71,7 @@ const ClientEditPage = () => {
       <div className="p-5  flex flex-col w-full">
         <div className="flex flex-row">
           <button onClick={() => navigate(-1)}>
-            <ChevronLeft size={35} />
+            <ChevronLeft size={42} />
           </button>
           <h1>Kunde Bearbeiten</h1>
         </div>
@@ -127,10 +127,7 @@ const ClientEditPage = () => {
 
           <p className="text-lime-500 mt-2">{message}</p>
           <p className="text-red-500 mt-2">{err}</p>
-          <button
-            className="mt-1 rounded-md px-3 py-1.5 ml-6 text-teal-800 transition-all bg-gradient-to-tr from-teal-200 to-teal-100"
-            type="submit"
-          >
+          <button className="custom-button" type="submit">
             Einreichen
           </button>
         </Form>

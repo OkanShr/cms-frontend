@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { getClientPdfs } from "../api/clientApi";
 import { useSelector } from "react-redux";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import ClientPdfModal from "../components/clients/ClientPdfModal";
 import UploadPdfModal from "../components/clients/UploadPdfModal";
 import { RotateCcw } from "lucide-react";
@@ -52,74 +52,88 @@ function ClientDocumentsPage() {
   };
 
   return (
-    <div className="bg-white-100 h-screen flex flex-row">
+    <div className="bg-pink-50 h-screen flex md:flex-row ">
       <SidebarShort dashboard={false} clients={true} addClient={false} />
-      <div className="flex flex-col w-full">
-        <div className="flex flex-row items-start p-5 w-full">
+      <div
+        className="flex p-6 bg-white shadow-lg rounded-lg 
+                      m-6 flex-col w-full max-h-screen"
+      >
+        <div className="flex flex-row items-start p-4 w-full">
           <button
+            className="mt-2 flex items-start text-pink-500 hover:text-pink-700"
             onClick={() => navigate(`/client/${clientId}`)}
-            className="mr-3"
           >
-            <ChevronLeft size={35} />
+            <ChevronLeft size={42} />
           </button>
-          <h2>Client Documents</h2>
+          <h1>Patientendokumente</h1>
         </div>
-        <div className="flex flex-row">
-          <RotateCcw
-            size={38}
-            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-3 p-1.5 rounded-xl"
-            onClick={() => setDocumentFilter("")}
-          />
-          <Button
-            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-45 m-3"
-            onClick={() => setDocumentFilter("datenschutz")}
-          >
-            Datenschutz
-          </Button>
-          <Button
-            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-45 m-3"
-            onClick={() => setDocumentFilter("aufnahmeformular")}
-          >
-            Aufnahmeformular
-          </Button>
-          <Button
-            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-45 m-3"
-            onClick={() => setDocumentFilter("behandlungsformular")}
-          >
-            Behandlungsformular
-          </Button>
-        </div>
-        <Button
-          className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+
+        <button
+          className="custom-button"
           onClick={() => {
             setShowPdfUploadModal(true);
             console.log(showPdfUploadModal);
           }}
         >
           Dokument hochladen
-        </Button>
-        <ListGroup className="m-3 w-6/12">
-          {filteredPdfs.length > 0 ? (
-            filteredPdfs.map((pdf) => (
-              <div
-                key={pdf.pdfId}
-                className="flex flex-row shadow-md p-3 justify-between items-center"
-              >
-                <span>{`${pdf.fileName} | ${
-                  pdf.uploadDate.split("T")[0]
-                }`}</span>
-                <Button
-                  className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-                  onClick={() => handlePdfClick(pdf)}
-                >
-                  Öffnen
-                </Button>
-              </div>
-            ))
-          ) : (
-            <h4>Keine Dokumente gefunden</h4>
-          )}
-        </ListGroup>
+        </button>
+        <h3 className="m-3">Filtern: </h3>
+        <div className="flex flex-row gap-2 mb-4">
+          <button
+            className="custom-button"
+            onClick={() => setDocumentFilter("datenschutz")}
+          >
+            Datenschutz
+          </button>
+          <button
+            className="custom-button"
+            onClick={() => setDocumentFilter("aufnahmeformular")}
+          >
+            Aufnahmeformular
+          </button>
+          <button
+            className="custom-button"
+            onClick={() => setDocumentFilter("behandlungsformular")}
+          >
+            Behandlungsformular
+          </button>
+          <RotateCcw
+            className="shadow-md shadow-pink-700 text-dark bg-gradient-to-tr from-pink-200 to-pink-100 border-white m-1 p-1.5 rounded-xl
+            hover:bg-gradient-to-tr hover:from-pink-300 hover:to-pink-200"
+            size={38}
+            color="#831843"
+            onClick={() => setDocumentFilter("")}
+          />
+        </div>
+        <h2 className="ml-3">Dokumente</h2>
+        <div className="p-4 m-1 bg-pink-50 rounded-lg overflow-auto flex-1 max-h-50">
+          <ListGroup className="m-2 gap-2">
+            {filteredPdfs.length > 0 ? (
+              // Sort by uploadDate in descending order (newest first)
+              filteredPdfs
+                .sort((a, b) => new Date(b.uploadDate) - new Date(a.uploadDate))
+                .map((pdf) => (
+                  <div
+                    key={pdf.pdfId}
+                    className="flex flex-row shadow-md p-3 justify-between items-center bg-white"
+                  >
+                    <span>{`${pdf.fileName} | ${
+                      pdf.uploadDate.split("T")[0]
+                    }`}</span>
+                    <button
+                      className="custom-button"
+                      onClick={() => handlePdfClick(pdf)}
+                    >
+                      Öffnen
+                    </button>
+                  </div>
+                ))
+            ) : (
+              <h4>Keine Dokumente gefunden</h4>
+            )}
+          </ListGroup>
+        </div>
+
         {currentPdf && (
           <ClientPdfModal
             showPdfModal={showPdfModal}

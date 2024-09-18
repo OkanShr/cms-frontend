@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
 
 const DeleteClientModal = ({ show, handleClose, handleDelete }) => {
   return (
@@ -8,12 +8,12 @@ const DeleteClientModal = ({ show, handleClose, handleDelete }) => {
         <Modal.Title>Möchten Sie den Client wirklich löschen?</Modal.Title>
       </Modal.Header>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <button className="custom-button" onClick={handleClose}>
           Abbrechen
-        </Button>
-        <Button variant="danger" onClick={handleDelete}>
+        </button>
+        <button className="custom-button-negative" onClick={handleDelete}>
           Löschen
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );

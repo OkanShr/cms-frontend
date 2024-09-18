@@ -71,11 +71,11 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
   return (
     <>
       <div className="flex flex-row items-center">
-        <h4>Appointments</h4>
+        <h2>Termine</h2>
         <div className="flex justify-end items-start ml-auto">
           <button
             onClick={() => setShowAddModal(true)}
-            className="w-11 h-11 border-3 bg-gradient-to-tr from-teal-200 to-teal-100 border-teal-700 rounded-full flex items-center justify-center"
+            className="w-11 h-11 border-3 bg-gradient-to-tr from-pink-200 to-pink-100 border-pink-700 rounded-full flex items-center justify-center"
           >
             <FilePlus />
           </button>
@@ -94,63 +94,66 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
         className="w-full mb-2 p-1 border-b-2 bg-transparent border-black"
         id="searchtableinput"
         type="text"
-        placeholder="Search Appointment By Date"
+        placeholder="Terminsuche nach Datum"
         onChange={handleChangeSearch}
         value={searchInput}
       />
       <ListGroup className="gap-3">
         {appointments.length > 0 ? (
-          appointments.map((appointment) => {
-            if (shouldShowAppointment(appointment)) {
-              return (
-                <div
-                  key={appointment.id}
-                  className="flex flex-col md:flex-row shadow-md p-3 w-full md:w-2/3 rounded-lg justify-between bg-white mt-3"
-                >
-                  <span>{`${appointment.date.split("T")[0]} - ${
-                    appointment.time
-                  } | ${appointment.activity}`}</span>
-                  <Button
-                    className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-                    onClick={() => {
-                      handleFetchAppointmentPdf(appointment.id);
-                      handleShowDetails(appointment.id);
-                    }}
+          appointments
+            .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort appointments by date, newest first
+            .map((appointment) => {
+              if (shouldShowAppointment(appointment)) {
+                return (
+                  <div
+                    key={appointment.id}
+                    className="flex flex-col md:flex-row items-center justify-between shadow-md p-3 w-full md:w-auto rounded-lg bg-white mt-3 overflow-auto"
                   >
-                    Details Anzeigen
-                  </Button>
-                  {selectedAppointmentId === appointment.id && (
-                    <AppointmentDetails
-                      appointmentPdf={appointmentPdf}
+                    <span className="mr-4 xs:mb-2 text-lg text-gray-800 whitespace-nowrap">
+                      {`${appointment.date.split("T")[0]} - ${
+                        appointment.time
+                      } | ${appointment.activity}`}
+                    </span>
+                    <button
+                      className="custom-button"
+                      onClick={() => {
+                        handleFetchAppointmentPdf(appointment.id);
+                        handleShowDetails(appointment.id);
+                      }}
+                    >
+                      Details Anzeigen
+                    </button>
+                    {selectedAppointmentId === appointment.id && (
+                      <AppointmentDetails
+                        appointmentPdf={appointmentPdf}
+                        updateAppointmentList={updateAppointmentList}
+                        loginDetails={loginDetails}
+                        appointment={appointment}
+                        showDetailsModal={showDetailsModal}
+                        handleClose={handleCloseModals}
+                        setShowDetailsModal={setShowDetailsModal}
+                        setShowEditModal={setShowEditModal}
+                        clientId={clientId}
+                        clientLastName={clientLastName}
+                        clientName={clientName}
+                      />
+                    )}
+                    <EditAppointment
                       updateAppointmentList={updateAppointmentList}
                       loginDetails={loginDetails}
                       appointment={appointment}
-                      showDetailsModal={showDetailsModal}
+                      showEditModal={showEditModal}
                       handleClose={handleCloseModals}
-                      setShowDetailsModal={setShowDetailsModal}
                       setShowEditModal={setShowEditModal}
-                      clientId={clientId}
-                      clientLastName={clientLastName}
-                      clientName={clientName}
+                      setShowDetailsModal={setShowDetailsModal}
                     />
-                  )}
-                  <EditAppointment
-                    updateAppointmentList={updateAppointmentList}
-                    loginDetails={loginDetails}
-                    appointment={appointment}
-                    showEditModal={showEditModal}
-                    handleClose={handleCloseModals}
-                    setShowEditModal={setShowEditModal}
-                    setShowDetailsModal={setShowDetailsModal}
-                  />
-                </div>
-              );
-            } else {
+                  </div>
+                );
+              }
               return null;
-            }
-          })
+            })
         ) : (
-          <h4>There are no Appointments</h4>
+          <h4>Keine Termine Gefunden</h4>
         )}
       </ListGroup>
     </>

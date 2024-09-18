@@ -1,0 +1,79 @@
+
+/* ALL TEXT */
+body, p, span, h1, h2, h3, h4, h5, h6, a, label, div {
+    font-weight: bold;
+    font-size: large; 
+}
+/* FOR TABS AND FORMS*/
+.form-label{
+    font-weight: bold;
+    font-size: large;
+    color: #831843;
+}
+.nav-tabs .nav-link.active:active{
+    font-weight: bold;
+    font-size: large;
+}
+.nav-tabs .nav-link{
+    font-weight: bold;
+    font-size: large;
+    color: black;
+}
+.nav-tabs .nav-link:hover{
+    font-weight: bold;
+    font-size: large;
+    color: #831843;
+}
+
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active {
+    color: #831843 !important; 
+}
+
+/* FOR MODALS */
+.modal-dialog{
+    max-width: 80% !important;
+}
+.doc-viewer-container {
+    height: 75vh; 
+    width: 100%; 
+  }
+
+.custom-button {
+    margin-left: 0.5rem; /* ml-2 */
+    font-weight: 700;
+    color: #831843; /* text-dark */
+    background: linear-gradient(to top right, #f9c6d6, #fbeefb); /* bg-gradient-to-tr from-pink-200 to-pink-100 */
+    border: 1px solid #b6b3b5; /* border-pink-500 */
+    box-shadow: 0 4px 6px rgba(236, 72, 153, 0.5); /* shadow-md shadow-pink-700 */
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    border-radius: 0.5rem; /* rounded-lg */
+    border-color: rgba(255, 193, 224, 0.5);
+    white-space: nowrap; /* whitespace-nowrap */
+    height: fit-content;
+    transition: background 0.5s ease-in-out; /* transition duration-500 ease-in-out */
+  }
+  .custom-button:hover {
+    background: linear-gradient(to top right, #fbb6ce, #f9c6d6); /* hover:bg-gradient-to-tr hover:from-pink-300 hover:to-pink-200 */
+  }
+  
+
+  .custom-button-negative {
+    margin-left: 0.5rem; /* ml-2 */
+    font-weight: 700;
+    color: #831843; /* text-dark */
+    background: linear-gradient(to top right, #ff7676, #ff9090); /* bg-gradient-to-tr from-pink-200 to-pink-100 */
+    border: 1px solid #b6b3b5; /* border-pink-500 */
+    box-shadow: 0 4px 6px rgba(236, 72, 153, 0.5); /* shadow-md shadow-pink-700 */
+    padding: 0.5rem 1rem; /* px-4 py-2 */
+    border-radius: 0.5rem; /* rounded-lg */
+    border-color: rgba(255, 193, 224, 0.5);
+    white-space: nowrap; /* whitespace-nowrap */
+    height: fit-content;
+    transition: background 0.5s ease-in-out; /* transition duration-500 ease-in-out */
+  }
+    
+  .custom-button-negative:hover {
+    background: linear-gradient(to top right, #ff0404, #ff0404); /* hover:bg-gradient-to-tr hover:from-pink-300 hover:to-pink-200 */
+  }
+  
+  

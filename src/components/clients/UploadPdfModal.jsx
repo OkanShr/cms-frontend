@@ -63,13 +63,15 @@ const UploadPdfModal = ({
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          variant="secondary"
+        <button
+          className="custom-button"
           onClick={() => setShowPdfUploadModal(false)}
         >
           Abbrechen
-        </Button>
-        <Button onClick={handleFileUpload}>Hochladen</Button>
+        </button>
+        <button className="custom-button" onClick={handleFileUpload}>
+          Hochladen
+        </button>
       </Modal.Footer>
     </Modal>
   );

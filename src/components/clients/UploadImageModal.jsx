@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import React, { useState, useRef } from "react";
+import { Modal } from "react-bootstrap";
 import { uploadClientImage } from "../../api/clientApi";
+
 const UploadImageModal = ({
   setShowImageUploadModal,
   showImageUploadModal,
@@ -9,10 +10,25 @@ const UploadImageModal = ({
   fetchClientImages,
 }) => {
   const [file, setFile] = useState(null);
+  const hiddenFileInput = useRef(null);
+  const [preview, setPreview] = useState(null);
 
-  // Function to handle file change
+  // Handle file change
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+
+    if (selectedFile && selectedFile.type.startsWith("image/")) {
+      setFile(selectedFile);
+      setPreview(URL.createObjectURL(selectedFile));
+    } else {
+      alert("Please select a valid image file.");
+      setFile(null);
+      setPreview(null);
+    }
+  };
+
+  const handleClick = () => {
+    hiddenFileInput.current.click();
   };
 
   // Function to handle image upload
@@ -32,6 +48,15 @@ const UploadImageModal = ({
         console.error("Error uploading image:", error);
       });
   };
+
+  React.useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
+
   return (
     <Modal
       show={showImageUploadModal}
@@ -44,33 +69,49 @@ const UploadImageModal = ({
             Bild hochladen
           </Modal.Title>
           <button
-            className="text-gray-400 hover:text-gray-600"
+            className="custom-button"
             onClick={() => setShowImageUploadModal(false)}
           >
-            &times;
+            X
           </button>
         </Modal.Header>
         <Modal.Body className="p-4">
+          <button className="button-upload custom-button" onClick={handleClick}>
+            Datei wählen
+          </button>
           <input
+            className="hidden"
             type="file"
             onChange={handleFileChange}
-            className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+            ref={hiddenFileInput}
+            accept="image/*"
           />
+
           <button
             onClick={handleImageUpload}
-            className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="custom-button mt-4"
+            disabled={!file}
           >
             Bild hochladen
           </button>
+          {preview && (
+            <div className="mt-4">
+              <img
+                src={preview}
+                alt="Image preview"
+                className="w-full h-auto object-contain rounded-md border"
+              />
+            </div>
+          )}
         </Modal.Body>
         <Modal.Footer className="flex justify-end border-t p-4">
-          <Button
+          <button
             variant="secondary"
             onClick={() => setShowImageUploadModal(false)}
-            className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
+            className="custom-button"
           >
             Abbrechen
-          </Button>
+          </button>
         </Modal.Footer>
       </div>
     </Modal>

@@ -76,7 +76,7 @@ function HomePage() {
   }, [loginDetails.token]);
 
   return (
-    <div className="bg-white-100 h-screen flex flex-row">
+    <div className="bg-pink_light h-screen flex flex-row">
       <SidebarShort dashboard={true} clients={false} addClient={false} />
       <Dashboard
         clientsLast3Months={clientsData.last3Months}

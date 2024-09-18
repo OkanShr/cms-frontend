@@ -71,19 +71,13 @@ export const AppointmentForm = ({ onNext, clientId, handleClose }) => {
         </Form.Control>
       </Form.Group>
 
-      <Button
-        onClick={handleClose}
-        className="mr-4 text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-      >
+      <button onClick={handleClose} className="custom-button-negative">
         Abbrechen
-      </Button>
+      </button>
 
-      <Button
-        className="float-right text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white"
-        type="submit"
-      >
+      <button className="custom-button float-right" type="submit">
         Nächste
-      </Button>
+      </button>
     </Form>
   );
 };

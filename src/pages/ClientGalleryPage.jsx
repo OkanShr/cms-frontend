@@ -5,7 +5,6 @@ import SidebarShort from "../components/SidebarShort";
 import { ChevronLeft, RotateCcw } from "lucide-react";
 import { deleteClientImage, getClientImages } from "../api/clientApi";
 import Gallery from "../components/misc/Gallery";
-import { Button } from "react-bootstrap";
 import UploadImageModal from "../components/clients/UploadImageModal";
 import ImageComparator from "../components/misc/ImageComparator";
 
@@ -107,10 +106,14 @@ function ClientGalleryPage() {
   };
 
   return (
-    <div className="bg-white-100 h-screen flex flex-row">
+    <div className="bg-pink-50 h-screen flex flex-row">
       <SidebarShort dashboard={false} clients={true} addClient={false} />
-      <div className="flex flex-col">
-        <div className="flex flex-row items-start p-5 w-full">
+      <div
+        className="flex p-6 bg-white shadow-lg rounded-lg 
+                      m-6 flex-col w-full max-h-screen"
+      >
+        {" "}
+        <div className="flex flex-row items-start ">
           <button
             onClick={() => navigate(`/client/${clientId}`)}
             className="mr-3"
@@ -119,40 +122,37 @@ function ClientGalleryPage() {
           </button>
           <h2>Kundengalerie</h2>
         </div>
-        <div className="flex flex-row">
-          <Button
-            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
+        <div className="flex flex-row gap-2">
+          <button
+            className="custom-button"
             onClick={() => {
               setShowImageUploadModal(true);
             }}
           >
             Bild hochladen
-          </Button>
-          <Button
-            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white w-40 m-3"
-            onClick={handleCompare}
-          >
+          </button>
+
+          <button className="custom-button" onClick={handleCompare}>
             Vergleichen
-          </Button>
+          </button>
+
+          <button className="custom-button-negative" onClick={handleDelete}>
+            Bild Löschen
+          </button>
+
           <RotateCcw
+            className="shadow-md shadow-pink-700 text-dark bg-gradient-to-tr from-pink-200 to-pink-100 border-white m-1 p-1.5 rounded-xl
+                        hover:bg-gradient-to-tr hover:from-pink-300 hover:to-pink-200"
             size={38}
-            className="text-dark bg-gradient-to-tr from-teal-200 to-teal-100 border-white m-3 p-1.5 rounded-xl"
+            color="#831843"
             onClick={() => setSelectedImages([])}
           />
-          <Button
-            className="text-dark bg-gradient-to-tr from-red-500 to-red-400 border-white w-40 m-3"
-            onClick={handleDelete}
-          >
-            Bild Löschen
-          </Button>
         </div>
-
-        <div className="grid grid-cols-3 gap-4 p-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 p-3">
           {clientImages.map((item, index) => (
             <div
               key={index}
               className="relative rounded overflow-hidden shadow-lg"
-              style={{ width: "200px", height: "200px" }}
             >
               <input
                 type="checkbox"
@@ -166,13 +166,12 @@ function ClientGalleryPage() {
                 loading="lazy"
                 src={item.imageUrl}
                 alt={item.fileName.split(".")[0]}
-                className="h-full w-full object-cover cursor-pointer"
+                className="w-full h-full object-cover cursor-pointer"
                 onClick={() => handleClick(item, index)}
               />
             </div>
           ))}
         </div>
-
         <div>
           {clickedImg && (
             <Gallery

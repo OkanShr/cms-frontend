@@ -71,7 +71,7 @@ const AddClientModal = ({
       <Modal.Body>
         <Tabs activeKey={activeTab} onSelect={(k) => setActiveTab(k)}>
           <Tab
-            className="mx-3 mt-3"
+            className={`mx-3 mt-3`}
             title="Kundendetails"
             eventKey="clientInfo"
           >

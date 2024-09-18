@@ -48,7 +48,7 @@ function Login() {
   };
 
   return (
-    <div className="bg-customColor1 h-screen flex items-center justify-center">
+    <div className="bg-pink_light h-screen flex items-center justify-center">
       <div className="rounded-lg overflow-hidden shadow-lg bg-white max-w-md w-full">
         <div className="relative h-44 bg-cover bg-center bg-image">
           <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50">
@@ -93,7 +93,7 @@ function Login() {
               ""
             )}
 
-            <button className="w-full mt-4 py-2 bg-teal-700 shadow-lg text-white font-semibold rounded-lg hover:bg-teal-600">
+            <button className="w-full mt-4 py-2 bg-pink_dark shadow-lg text-white font-semibold rounded-lg hover:bg-pink_medium">
               Einloggen
             </button>
           </Form>

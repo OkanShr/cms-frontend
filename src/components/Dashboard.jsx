@@ -7,7 +7,7 @@ import consultationImage from "../assets/consultation.png";
 import surgeryImage from "../assets/surgery.png";
 import rightArrowImage from "../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
-
+import HeaderImg from "../assets/HeaderImg.png";
 // Chart.js bileşenlerini kaydet
 Chart.register(...registerables);
 
@@ -62,13 +62,13 @@ const Dashboard = ({
   };
 
   return (
-    <div className="w-full  flex  justify-center p-4 bg-white h-full">
+    <div className="w-full  flex  justify-center p-4 h-full">
       <div className="w-full max-w-6xl">
-        <div className="bg-stone-100 p-4 rounded-3xl">
-          <h2 className="text-dark text-left">Dashboard</h2>
+        <div className=" p-4 rounded-3xl flex  justify-center">
+          <img src={HeaderImg} width={520}></img>
         </div>
         <div className="flex flex-col justify-between">
-          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl">
+          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl shadow-lg">
             <div className="lg:m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
               <h4 className="text-center mb-6">Patienten</h4>
               <Line data={data} content="" />
@@ -109,7 +109,7 @@ const Dashboard = ({
           <div className="rounded-lg border-inherit p-4 w-full mb-6 lg:mb-0">
             <div className="m-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
               {/* Total Patients */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-green-50 to-green-200 p-4 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-green-50 to-green-200 p-4 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
                 <div className="w-16 h-16 border-4 border-green-700 rounded-full flex items-center justify-center">
                   <img
                     src={clientsImage}
@@ -126,7 +126,7 @@ const Dashboard = ({
               </div>
 
               {/* Consultation */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-indigo-50 to-indigo-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-indigo-50 to-indigo-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
                 <div className="w-16 h-16 border-4 border-indigo-700 rounded-full flex items-center justify-center">
                   <img
                     src={consultationImage}
@@ -143,7 +143,7 @@ const Dashboard = ({
               </div>
 
               {/* Injection */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-fuchsia-50 to-fuchsia-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-fuchsia-50 to-fuchsia-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
                 <div className="w-16 h-16 border-4 border-fuchsia-700 rounded-full flex items-center justify-center">
                   <img
                     src={botoksImage}
@@ -160,7 +160,7 @@ const Dashboard = ({
               </div>
 
               {/* Surgery */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-amber-50 to-amber-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-amber-50 to-amber-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
                 <div className="w-16 h-16 border-4 border-amber-700 rounded-full flex items-center justify-center">
                   <img
                     src={surgeryImage}

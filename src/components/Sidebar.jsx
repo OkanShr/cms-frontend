@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../store/authentication";
 import doctorImg from "../assets/doctor.png";
 import { useNavigate } from "react-router-dom";
-import XeramedImg from "../assets/xeramedimg.png";
+import Logo from "../assets/AAHeaderText.png";
 
 const SidebarContext = createContext();
 
@@ -51,19 +51,19 @@ export default function Sidebar({ children }) {
   };
 
   return (
-    <aside className="h-screen ">
+    <aside className="h-screen">
       <nav className="h-full flex flex-col bg-white border-r shadow-sm  pt-4">
         <div className="p-4 pb-2 flex justify-between items-center">
           <img
-            src={XeramedImg}
+            src={Logo}
             className={`overflow-hidden transition-all ${
-              expanded ? "w-32" : "w-0"
+              expanded ? "w-60" : "w-0"
             }`}
             alt=""
           />
           <button
             onClick={toggleExpanded}
-            className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+            className="p-1.5 rounded-lg  hover:bg-pink-100"
           >
             {expanded ? <ChevronFirst /> : <ChevronLast />}
           </button>
@@ -124,8 +124,8 @@ export function SidebarItem({
         transition-colors group
         ${
           active
-            ? "bg-gradient-to-tr from-teal-200 to-teal-100 text-teal-900"
-            : "hover:bg-teal-50 text-teal-600"
+            ? "bg-gradient-to-tr from-pink-200 to-pink-100 text-pink-900"
+            : "hover:bg-pink-50 text-pink-600"
         }
       `}
     >
@@ -139,7 +139,7 @@ export function SidebarItem({
       </span>
       {alert && (
         <div
-          className={`absolute right-2 w-2 h-2 rounded bg-teal-400 ${
+          className={`absolute right-2 w-2 h-2 rounded bg-pink-400 ${
             expanded ? "" : "top-2"
           }`}
         />
@@ -149,7 +149,7 @@ export function SidebarItem({
         <span
           className={`
             absolute left-full rounded-md px-2 py-1 ml-6
-            bg-teal-100 text-teal-800 text-sm
+            bg-pink-100 text-pink-800 text-sm
             invisible opacity-20 -translate-x-3 transition-all
             group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
           `}
