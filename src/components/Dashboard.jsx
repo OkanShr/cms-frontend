@@ -68,7 +68,7 @@ const Dashboard = ({
           <img src={HeaderImg} width={520}></img>
         </div>
         <div className="flex flex-col justify-between">
-          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-96 bg-stone-100 rounded-3xl shadow-lg">
+          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-auto bg-stone-100 rounded-3xl shadow-lg overflow-auto">
             <div className="lg:m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
               <h4 className="text-center mb-6">Patienten</h4>
               <Line data={data} content="" />
