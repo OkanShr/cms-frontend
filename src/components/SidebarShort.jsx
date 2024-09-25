@@ -2,6 +2,7 @@ import React from "react";
 import Sidebar from "../components/Sidebar";
 import { SidebarItem } from "../components/Sidebar";
 import { LayoutDashboard, Users } from "lucide-react";
+import ShoreLogo from "../assets/ShoreLogo.png";
 export const SidebarShort = (props) => {
   const { dashboard, clients } = props;
   return (
@@ -20,8 +21,8 @@ export const SidebarShort = (props) => {
           active={clients}
         />
         <SidebarItem
+          icon={<img width={20} src={ShoreLogo}></img>}
           text="Shore"
-          icon={<Users size={20} />}
           onclick={"my.shore"}
           // https://my.shore.com/calendar/week/2024-06-03:2024-06-09
           isExternal={true}

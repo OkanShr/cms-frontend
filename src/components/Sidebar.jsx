@@ -125,8 +125,13 @@ export function SidebarItem({
         ${
           active
             ? "bg-gradient-to-tr from-pink-200 to-pink-100 text-pink-900"
-            : "hover:bg-pink-50 text-pink-600"
+            : `${
+                text == "Shore"
+                  ? "hover:bg-teal-50 text-teal-400"
+                  : "hover:bg-pink-50 text-pink-600"
+              }`
         }
+        
       `}
     >
       {icon}
@@ -149,7 +154,11 @@ export function SidebarItem({
         <span
           className={`
             absolute left-full rounded-md px-2 py-1 ml-6
-            bg-pink-100 text-pink-800 text-sm
+            ${
+              text == "Shore"
+                ? "bg-teal-300 text-teal-400"
+                : "bg-pink-100 text-pink-800"
+            } text-sm
             invisible opacity-20 -translate-x-3 transition-all
             group-hover:visible group-hover:opacity-100 group-hover:translate-x-0
           `}
