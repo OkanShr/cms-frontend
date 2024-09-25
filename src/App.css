@@ -5,10 +5,11 @@ body, p, span, h1, h2, h3, h4, h5, h6, a, label, div {
     font-size: large; 
 }
 /* FOR TABS AND FORMS*/
-.form-label{
+.form-label, .form-check-label{
     font-weight: bold;
     font-size: large;
     color: #831843;
+    margin-top: 5px;
 }
 .nav-tabs .nav-link.active:active{
     font-weight: bold;
@@ -59,6 +60,7 @@ body, p, span, h1, h2, h3, h4, h5, h6, a, label, div {
 
   .custom-button-negative {
     margin-left: 0.5rem; /* ml-2 */
+    margin-top: 10px;
     font-weight: 700;
     color: #831843; /* text-dark */
     background: linear-gradient(to top right, #ff7676, #ff9090); /* bg-gradient-to-tr from-pink-200 to-pink-100 */

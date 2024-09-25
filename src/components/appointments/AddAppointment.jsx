@@ -12,6 +12,7 @@ const AddAppointment = ({
   clientId,
   clientName,
   clientLastName,
+  client,
   loginDetails,
   showAddModal,
   handleClose,
@@ -19,26 +20,29 @@ const AddAppointment = ({
 }) => {
   const [appointmentData, setAppointmentData] = useState({
     activity: "",
-    date: "",
+    date: new Date().toISOString().split("T")[0],
     time: "",
     clientId: clientId || "",
     type: "",
   });
   const [docuFormData, setDocuFormData] = useState({
+    doctor: "",
     datum: "",
     name: clientLastName || "",
     vorname: clientName || "",
-    geburtsdatum: "",
+    geburtsdatum: client?.birthDate || "",
     vorerkrankungen: "",
     vormedikation: "",
     allergie: "",
-    beschwerden: "",
-    behandlungswunsch: "",
+    wunsch: "",
     behandlung: "",
     material: "",
-    komplikationen: "",
-    gpkontrolle: "",
-    gpfolgetherapie: "",
+    komplikationen: false,
+    kpnote: "", // Notiz for "Komplikationen"
+    gpkontrolle: false,
+    gpkdatum: "", // Datum for "Kontrolle Geplant?"
+    gpfolgetherapie: false,
+    gpfdatum: "", // Datum for "Folgetherapie Geplant?"
   });
 
   useEffect(() => {
@@ -47,19 +51,17 @@ const AddAppointment = ({
       datum: appointmentData.date || "",
       name: clientLastName || "",
       vorname: clientName || "",
+      geburtsdatum: client?.birthDate || "",
     }));
-  }, [appointmentData, clientName, clientLastName]);
+  }, [appointmentData, clientName, clientLastName, client?.birthDate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const updatedAppointmentData = {
         ...appointmentData,
-        activity: docuFormData.behandlung,
+        activity: appointmentData.type,
       };
-
-      // Log state before submission
-      console.log("Submitting with data:", updatedAppointmentData);
 
       const appointmentResponse = await createAppointment(
         updatedAppointmentData,
@@ -98,6 +100,14 @@ const AddAppointment = ({
 
   const generateDocument = async (formData, appointmentId) => {
     try {
+      // Prepare the data for boolean values as "Ja" or "Nein"
+      const documentData = {
+        ...formData,
+        komplikationen: formData.komplikationen ? "Ja" : "Nein",
+        gpkontrolle: formData.gpkontrolle ? "Ja" : "Nein",
+        gpfolgetherapie: formData.gpfolgetherapie ? "Ja" : "Nein",
+      };
+
       const response = await fetch(templateFile);
       const arrayBuffer = await response.arrayBuffer();
       const zip = new PizZip(arrayBuffer);
@@ -106,7 +116,7 @@ const AddAppointment = ({
         linebreaks: true,
       });
 
-      doc.setData(formData);
+      doc.setData(documentData);
       doc.render();
 
       const out = doc.getZip().generate({
@@ -144,16 +154,17 @@ const AddAppointment = ({
   };
 
   const handleInputChange = (e, formType) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
+    const inputValue = type === "checkbox" ? checked : value;
     if (formType === "appointment") {
       setAppointmentData({
         ...appointmentData,
-        [name]: value,
+        [name]: inputValue,
       });
     } else {
       setDocuFormData({
         ...docuFormData,
-        [name]: value,
+        [name]: inputValue,
       });
     }
   };
@@ -167,17 +178,22 @@ const AddAppointment = ({
         <Form onSubmit={handleSubmit}>
           <Row>
             <Col md={6}>
-              <Form.Group controlId="behandlung">
-                <Form.Label>Behandlung</Form.Label>
+              <Form.Group controlId="doctor">
+                <Form.Label>Arzt/Ärztin</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Behandlung"
-                  name="behandlung"
-                  value={docuFormData.behandlung}
+                  as="select"
+                  name="doctor"
+                  value={docuFormData.doctor}
                   onChange={(e) => handleInputChange(e, "docu")}
-                />
+                >
+                  <option value="">Arzt/Ärztin auswählen</option>
+                  <option value="Husein Kechagia">Husein Kechagia</option>
+                  <option value="Menekse Kechagia">Menekse Kechagia</option>
+                </Form.Control>
               </Form.Group>
             </Col>
+          </Row>
+          <Row>
             <Col md={6}>
               <Form.Group controlId="type">
                 <Form.Label>Art</Form.Label>
@@ -188,14 +204,13 @@ const AddAppointment = ({
                   onChange={(e) => handleInputChange(e, "appointment")}
                 >
                   <option value="">Art auswählen</option>
+                  <option value="Lazer">Laser</option>
                   <option value="Consulting">Beratung</option>
                   <option value="Surgery">Operation</option>
                   <option value="Injection">Injektion</option>
                 </Form.Control>
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
             <Col md={6}>
               <Form.Group controlId="date">
                 <Form.Label>Datum</Form.Label>
@@ -207,32 +222,8 @@ const AddAppointment = ({
                 />
               </Form.Group>
             </Col>
-            <Col md={6}>
-              <Form.Group controlId="time">
-                <Form.Label>Zeitpunkt</Form.Label>
-                <Form.Control
-                  type="time"
-                  name="time"
-                  value={appointmentData.time}
-                  onChange={(e) => handleInputChange(e, "appointment")}
-                />
-              </Form.Group>
-            </Col>
           </Row>
-          <hr />
           <Row>
-            <Col md={6}>
-              <Form.Group controlId="geburtsdatum">
-                <Form.Label>Geburtsdatum</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Geburtsdatum"
-                  name="geburtsdatum"
-                  value={docuFormData.geburtsdatum}
-                  onChange={(e) => handleInputChange(e, "docu")}
-                />
-              </Form.Group>
-            </Col>
             <Col md={6}>
               <Form.Group controlId="vorerkrankungen">
                 <Form.Label>Vorerkrankungen</Form.Label>
@@ -245,8 +236,6 @@ const AddAppointment = ({
                 />
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
             <Col md={6}>
               <Form.Group controlId="vormedikation">
                 <Form.Label>Vormedikation</Form.Label>
@@ -259,11 +248,14 @@ const AddAppointment = ({
                 />
               </Form.Group>
             </Col>
+          </Row>
+          <Row>
             <Col md={6}>
               <Form.Group controlId="allergie">
                 <Form.Label>Allergie</Form.Label>
                 <Form.Control
-                  type="text"
+                  as="textarea"
+                  rows={4}
                   placeholder="Allergie"
                   name="allergie"
                   value={docuFormData.allergie}
@@ -271,57 +263,105 @@ const AddAppointment = ({
                 />
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
             <Col md={6}>
-              <Form.Group controlId="beschwerden">
-                <Form.Label>Beschwerden</Form.Label>
+              <Form.Group controlId="wunsch">
+                <Form.Label>Diagnose/Behandlungswunsch</Form.Label>
                 <Form.Control
-                  type="text"
-                  placeholder="Beschwerden"
-                  name="beschwerden"
-                  value={docuFormData.beschwerden}
-                  onChange={(e) => handleInputChange(e, "docu")}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group controlId="behandlungswunsch">
-                <Form.Label>Behandlungswunsch</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Behandlungswunsch"
-                  name="behandlungswunsch"
-                  value={docuFormData.behandlungswunsch}
+                  as="textarea"
+                  rows={4}
+                  placeholder="Diagnose/Behandlungswunsch"
+                  name="wunsch"
+                  value={docuFormData.wunsch}
                   onChange={(e) => handleInputChange(e, "docu")}
                 />
               </Form.Group>
             </Col>
           </Row>
-          <Row>
-            <Col md={6}>
-              <Form.Group controlId="material">
-                <Form.Label>Material</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Material"
-                  name="material"
-                  value={docuFormData.material}
-                  onChange={(e) => handleInputChange(e, "docu")}
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-          <Form.Group controlId="komplikationen" className="mb-4">
-            <Form.Label>Komplikationen</Form.Label>
+
+          <Form.Group controlId="behandlung">
+            <Form.Label>Durchgeführte Behandlung</Form.Label>
             <Form.Control
               as="textarea"
-              placeholder="Komplikationen"
-              name="komplikationen"
-              value={docuFormData.komplikationen}
+              rows={4}
+              placeholder="Durchgeführte Behandlung"
+              name="behandlung"
+              value={docuFormData.behandlung}
               onChange={(e) => handleInputChange(e, "docu")}
             />
           </Form.Group>
+
+          <Form.Group controlId="material">
+            <Form.Label>Verwendetes Material</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={2}
+              placeholder="Verwendetes Material"
+              name="material"
+              value={docuFormData.material}
+              onChange={(e) => handleInputChange(e, "docu")}
+            />
+          </Form.Group>
+
+          <Row>
+            <Col md={6}>
+              <Form.Group controlId="komplikationen">
+                <Form.Check
+                  type="checkbox"
+                  label="Traten Komplikationen auf?"
+                  name="komplikationen"
+                  checked={docuFormData.komplikationen}
+                  onChange={(e) => handleInputChange(e, "docu")}
+                />
+                <Form.Control
+                  type="text"
+                  placeholder="Notiz"
+                  name="kpnote"
+                  value={docuFormData.kpnote}
+                  onChange={(e) => handleInputChange(e, "docu")}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <Form.Group controlId="gpkontrolle">
+                <Form.Check
+                  type="checkbox"
+                  label="Kontrolle Geplant?"
+                  name="gpkontrolle"
+                  checked={docuFormData.gpkontrolle}
+                  onChange={(e) => handleInputChange(e, "docu")}
+                />
+                <Form.Control
+                  type="date"
+                  placeholder="Datum"
+                  name="gpkdatum"
+                  value={docuFormData.gpkdatum}
+                  onChange={(e) => handleInputChange(e, "docu")}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={6}>
+              <Form.Group controlId="gpfolgetherapie">
+                <Form.Check
+                  type="checkbox"
+                  label="Folgetherapie Geplant?"
+                  name="gpfolgetherapie"
+                  checked={docuFormData.gpfolgetherapie}
+                  onChange={(e) => handleInputChange(e, "docu")}
+                />
+                <Form.Control
+                  type="date"
+                  placeholder="Datum"
+                  name="gpfdatum"
+                  value={docuFormData.gpfdatum}
+                  onChange={(e) => handleInputChange(e, "docu")}
+                />
+              </Form.Group>
+            </Col>
+          </Row>
 
           <button onClick={handleClose} className="custom-button-negative">
             Abbrechen

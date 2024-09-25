@@ -23,7 +23,7 @@ function HomePage() {
     Surgery: 0,
     Injection: 0,
     Consulting: 0,
-    Example: 0,
+    Lazer: 0,
   });
 
   const getClientGraphData = async () => {
