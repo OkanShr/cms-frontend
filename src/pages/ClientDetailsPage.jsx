@@ -138,6 +138,7 @@ function ClientDetailsPage() {
             clientId={client.id}
             clientName={client.firstName}
             clientLastName={client.lastName}
+            clientBirthDate={client.birthDate}
           />
         </div>
       </div>

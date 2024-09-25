@@ -10,7 +10,12 @@ import { FilePlus } from "lucide-react";
 import AddAppointment from "./AddAppointment";
 import EditAppointment from "./EditAppointment";
 
-const Appointments = ({ clientId, clientName, clientLastName }) => {
+const Appointments = ({
+  clientId,
+  clientName,
+  clientLastName,
+  clientBirthDate,
+}) => {
   const loginDetails = useSelector((state) => state.auth.value);
 
   const [appointments, setAppointments] = useState([]);
@@ -89,6 +94,7 @@ const Appointments = ({ clientId, clientName, clientLastName }) => {
         updateAppointmentList={updateAppointmentList}
         clientName={clientName}
         clientLastName={clientLastName}
+        clientBirthDate={clientBirthDate}
       />
       <input
         className="w-full mb-2 p-1 border-b-2 bg-transparent border-black"

@@ -12,7 +12,7 @@ const AddAppointment = ({
   clientId,
   clientName,
   clientLastName,
-  client,
+  clientBirthDate,
   loginDetails,
   showAddModal,
   handleClose,
@@ -30,7 +30,7 @@ const AddAppointment = ({
     datum: "",
     name: clientLastName || "",
     vorname: clientName || "",
-    geburtsdatum: client?.birthDate || "",
+    geburtsdatum: clientBirthDate || "",
     vorerkrankungen: "",
     vormedikation: "",
     allergie: "",
@@ -51,9 +51,9 @@ const AddAppointment = ({
       datum: appointmentData.date || "",
       name: clientLastName || "",
       vorname: clientName || "",
-      geburtsdatum: client?.birthDate || "",
+      geburtsdatum: clientBirthDate || "",
     }));
-  }, [appointmentData, clientName, clientLastName, client?.birthDate]);
+  }, [appointmentData, clientName, clientLastName, clientBirthDate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
