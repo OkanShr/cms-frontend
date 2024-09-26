@@ -20,10 +20,10 @@ function HomePage() {
   const [clientCount, setClientCount] = useState(0);
 
   const [appointmentData, setAppointmentData] = useState({
-    Surgery: 0,
-    Injection: 0,
-    Consulting: 0,
-    Lazer: 0,
+    Operation: 0,
+    Injektion: 0,
+    Beratung: 0,
+    Laser: 0,
   });
 
   const getClientGraphData = async () => {

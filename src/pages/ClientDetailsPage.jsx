@@ -12,7 +12,6 @@ import galleryImage from "../assets/gallery.png";
 import docsImage from "../assets/document.png";
 import manImg from "../assets/man.png";
 import womanImg from "../assets/woman.png";
-import divImg from "../assets/userImg.png";
 
 function ClientDetailsPage() {
   const { clientId } = useParams();

@@ -48,10 +48,6 @@ const UploadPdfModal = ({
       <Modal.Body>
         <Form>
           <Form.Group>
-            <Form.Label>PDF hochladen</Form.Label>
-            <Form.Control type="file" onChange={handlePdfFileChange} />
-          </Form.Group>
-          <Form.Group>
             <Form.Label>Behandlungsart auswählen</Form.Label>
             <Form.Control as="select" value={type} onChange={handleTypeChange}>
               <option value="">Art auswählen</option>
@@ -59,6 +55,10 @@ const UploadPdfModal = ({
               <option value="aufnahmeformular">Aufnahmeformular</option>
               <option value="datenschutz">Datenschutz</option>
             </Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>PDF hochladen</Form.Label>
+            <Form.Control type="file" onChange={handlePdfFileChange} />
           </Form.Group>
         </Form>
       </Modal.Body>

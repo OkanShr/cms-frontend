@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
-import { Chart, registerables } from "chart.js"; // Chart.js ve gerekli bileşenleri içe aktar
+import { Chart, registerables } from "chart.js";
 import clientsImage from "../assets/clients.png";
 import botoksImage from "../assets/botoks.png";
 import consultationImage from "../assets/consultation.png";
@@ -8,7 +8,7 @@ import surgeryImage from "../assets/surgery.png";
 import rightArrowImage from "../assets/right-arrow.png";
 import { useNavigate } from "react-router-dom";
 import HeaderImg from "../assets/HeaderImg.png";
-// Chart.js bileşenlerini kaydet
+
 Chart.register(...registerables);
 
 const Dashboard = ({
@@ -19,9 +19,10 @@ const Dashboard = ({
   clientCount,
   graphData,
 }) => {
-  const [moreData, setMoreData] = useState(true);
   const navigate = useNavigate();
-
+  {
+    console.log(appointmentData);
+  }
   function getLastSixMonths() {
     const months = [
       "Januar",
@@ -53,9 +54,10 @@ const Dashboard = ({
     datasets: [
       {
         label: "Patient Count",
-        data: Object.values(graphData),
-        fill: false,
-        borderColor: "rgba(75,192,192,1)",
+        data: Object.values(graphData).map((value) => Math.round(value)),
+        fill: true,
+        borderColor: "rgb(8, 47, 73)",
+        backgroundColor: "rgb(224, 231, 255)",
         borderWidth: 2,
       },
     ],
@@ -137,7 +139,7 @@ const Dashboard = ({
                 <div>
                   <p className="text-center m-0">Beratung</p>
                   <h2 className="text-center font-bold text-5xl">
-                    {appointmentData.Consulting}
+                    {appointmentData.Beratung}
                   </h2>
                 </div>
               </div>
@@ -154,7 +156,7 @@ const Dashboard = ({
                 <div>
                   <p className="text-center m-0">Injektion</p>
                   <h2 className="text-center font-bold text-5xl">
-                    {appointmentData.Injection}
+                    {appointmentData.Injektion}
                   </h2>
                 </div>
               </div>
@@ -171,7 +173,7 @@ const Dashboard = ({
                 <div>
                   <p className="text-center m-0">Operation</p>
                   <h2 className="text-center font-bold text-5xl">
-                    {appointmentData.Surgery}
+                    {appointmentData.Operation}
                   </h2>
                 </div>
               </div>

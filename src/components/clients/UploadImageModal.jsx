@@ -37,7 +37,7 @@ const UploadImageModal = ({
       console.error("File, client ID, or token missing");
       return;
     }
-
+    setPreview(null);
     uploadClientImage(clientId, file, loginDetails.token)
       .then((response) => {
         console.log("Image uploaded successfully:", response.data);
@@ -69,7 +69,7 @@ const UploadImageModal = ({
             Bild hochladen
           </Modal.Title>
           <button
-            className="custom-button"
+            className="custom-button-negative"
             onClick={() => setShowImageUploadModal(false)}
           >
             X
@@ -98,8 +98,9 @@ const UploadImageModal = ({
             <div className="mt-4">
               <img
                 src={preview}
+                width={200}
                 alt="Image preview"
-                className="w-full h-auto object-contain rounded-md border"
+                className="w-96 object-contain rounded-md border"
               />
             </div>
           )}
@@ -107,8 +108,11 @@ const UploadImageModal = ({
         <Modal.Footer className="flex justify-end border-t p-4">
           <button
             variant="secondary"
-            onClick={() => setShowImageUploadModal(false)}
-            className="custom-button"
+            onClick={() => {
+              setShowImageUploadModal(false);
+              setPreview(null);
+            }}
+            className="custom-button-negative"
           >
             Abbrechen
           </button>

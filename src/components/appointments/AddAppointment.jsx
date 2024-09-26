@@ -204,10 +204,10 @@ const AddAppointment = ({
                   onChange={(e) => handleInputChange(e, "appointment")}
                 >
                   <option value="">Art auswählen</option>
-                  <option value="Lazer">Laser</option>
-                  <option value="Consulting">Beratung</option>
-                  <option value="Surgery">Operation</option>
-                  <option value="Injection">Injektion</option>
+                  <option value="Laser">Laser</option>
+                  <option value="Beratung">Beratung</option>
+                  <option value="Operation">Operation</option>
+                  <option value="Injektion">Injektion</option>
                 </Form.Control>
               </Form.Group>
             </Col>
@@ -342,7 +342,7 @@ const AddAppointment = ({
               </Form.Group>
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col md={6}>
               <Form.Group controlId="gpfolgetherapie">
                 <Form.Check

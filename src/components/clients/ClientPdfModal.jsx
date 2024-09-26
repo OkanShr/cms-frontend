@@ -18,6 +18,9 @@ const ClientPdfModal = ({
   fetchClientPdfs,
 }) => {
   const Hide = () => setShowPdfModal(false);
+  {
+    console.log(file.pdfId);
+  }
   const handleDelete = () => {
     if (file.fileName.endsWith(".pdf")) {
       try {
@@ -32,6 +35,7 @@ const ClientPdfModal = ({
       try {
         deleteAppointmentPdf(
           file.appointmentId,
+          clientId,
           file.pdfId,
           loginDetails.token
         ).then(() => {

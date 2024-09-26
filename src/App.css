@@ -9,7 +9,11 @@ body, p, span, h1, h2, h3, h4, h5, h6, a, label, div {
     font-weight: bold;
     font-size: large;
     color: #831843;
-    margin-top: 5px;
+    
+}
+.form-control{
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 .nav-tabs .nav-link.active:active{
     font-weight: bold;
@@ -40,42 +44,43 @@ body, p, span, h1, h2, h3, h4, h5, h6, a, label, div {
   }
 
 .custom-button {
-    margin-left: 0.5rem; /* ml-2 */
+
+    margin-left: 0.5rem; 
     font-weight: 700;
-    color: #831843; /* text-dark */
-    background: linear-gradient(to top right, #f9c6d6, #fbeefb); /* bg-gradient-to-tr from-pink-200 to-pink-100 */
-    border: 1px solid #b6b3b5; /* border-pink-500 */
-    box-shadow: 0 4px 6px rgba(236, 72, 153, 0.5); /* shadow-md shadow-pink-700 */
-    padding: 0.5rem 1rem; /* px-4 py-2 */
-    border-radius: 0.5rem; /* rounded-lg */
+    color: #831843; 
+    background: linear-gradient(to top right, #f9c6d6, #fbeefb); 
+    border: 1px solid #b6b3b5; 
+    box-shadow: 0 4px 6px rgba(236, 72, 153, 0.5); 
+    padding: 0.5rem 1rem; 
+    border-radius: 0.5rem; 
     border-color: rgba(255, 193, 224, 0.5);
-    white-space: nowrap; /* whitespace-nowrap */
+    white-space: nowrap; 
     height: fit-content;
-    transition: background 0.5s ease-in-out; /* transition duration-500 ease-in-out */
+    transition: background 0.5s ease-in-out; 
   }
   .custom-button:hover {
-    background: linear-gradient(to top right, #fbb6ce, #f9c6d6); /* hover:bg-gradient-to-tr hover:from-pink-300 hover:to-pink-200 */
+    background: linear-gradient(to top right, #fbb6ce, #f9c6d6);
   }
   
 
   .custom-button-negative {
-    margin-left: 0.5rem; /* ml-2 */
-    margin-top: 10px;
+    margin-left: 0.5rem; 
+
     font-weight: 700;
-    color: #831843; /* text-dark */
-    background: linear-gradient(to top right, #ff7676, #ff9090); /* bg-gradient-to-tr from-pink-200 to-pink-100 */
-    border: 1px solid #b6b3b5; /* border-pink-500 */
-    box-shadow: 0 4px 6px rgba(236, 72, 153, 0.5); /* shadow-md shadow-pink-700 */
-    padding: 0.5rem 1rem; /* px-4 py-2 */
-    border-radius: 0.5rem; /* rounded-lg */
+    color: #831843; 
+    background: linear-gradient(to top right, #ff7676, #ff9090); 
+    border: 1px solid #b6b3b5; 
+    box-shadow: 0 4px 6px rgba(236, 72, 153, 0.5); 
+    padding: 0.5rem 1rem; 
+    border-radius: 0.5rem;
     border-color: rgba(255, 193, 224, 0.5);
-    white-space: nowrap; /* whitespace-nowrap */
+    white-space: nowrap; 
     height: fit-content;
-    transition: background 0.5s ease-in-out; /* transition duration-500 ease-in-out */
+    transition: background 0.5s ease-in-out;
   }
     
   .custom-button-negative:hover {
-    background: linear-gradient(to top right, #ff0404, #ff0404); /* hover:bg-gradient-to-tr hover:from-pink-300 hover:to-pink-200 */
+    background: linear-gradient(to top right, #ff0404, #ff0404); 
   }
   
   

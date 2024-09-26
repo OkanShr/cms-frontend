@@ -51,7 +51,6 @@ function ClientGalleryPage() {
       } catch (error) {
         console.log(error);
       }
-      // Implement delete logic here
     } else {
       console.log("Please select exactly one image to delete.");
     }
@@ -72,7 +71,7 @@ function ClientGalleryPage() {
 
   useEffect(() => {
     fetchClientImages(); // Initial fetch when component mounts
-  }, [clientId]); // Trigger fetch when clientId changes
+  }, [clientId]);
 
   const handleClick = (item, index) => {
     setCurrentIndex(index);
