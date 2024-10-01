@@ -192,8 +192,6 @@ const AddAppointment = ({
                 </Form.Control>
               </Form.Group>
             </Col>
-          </Row>
-          <Row>
             <Col md={6}>
               <Form.Group controlId="type">
                 <Form.Label>Art</Form.Label>
@@ -211,6 +209,8 @@ const AddAppointment = ({
                 </Form.Control>
               </Form.Group>
             </Col>
+          </Row>
+          <Row>
             <Col md={6}>
               <Form.Group controlId="date">
                 <Form.Label>Datum</Form.Label>
@@ -218,6 +218,17 @@ const AddAppointment = ({
                   type="date"
                   name="date"
                   value={appointmentData.date}
+                  onChange={(e) => handleInputChange(e, "appointment")}
+                />
+              </Form.Group>
+            </Col>
+            <Col md={6}>
+              <Form.Group controlId="time">
+                <Form.Label>Uhrzeit</Form.Label>
+                <Form.Control
+                  type="time"
+                  name="time"
+                  value={appointmentData.time}
                   onChange={(e) => handleInputChange(e, "appointment")}
                 />
               </Form.Group>
