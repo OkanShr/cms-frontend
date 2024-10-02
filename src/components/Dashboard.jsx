@@ -70,12 +70,12 @@ const Dashboard = ({
           <img src={HeaderImg} width={520}></img>
         </div>
         <div className="flex flex-col justify-between">
-          <div className="mt-3 flex lg:flex-row flex-col gap-4 w-full h-auto bg-stone-100 rounded-3xl shadow-lg overflow-auto">
-            <div className="lg:m-3 rounded-lg  p-4 w-full sm:w-1/2 lg:w-5/12 bg-transparent">
-              <h4 className="text-center mb-6">Patienten</h4>
+          <div className="mt-3 flex lg:flex-row flex-col pl-2 gap-4 w-full h-auto bg-stone-100 rounded-3xl shadow-lg overflow-auto">
+            <div className="lg:m-3 rounded-lg   w-full  lg:w-5/12 bg-transparent">
+              <h4 className="text-center mb-6 p-4">Patienten</h4>
               <Line data={data} content="" />
             </div>
-            <div className="lg:m-5 bg-indigo-100 rounded-2xl p-4 w-full sm:w-1/2 lg:w-5/12 ">
+            <div className="lg:m-5 bg-indigo-100 rounded-2xl p-4 w-fill sm:m-2 lg:w-5/12 ">
               <h3 className="text-xl font-semibold mb-4">
                 Patienten Eingetragen
               </h3>
@@ -109,14 +109,14 @@ const Dashboard = ({
             </div>
           </div>
           <div className="rounded-lg border-inherit p-4 w-full mb-6 lg:mb-0">
-            <div className="m-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="m-3 grid grid-cols-1 md:grid-cols-2  sm:grid-cols-2  lg:grid-cols-4 gap-4">
               {/* Total Patients */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-green-50 to-green-200 p-4 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-green-50 to-green-200 p-4 sm:w-60 md:w-full lg:w-full h-28 gap-4 md:gap-2 shadow-md">
                 <div className="w-16 h-16 border-4 border-green-700 rounded-full flex items-center justify-center">
                   <img
                     src={clientsImage}
                     alt="Clients"
-                    className="w-10 h-10 p-1"
+                    className="min-w-10 h-10 p-1"
                   />
                 </div>
                 <div>
@@ -128,12 +128,12 @@ const Dashboard = ({
               </div>
 
               {/* Consultation */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-indigo-50 to-indigo-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-indigo-50 to-indigo-200 p-8 sm:w-60 md:w-full lg:w-full h-28 gap-4 shadow-md">
                 <div className="w-16 h-16 border-4 border-indigo-700 rounded-full flex items-center justify-center">
                   <img
                     src={consultationImage}
                     alt="Consultation"
-                    className="w-10 h-10 p-1"
+                    className="min-w-10 h-10 p-1"
                   />
                 </div>
                 <div>
@@ -145,12 +145,12 @@ const Dashboard = ({
               </div>
 
               {/* Injection */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-fuchsia-50 to-fuchsia-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-fuchsia-50 to-fuchsia-200 p-8 sm:w-60 md:w-full lg:w-full h-28 gap-4 shadow-md">
                 <div className="w-16 h-16 border-4 border-fuchsia-700 rounded-full flex items-center justify-center">
                   <img
                     src={botoksImage}
                     alt="Bototks"
-                    className="w-10 h-10 p-1"
+                    className="min-w-10 h-10 p-1"
                   />
                 </div>
                 <div>
@@ -162,12 +162,12 @@ const Dashboard = ({
               </div>
 
               {/* Surgery */}
-              <div className="flex items-center rounded-lg bg-gradient-to-br from-amber-50 to-amber-200 p-8 sm:w-60 md:w-48 lg:w-full h-28 gap-4 shadow-md">
+              <div className="flex items-center rounded-lg bg-gradient-to-br from-amber-50 to-amber-200 p-8 sm:w-60 md:w-full lg:w-full h-28 gap-4 shadow-md">
                 <div className="w-16 h-16 border-4 border-amber-700 rounded-full flex items-center justify-center">
                   <img
                     src={surgeryImage}
                     alt="Surgery"
-                    className="w-10 h-10 p-1"
+                    className="min-w-10 h-10 p-1"
                   />
                 </div>
                 <div>
