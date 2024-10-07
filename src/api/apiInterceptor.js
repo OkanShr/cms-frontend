@@ -43,7 +43,7 @@ instance.interceptors.response.use(
             }
           );
 
-          const newToken = response.data.token; // Assuming your response contains the new token
+          const newToken = response.data.token;
           localStorage.setItem("token", newToken);
 
           isRefreshing = false;

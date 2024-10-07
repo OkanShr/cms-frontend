@@ -23,6 +23,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
       ...formData,
       [name]: value,
     });
+    console.log(loginDetails.user.userId);
   };
 
   return (

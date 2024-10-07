@@ -9,7 +9,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loginDetails, setLoginDetails] = useState({
-    email: "",
+    username: "",
     password: "",
   });
 
@@ -57,17 +57,17 @@ function Login() {
         </div>
         <div className="p-8">
           <Form className="flex flex-col" onSubmit={loginFunction}>
-            <Form.Group className="mb-4" controlId="formBasicEmail">
+            <Form.Group className="mb-4" controlId="formBasicUsername">
               <Form.Label className="font-medium text-gray-700">
-                E-Mail
+                Username
               </Form.Label>
               <Form.Control
                 onChange={(e) =>
-                  setLoginDetails({ ...loginDetails, email: e.target.value })
+                  setLoginDetails({ ...loginDetails, username: e.target.value })
                 }
                 type="text"
                 className="rounded-lg bg-gray-200 mt-1 p-2 focus:border-blue-500 focus:bg-white focus:outline-none"
-                placeholder="email"
+                placeholder="username"
                 required
               />
             </Form.Group>
