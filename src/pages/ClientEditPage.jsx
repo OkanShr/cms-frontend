@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { Form, Col, Row, Button } from "react-bootstrap";
+import { Form, Col, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { updateClient, getClientById } from "../api/clientApi";
 import SidebarShort from "../components/SidebarShort";
@@ -15,7 +15,9 @@ const ClientEditPage = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
-    doctorId: "",
+    doctorId: loginDetails.user.userId, // Ensure doctorId is set
+    birthDate: "",
+    gender: "", // Add gender field
   });
 
   const [message, setMessage] = useState("");
@@ -32,6 +34,8 @@ const ClientEditPage = () => {
           email: clientData.email || "",
           phoneNumber: clientData.phoneNumber || "",
           doctorId: loginDetails.user.userId,
+          birthDate: clientData.birthDate || "", // Set birthDate from clientData
+          gender: clientData.gender || "", // Set gender from clientData
         });
       })
       .catch((error) => {
@@ -51,24 +55,25 @@ const ClientEditPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const updatedFormData = { ...formData }; // Make a copy of the formData
+      const updatedFormData = { ...formData };
       const response = await updateClient(
         updatedFormData,
         loginDetails.token,
         clientId
       );
-      setFormData(updatedFormData); // Update formData after successful submission
+      setFormData(updatedFormData);
       setMessage(`Client ${updatedFormData.firstName} updated successfully`);
-      navigate(-1); // Navigate after updating
+      navigate(-1);
     } catch (error) {
       console.error("Update failed:", error);
       setErr("Failed due to an Error.");
     }
   };
+
   return (
     <div className="bg-white-100 h-screen flex flex-row">
       <SidebarShort dashboard={false} clients={true} addClient={false} />
-      <div className="p-5  flex flex-col w-full">
+      <div className="p-5 flex flex-col w-full">
         <div className="flex flex-row">
           <button onClick={() => navigate(-1)}>
             <ChevronLeft size={42} />
@@ -77,7 +82,7 @@ const ClientEditPage = () => {
         </div>
 
         <Form className="w-6/12 m-3" onSubmit={handleSubmit}>
-          <Row>
+          <Row className="mb-3">
             <Form.Group as={Col} controlId="formFirstName">
               <Form.Label>Vorname</Form.Label>
               <Form.Control
@@ -96,6 +101,16 @@ const ClientEditPage = () => {
                 placeholder="Nachnamen eingeben"
                 name="lastName"
                 value={formData.lastName}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="formBirthDate">
+              <Form.Label>Geburtsdatum</Form.Label>
+              <Form.Control
+                type="date"
+                name="birthDate"
+                value={formData.birthDate}
                 onChange={handleChange}
               />
             </Form.Group>
@@ -122,6 +137,21 @@ const ClientEditPage = () => {
                 value={formData.email}
                 onChange={handleChange}
               />
+            </Form.Group>
+
+            <Form.Group as={Col} controlId="formGender">
+              <Form.Label>Geschlecht</Form.Label>
+              <Form.Control
+                as="select"
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+              >
+                <option value="">Select gender</option>
+                <option value="male">Männlich</option>
+                <option value="female">Weiblich</option>
+                <option value="other">Diverse</option>
+              </Form.Control>
             </Form.Group>
           </Row>
 

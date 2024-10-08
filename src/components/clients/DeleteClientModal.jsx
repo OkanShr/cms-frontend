@@ -3,11 +3,17 @@ import { Modal } from "react-bootstrap";
 
 const DeleteClientModal = ({ show, handleClose, handleDelete }) => {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal
+      show={show}
+      onHide={handleClose}
+      dialogClassName="modal-dialog-centered"
+    >
       <Modal.Header>
-        <Modal.Title>Möchten Sie den Client wirklich löschen?</Modal.Title>
+        <Modal.Title className="w-full d-flex justify-content-center">
+          Möchten Sie den Client wirklich löschen?
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Footer>
+      <Modal.Footer className="d-flex justify-content-center">
         <button className="custom-button" onClick={handleClose}>
           Abbrechen
         </button>

@@ -14,6 +14,7 @@ const EditAppointment = ({
   const [formData, setFormData] = useState({
     activity: appointment.activity || "",
     date: appointment.date.split("T")[0] || "",
+    time: appointment.time || "",
     clientId: clientId,
   });
 
@@ -48,6 +49,14 @@ const EditAppointment = ({
     setShowDetailsModal(true);
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
   return (
     <Modal show={showEditModal} onHide={handleClose}>
       <Modal.Header>Termin hinzufügen</Modal.Header>
@@ -56,12 +65,17 @@ const EditAppointment = ({
           <Form.Group className="mb-3" controlId="activity">
             <Form.Label>Activity</Form.Label>
             <Form.Control
-              type="text"
-              placeholder="Enter activity"
-              name="activity"
+              as="select"
+              name="type"
               value={formData.activity}
-              onChange={handleChange}
-            />
+              onChange={(e) => handleInputChange(e)}
+            >
+              <option value="">Art auswählen</option>
+              <option value="Laser">Laser</option>
+              <option value="Beratung">Beratung</option>
+              <option value="Operation">Operation</option>
+              <option value="Injektion">Injektion</option>
+            </Form.Control>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="date">
@@ -71,6 +85,15 @@ const EditAppointment = ({
               name="date"
               value={formData.date}
               onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="time">
+            <Form.Label>Uhrzeit</Form.Label>
+            <Form.Control
+              type="time"
+              name="time"
+              value={formData.time}
+              onChange={(e) => handleInputChange(e, "appointment")}
             />
           </Form.Group>
 

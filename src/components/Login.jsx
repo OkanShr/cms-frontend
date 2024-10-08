@@ -34,7 +34,7 @@ function Login() {
           login({
             token,
             user: {
-              userId: doctor.userId,
+              userId: doctor.id,
               username: doctor.username,
             },
           })

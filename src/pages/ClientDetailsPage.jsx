@@ -24,6 +24,7 @@ function ClientDetailsPage() {
     getClientById(clientId, loginDetails.token)
       .then((response) => {
         setClient(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         console.error("Error fetching client:", error);
