@@ -42,7 +42,7 @@ function ClientsPage() {
             value={searchInput}
           />
           <button
-            onClick={() => setShowAddClientModal(true)} // on hover make pink 100
+            onClick={() => setShowAddClientModal(true)}
             className="custom-button"
           >
             Patient Hinzufügen

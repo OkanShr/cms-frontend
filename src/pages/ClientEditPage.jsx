@@ -78,7 +78,7 @@ const ClientEditPage = () => {
           <button onClick={() => navigate(-1)}>
             <ChevronLeft size={42} />
           </button>
-          <h1>Kunde Bearbeiten</h1>
+          <h1>Patient Bearbeiten</h1>
         </div>
 
         <Form className="w-6/12 m-3" onSubmit={handleSubmit}>

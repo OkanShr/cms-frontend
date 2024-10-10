@@ -119,7 +119,9 @@ function ClientGalleryPage() {
           >
             <ChevronLeft size={35} />
           </button>
-          <h2>Kundengalerie</h2>
+          <h1 className="ml-2 font-semibold text-gray-800 whitespace-nowrap">
+            Patientengalerie
+          </h1>
         </div>
         <div className="flex flex-row gap-2">
           <button

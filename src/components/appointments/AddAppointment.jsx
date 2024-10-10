@@ -74,7 +74,25 @@ const AddAppointment = ({
       }
 
       handleClose();
-      setDocuFormData({});
+      setDocuFormData({
+        doctor: "",
+        datum: "",
+        name: clientLastName || "",
+        vorname: clientName || "",
+        geburtsdatum: clientBirthDate || "",
+        vorerkrankungen: "",
+        vormedikation: "",
+        allergie: "",
+        wunsch: "",
+        behandlung: "",
+        material: "",
+        komplikationen: false,
+        kpnote: "", // Notiz for "Komplikationen"
+        gpkontrolle: false,
+        gpkdatum: "", // Datum for "Kontrolle Geplant?"
+        gpfolgetherapie: false,
+        gpfdatum: "", // Datum for "Folgetherapie Geplant?"
+      });
       setAppointmentData({
         activity: "",
         date: "",
@@ -187,8 +205,8 @@ const AddAppointment = ({
                   onChange={(e) => handleInputChange(e, "docu")}
                 >
                   <option value="">Arzt/Ärztin auswählen</option>
-                  <option value="Husein Kechagia">Husein Kechagia</option>
-                  <option value="Menekse Kechagia">Menekse Kechagia</option>
+                  <option value="Husein Kechagia">Chousein Kechagia </option>
+                  <option value="Menekse Kechagia">Menekse Kechagia </option>
                 </Form.Control>
               </Form.Group>
             </Col>
@@ -202,10 +220,10 @@ const AddAppointment = ({
                   onChange={(e) => handleInputChange(e, "appointment")}
                 >
                   <option value="">Art auswählen</option>
-                  <option value="Laser">Laser</option>
                   <option value="Beratung">Beratung</option>
-                  <option value="Operation">Operation</option>
+                  <option value="Laser">Laser</option>
                   <option value="Injektion">Injektion</option>
+                  <option value="Operation">Operation</option>
                 </Form.Control>
               </Form.Group>
             </Col>
