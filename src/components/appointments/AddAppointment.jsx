@@ -392,9 +392,6 @@ const AddAppointment = ({
             </Col>
           </Row>
 
-          <button onClick={handleClose} className="custom-button-negative">
-            Abbrechen
-          </button>
           <button className="custom-button float-right" type="submit">
             Termin Speichern
           </button>
