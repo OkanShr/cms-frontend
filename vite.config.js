@@ -8,10 +8,10 @@ export default defineConfig({
   plugins: [react()],
   assetsInclude: ["**/*.docx"],
   server: {
-    // https: {
-    //   key: fs.readFileSync("C:/Users/OkanS/cert-key.pem"),
-    //   cert: fs.readFileSync("C:/Users/OkanS/cert.pem"),
-    // },
+    https: {
+      key: fs.readFileSync("C:/Users/OkanS/cert-key.pem"),
+      cert: fs.readFileSync("C:/Users/OkanS/cert.pem"),
+    },
     port: 3000,
     strictPort: true,
     host: true,
