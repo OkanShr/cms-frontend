@@ -11,6 +11,9 @@ export const loginUser = async (post) => {
     } else if (error.response.status === 401) {
       // Invalid login
       return "Wrong username or password";
+    } else if (error.response.status === 429) {
+      // Too many attempts
+      return "Too many attempts.";
     } else {
       // Other errors
       throw error;
