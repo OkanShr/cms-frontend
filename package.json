@@ -7,7 +7,7 @@
     "dev": "vite --host",
     "build": "npx vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "serve": "vite preview"
   },
   "dependencies": {
     "@cyntler/react-doc-viewer": "^1.16.6",

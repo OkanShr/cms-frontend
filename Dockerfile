@@ -1,19 +1,38 @@
-FROM node:19.5.0-alpine
+# Stage 1: Build the Vite app
+FROM node:19.5.0-alpine AS build
 
+# Set working directory
 WORKDIR /app
 
-COPY package.json .
+# Copy the package.json and lock file
+COPY package.json package-lock.json ./
 
-RUN pwd
-
+# Install dependencies
 RUN npm install --force
 
-RUN npm i -g serve
-
+# Copy the source code to the working directory
 COPY . .
 
+# Copy SSL certificates into the container
+COPY certs/ /etc/ssl/certs/
+
+# Build the Vite app
 RUN npm run build
 
-EXPOSE 3000
+# Stage 2: Use Nginx to serve the built files
+FROM nginx:alpine
 
-CMD [ "serve", "-s", "dist" ]
+# Copy the built app from the build stage to Nginx's default directory
+COPY --from=build /app/dist /usr/share/nginx/html
+
+# Copy SSL certificates into the container
+COPY certs/ /etc/nginx/certs/
+
+# Copy Nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 443 for HTTPS
+EXPOSE 443
+
+# Start Nginx
+CMD ["nginx", "-g", "daemon off;"]

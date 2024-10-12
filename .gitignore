@@ -24,3 +24,5 @@ dist-ssr
 *.sw?
 *.key
 *.crt
+
+certs

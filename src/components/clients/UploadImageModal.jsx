@@ -31,14 +31,20 @@ const UploadImageModal = ({
     hiddenFileInput.current.click();
   };
 
-  // Function to handle image upload
   const handleImageUpload = () => {
     if (!file || !clientId || !loginDetails.token) {
       console.error("File, client ID, or token missing");
       return;
     }
+
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-"); // Replace `:` and `.` with `-` for a valid filename
+
+    const newFileName = `${timestamp}-${file.name}`;
+    const newFile = new File([file], newFileName, { type: file.type });
+
     setPreview(null);
-    uploadClientImage(clientId, file, loginDetails.token)
+
+    uploadClientImage(clientId, newFile, loginDetails.token)
       .then((response) => {
         console.log("Image uploaded successfully:", response.data);
         setShowImageUploadModal(false);
