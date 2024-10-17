@@ -72,7 +72,7 @@ export const getAllAppointmentPdfsByClient = async (id, token) => {
   });
 };
 
-export const createAppointmentPdf = (
+export const createAppointmentDoc = (
   file,
   type,
   clientId,
