@@ -33,8 +33,15 @@ const AppointmentDetails = ({
         clientId,
         loginDetails.token
       );
+
       setAppointmentPdf(response.data[0]);
-      setFileType(response.data[0].fileName.split(".")[1]);
+
+      const filename = response.data[0].fileName;
+
+      // Use lastIndexOf to extract the file extension correctly
+      const fileExtension = filename.substring(filename.lastIndexOf(".") + 1);
+
+      setFileType(fileExtension);
     } catch (error) {
       console.error("Error fetching pdf:", error);
     }
@@ -46,7 +53,7 @@ const AppointmentDetails = ({
       handleClose();
       updateAppointmentList();
     } catch (error) {
-      console.log(error);
+      console.error("Error deleting appointment:", error);
     }
   };
 
@@ -58,10 +65,10 @@ const AppointmentDetails = ({
   function formatPdf(pdf) {
     const formattedDoc = {
       uri: pdf.filePath,
-      fileType: pdf.fileName.split(".")[1],
+      fileType: pdf.fileName.substring(pdf.fileName.lastIndexOf(".") + 1),
       fileName: pdf.fileName,
     };
-    return [formattedDoc]; // Return as an array
+    return [formattedDoc];
   }
 
   return (

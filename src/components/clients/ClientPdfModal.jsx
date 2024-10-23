@@ -58,7 +58,7 @@ const ClientPdfModal = ({
   function formatPdf(pdf) {
     const formattedDoc = {
       uri: pdf.filePath,
-      fileType: pdf.fileName.split(".")[1],
+      fileType: pdf.fileName.substring(pdf.fileName.lastIndexOf(".") + 1),
       fileName: pdf.fileName,
     };
     return [formattedDoc];

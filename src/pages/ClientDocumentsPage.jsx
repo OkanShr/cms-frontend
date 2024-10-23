@@ -24,12 +24,12 @@ function ClientDocumentsPage() {
     try {
       const [clientPdfsResponse, appointmentPdfsResponse] = await Promise.all([
         getClientPdfs(clientId, loginDetails.token),
-        getAllAppointmentPdfsByClient(clientId, loginDetails.token),
+        // getAllAppointmentPdfsByClient(clientId, loginDetails.token),
       ]);
 
       const allPdfs = [
         ...clientPdfsResponse.data,
-        ...appointmentPdfsResponse.data,
+        // ...appointmentPdfsResponse.data,
       ];
 
       setPdfs(allPdfs);
@@ -117,7 +117,7 @@ function ClientDocumentsPage() {
                     key={pdf.pdfId}
                     className="flex flex-row shadow-md p-3 justify-between items-center bg-white"
                   >
-                    <span>{`${pdf.fileName} | ${
+                    <span>{`${pdf.fileName.split("T")[0]} | ${
                       pdf.uploadDate.split("T")[0]
                     }`}</span>
                     <button
