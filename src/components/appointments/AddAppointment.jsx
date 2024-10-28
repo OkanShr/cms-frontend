@@ -295,7 +295,7 @@ const AddAppointment = ({
                       onChange={(e) => handleInputChange(e, "docu")}
                     >
                       <option value="">Arzt/Ärztin auswählen</option>
-                      <option value="Husein Kechagia">
+                      <option value="Chousein Kechagia">
                         Chousein Kechagia{" "}
                       </option>
                       <option value="Menekse Kechagia">

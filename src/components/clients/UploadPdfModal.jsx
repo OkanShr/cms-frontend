@@ -53,7 +53,8 @@ const UploadPdfModal = ({
               <option value="">Art auswählen</option>
               <option value="behandlungsformular">Behandlungsformular</option>
               <option value="aufnahmeformular">Aufnahmeformular</option>
-              <option value="datenschutz">Datenschutz</option>
+              <option value="opbericht">OP Bericht</option>
+              <option value="sonstige">Sonstige</option>
             </Form.Control>
           </Form.Group>
           <Form.Group>

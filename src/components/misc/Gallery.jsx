@@ -23,7 +23,7 @@ const Gallery = ({
           loading="lazy"
           src={clickedImg}
           alt="bigger pic"
-          className="block max-w-[60%] max-h-[80%] m-auto shadow-[3px_5px_7px_rgba(0,0,0,0.5)]"
+          className="block max-w-full max-h-screen m-auto shadow-[3px_5px_7px_rgba(0,0,0,0.5)] object-contain"
         />
         <span
           className="absolute top-5 right-5 text-3xl text-black z-[999] cursor-pointer dismiss"

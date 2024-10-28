@@ -97,6 +97,18 @@ function ClientDocumentsPage() {
           >
             Behandlungsformular
           </button>
+          <button
+            className="custom-button"
+            onClick={() => setDocumentFilter("opbericht")}
+          >
+            OP Bericht
+          </button>
+          <button
+            className="custom-button"
+            onClick={() => setDocumentFilter("sonstige")}
+          >
+            Sonstige
+          </button>
           <RotateCcw
             className="shadow-md shadow-pink-700 text-dark bg-gradient-to-tr from-pink-200 to-pink-100 border-white m-1 p-1.5 rounded-xl
             hover:bg-gradient-to-tr hover:from-pink-300 hover:to-pink-200"
