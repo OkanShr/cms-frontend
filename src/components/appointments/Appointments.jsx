@@ -4,7 +4,7 @@ import {
   getAllAppointments,
   getAppointmentPdf,
 } from "../../api/appointmentApi";
-import { ListGroup, Button } from "react-bootstrap";
+import { ListGroup } from "react-bootstrap";
 import AppointmentDetails from "./AppointmentDetails";
 import { FilePlus } from "lucide-react";
 import AddAppointment from "./AddAppointment";

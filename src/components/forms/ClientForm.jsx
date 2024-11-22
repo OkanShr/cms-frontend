@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Col, Row } from "react-bootstrap";
 
-export const ClientForm = ({ onNext, loginDetails }) => {
+export const ClientForm = ({ onSubmit, loginDetails }) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -14,7 +14,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onNext(formData); // Pass the form data to the parent
+    onSubmit(formData); // Call the parent component's submit handler
   };
 
   const handleChange = (e) => {
@@ -23,7 +23,6 @@ export const ClientForm = ({ onNext, loginDetails }) => {
       ...formData,
       [name]: value,
     });
-    console.log(loginDetails.user.userId);
   };
 
   return (
@@ -37,6 +36,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -48,6 +48,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
+            required
           />
         </Form.Group>
 
@@ -102,7 +103,7 @@ export const ClientForm = ({ onNext, loginDetails }) => {
         </Form.Group>
       </Row>
       <button className="custom-button mt-4" type="submit">
-        Nächste
+        Hinzufügen
       </button>
     </Form>
   );

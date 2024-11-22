@@ -4,7 +4,7 @@ import { ClientCard } from "./ClientCard";
 
 function Clients({ searchInput, clients }) {
   return (
-    <div>
+    <div className="overflow-auto">
       <ListGroup>
         {clients.length > 0 ? (
           clients.map((client) => {
