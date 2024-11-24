@@ -81,15 +81,9 @@ function ClientDocumentsPage() {
         <div className="flex flex-row gap-2 mb-4">
           <button
             className="custom-button"
-            onClick={() => setDocumentFilter("datenschutz")}
+            onClick={() => setDocumentFilter("aufnahmeformulare")}
           >
-            Datenschutz
-          </button>
-          <button
-            className="custom-button"
-            onClick={() => setDocumentFilter("aufnahmeformular")}
-          >
-            Aufnahmeformular
+            Aufnahmeformulare
           </button>
           <button
             className="custom-button"
@@ -129,7 +123,7 @@ function ClientDocumentsPage() {
                     key={pdf.pdfId}
                     className="flex flex-row shadow-md p-3 justify-between items-center bg-white"
                   >
-                    <span>{`${pdf.fileName.split("T")[0]} | ${
+                    <span>{`${pdf.fileName.split("~")[1]} | ${
                       pdf.uploadDate.split("T")[0]
                     }`}</span>
                     <button

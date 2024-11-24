@@ -19,7 +19,7 @@ const ClientPdfModal = ({
 }) => {
   const Hide = () => setShowPdfModal(false);
   {
-    console.log(file.pdfId);
+    console.log(file);
   }
   const handleDelete = () => {
     if (file.fileName.endsWith(".pdf")) {
@@ -69,7 +69,7 @@ const ClientPdfModal = ({
       <Modal.Body style={{ height: "80vh", overflow: "auto" }}>
         {file.fileName.endsWith(".pdf") ? (
           <Document file={file.filePath} options={options}>
-            <Page pageNumber={1} />
+            <Page />
           </Document>
         ) : (
           <DocViewer

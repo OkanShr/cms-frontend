@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Form } from "react-bootstrap";
 import { uploadClientPdf } from "../../api/clientApi";
 
 const UploadPdfModal = ({
@@ -25,8 +25,14 @@ const UploadPdfModal = ({
       console.error("File, file type, client ID, or token missing");
       return;
     }
+    const timestamp = new Date().toISOString().replace(/[:.]/g, "-"); // Replace `:` and `.` with `-` for a valid filename
 
-    uploadClientPdf(clientId, selectedFile, type, loginDetails.token)
+    const newFileName = `${timestamp}~${selectedFile.name}`;
+    const newFile = new File([selectedFile], newFileName, {
+      type: selectedFile.type,
+    });
+
+    uploadClientPdf(clientId, newFile, type, loginDetails.token)
       .then((response) => {
         console.log("PDF uploaded successfully:", response.data);
         setShowPdfUploadModal(false);
@@ -51,8 +57,10 @@ const UploadPdfModal = ({
             <Form.Label>Behandlungsart auswählen</Form.Label>
             <Form.Control as="select" value={type} onChange={handleTypeChange}>
               <option value="">Art auswählen</option>
+              <option value="aufnahmeformulare">
+                Aufnahmeformular + Datenschutz
+              </option>
               <option value="behandlungsformular">Behandlungsformular</option>
-              <option value="aufnahmeformular">Aufnahmeformular</option>
               <option value="opbericht">OP Bericht</option>
               <option value="sonstige">Sonstige</option>
             </Form.Control>
